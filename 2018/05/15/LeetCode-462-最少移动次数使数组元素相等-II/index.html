@@ -8,14 +8,14 @@
   <title>LeetCode 462 最少移动次数使数组元素相等 II | Love of Red Moon Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="minimum moves to equal array elements ii题目给定一个非空整数数组，找到使所有数组元素相等所需的最小移动数，其中每次移动可将选定的一个元素加 1 或减 1。 您可以假设数组的长度最多为 10000。 例如: 输入:[1,2,3] 输出:2 说明：只有两个动作是必要的（记得每一步仅可使其中一个元素加 1 或减 1）： [1,2,3] =&amp;gt; [2,2,3]">
-<meta name="keywords" content="JS CSS">
+<meta name="keywords" content="LeetCode JavaScript 算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode 462 最少移动次数使数组元素相等 II">
 <meta property="og:url" content="http://yoursite.com/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/index.html">
 <meta property="og:site_name" content="Love of Red Moon Blog">
 <meta property="og:description" content="minimum moves to equal array elements ii题目给定一个非空整数数组，找到使所有数组元素相等所需的最小移动数，其中每次移动可将选定的一个元素加 1 或减 1。 您可以假设数组的长度最多为 10000。 例如: 输入:[1,2,3] 输出:2 说明：只有两个动作是必要的（记得每一步仅可使其中一个元素加 1 或减 1）： [1,2,3] =&amp;gt; [2,2,3]">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-05-15T07:58:56.327Z">
+<meta property="og:updated_time" content="2018-05-15T09:08:33.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode 462 最少移动次数使数组元素相等 II">
 <meta name="twitter:description" content="minimum moves to equal array elements ii题目给定一个非空整数数组，找到使所有数组元素相等所需的最小移动数，其中每次移动可将选定的一个元素加 1 或减 1。 您可以假设数组的长度最多为 10000。 例如: 输入:[1,2,3] 输出:2 说明：只有两个动作是必要的（记得每一步仅可使其中一个元素加 1 或减 1）： [1,2,3] =&amp;gt; [2,2,3]">
@@ -99,16 +99,18 @@
 <p>[1,2,3] =&gt; [2,2,3] =&gt; [2,2,2]</p>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>举个栗子 , 对于数组 <code>[0, 0, 1, 7, 8]</code> 来说, 第一想法肯定是取中间的数例如取 <code>4</code> ,那么此时各个位置的差值为 <code>4 4 3 3 4</code><br>如果取 <code>3</code> ,那么此时各个位置的差值为 <code>3 3 2 4 5</code></p>
 <p>也就是当取值减 <code>1</code> 时, 比它小的数的差值会减一, 比它大的数的差值就会加一所以如果<strong>比它小的数</strong>的个数比<strong>比它大的数</strong>的个数多, 那我们就是赚的那什么时候可以停止呢? 肯定是比它小的数比比它大的数的个数不多的时候</p>
-<p>因此我们取的值应当是居中的一个<strong>中位数</strong>值<br>可以测试得知, 如果数组长度为偶数, 取中间两个数任意一个都可以</p>
+<p>因此我们取的值应当是居中的一个<strong>中位数</strong>值可以测试得知, 如果数组长度为偶数, 取中间两个数任意一个都可以</p>
 <p>因此对于长度为 <code>len</code> 的数组而言, 取 <code>Math.floor(len/2)</code> 即可</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 462</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> minMoves2 = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> len = nums.length,</span><br><span class="line">        per = nums.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)[<span class="built_in">Math</span>.floor(len / <span class="number">2</span>)]</span><br><span class="line">    <span class="keyword">return</span> nums.reduce(<span class="function">(<span class="params">p, v</span>) =&gt;</span> p + <span class="built_in">Math</span>.abs(v - per), <span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(minMoves2([<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">6</span>]))</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/" data-id="cjh7g0jsr0000dwkf0yvn6oeh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/" data-id="cjh7gilrc000968kf8hvtaqud" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
     </footer>
   </div>
   
@@ -138,9 +140,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS-radial-gradient/" style="font-size: 10px;">CSS radial-gradient</a> <a href="/tags/LeetCode-JavaScript-算法/" style="font-size: 20px;">LeetCode JavaScript 算法</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -157,6 +173,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/05/15/CSS-径向渐变/">CSS: 径向渐变</a>
+          </li>
         
           <li>
             <a href="/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/">LeetCode 592 Fraction Addition and Subtraction</a>
