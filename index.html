@@ -70,6 +70,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LeetCode-406-根据身高重建队列" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/16/LeetCode-406-根据身高重建队列/" class="article-date">
+  <time datetime="2018-05-16T07:32:13.000Z" itemprop="datePublished">2018-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/16/LeetCode-406-根据身高重建队列/">LeetCode 406 根据身高重建队列</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="queue-reconstruction-by-height"><a href="#queue-reconstruction-by-height" class="headerlink" title="queue reconstruction by height"></a>queue reconstruction by height</h3><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>假设有打乱顺序的一群人站成一个队列。 每个人由一个整数对(h, k)表示，其中 h 是这个人的身高，k 是排在这个人前面且身高大于或等于 h 的人数。 编写一个算法来重建这个队列。</p>
+<p>注意：总人数少于 1100 人。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>按照前置身高个数依次排序 在每组中必有前面的身高低于后者</p>
+<p>例如 <code>[[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]</code></p>
+<p>排序后的结果必有 <code>[5,0]</code> 在 <code>[7,0]</code> 之前</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[][]&#125; people</span></span><br><span class="line"><span class="comment"> * @return &#123;number[][]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> reconstructQueue = <span class="function"><span class="keyword">function</span>(<span class="params">people</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (people.length &lt; <span class="number">1</span>) <span class="keyword">return</span> people</span><br><span class="line">    <span class="keyword">const</span> keys = [],</span><br><span class="line">        res = &#123;&#125;</span><br><span class="line">    <span class="comment">// 处理所有的键名-数组后一个元素 键值-数组前一个元素</span></span><br><span class="line">    people.forEach(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (keys.indexOf(v[<span class="number">1</span>]) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            keys.push(v[<span class="number">1</span>])</span><br><span class="line">            res[v[<span class="number">1</span>]] = []</span><br><span class="line">        &#125;</span><br><span class="line">        res[v[<span class="number">1</span>]].push(v[<span class="number">0</span>])</span><br><span class="line">    &#125;)</span><br><span class="line">    keys.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line">    <span class="keyword">const</span> len = keys.length</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) res[keys[i]].sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line">    <span class="comment">// 初始化为0的数组</span></span><br><span class="line">    <span class="keyword">const</span> cur = [].concat(res[<span class="number">0</span>].map(<span class="function"><span class="params">v</span> =&gt;</span> [v, <span class="number">0</span>]))</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> t = keys[i]</span><br><span class="line">        <span class="keyword">let</span> pre = <span class="number">0</span></span><br><span class="line">        res[t].forEach(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> pos = <span class="number">0</span></span><br><span class="line">            <span class="keyword">const</span> lens = cur.length</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; lens; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (cur[j][<span class="number">0</span>] &gt;= v) pos++</span><br><span class="line">                <span class="keyword">if</span> (pos &gt;= t &amp;&amp; j &gt;= pre) &#123;</span><br><span class="line">                    <span class="comment">// 已经找到为止</span></span><br><span class="line">                    cur.splice(j + <span class="number">1</span>, <span class="number">0</span>, [v, t])</span><br><span class="line">                    pre = j + <span class="number">1</span></span><br><span class="line">                    <span class="keyword">return</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cur</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(reconstructQueue([[<span class="number">7</span>, <span class="number">0</span>], [<span class="number">4</span>, <span class="number">4</span>], [<span class="number">7</span>, <span class="number">1</span>], [<span class="number">5</span>, <span class="number">0</span>], [<span class="number">6</span>, <span class="number">1</span>], [<span class="number">5</span>, <span class="number">2</span>]]))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/16/LeetCode-406-根据身高重建队列/" data-id="cjh8v6y5d0000w8kfhftqdnwl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-CSS-径向渐变" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/15/CSS-径向渐变/" class="article-date">
@@ -173,7 +217,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/15/CSS-径向渐变/" data-id="cjh7gilqi000168kfg28cz9lu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/15/CSS-径向渐变/" data-id="cjh8v6y63000aw8kf4ij9vl7j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li></ul>
@@ -223,7 +267,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/" data-id="cjh7gilqd000068kfe7nbu9uz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/" data-id="cjh8v6y5m0003w8kf5z7e57a7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -267,7 +311,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/15/LeetCode-20-有效的括号/" data-id="cjh7gilqr000368kf908ud12n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/15/LeetCode-20-有效的括号/" data-id="cjh8v6y5i0001w8kfswg4jpa9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -316,7 +360,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/" data-id="cjh7gilrc000968kf8hvtaqud" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/" data-id="cjh8v6y620009w8kf6potv3j4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -371,6 +415,10 @@ $$k = \frac{1}{2}$$
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/05/16/LeetCode-406-根据身高重建队列/">LeetCode 406 根据身高重建队列</a>
+          </li>
         
           <li>
             <a href="/2018/05/15/CSS-径向渐变/">CSS: 径向渐变</a>

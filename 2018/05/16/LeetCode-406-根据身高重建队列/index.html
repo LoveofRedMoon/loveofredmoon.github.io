@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>LeetCode 406 根据身高重建队列 | Love of Red Moon Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="queue reconstruction by height题目假设有打乱顺序的一群人站成一个队列。 每个人由一个整数对(h, k)表示，其中 h 是这个人的身高，k 是排在这个人前面且身高大于或等于 h 的人数。 编写一个算法来重建这个队列。 注意：总人数少于 1100 人。 思路按照前置身高个数依次排序 在每组中必有前面的身高低于后者 例如 [[7,0], [4,4], [7,1], [5,0">
+<meta name="keywords" content="LeetCode JavaScript 算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 406 根据身高重建队列">
+<meta property="og:url" content="http://yoursite.com/2018/05/16/LeetCode-406-根据身高重建队列/index.html">
+<meta property="og:site_name" content="Love of Red Moon Blog">
+<meta property="og:description" content="queue reconstruction by height题目假设有打乱顺序的一群人站成一个队列。 每个人由一个整数对(h, k)表示，其中 h 是这个人的身高，k 是排在这个人前面且身高大于或等于 h 的人数。 编写一个算法来重建这个队列。 注意：总人数少于 1100 人。 思路按照前置身高个数依次排序 在每组中必有前面的身高低于后者 例如 [[7,0], [4,4], [7,1], [5,0">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-05-16T08:48:43.425Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode 406 根据身高重建队列">
+<meta name="twitter:description" content="queue reconstruction by height题目假设有打乱顺序的一群人站成一个队列。 每个人由一个整数对(h, k)表示，其中 h 是这个人的身高，k 是排在这个人前面且身高大于或等于 h 的人数。 编写一个算法来重建这个队列。 注意：总人数少于 1100 人。 思路按照前置身高个数依次排序 在每组中必有前面的身高低于后者 例如 [[7,0], [4,4], [7,1], [5,0">
+  
+    <link rel="alternate" href="/atom.xml" title="Love of Red Moon Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Love of Red Moon Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">赤月之爱的博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-LeetCode-406-根据身高重建队列" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/16/LeetCode-406-根据身高重建队列/" class="article-date">
+  <time datetime="2018-05-16T07:32:13.000Z" itemprop="datePublished">2018-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LeetCode 406 根据身高重建队列
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="queue-reconstruction-by-height"><a href="#queue-reconstruction-by-height" class="headerlink" title="queue reconstruction by height"></a>queue reconstruction by height</h3><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>假设有打乱顺序的一群人站成一个队列。 每个人由一个整数对(h, k)表示，其中 h 是这个人的身高，k 是排在这个人前面且身高大于或等于 h 的人数。 编写一个算法来重建这个队列。</p>
+<p>注意：总人数少于 1100 人。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>按照前置身高个数依次排序 在每组中必有前面的身高低于后者</p>
+<p>例如 <code>[[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]</code></p>
+<p>排序后的结果必有 <code>[5,0]</code> 在 <code>[7,0]</code> 之前</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[][]&#125; people</span></span><br><span class="line"><span class="comment"> * @return &#123;number[][]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> reconstructQueue = <span class="function"><span class="keyword">function</span>(<span class="params">people</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (people.length &lt; <span class="number">1</span>) <span class="keyword">return</span> people</span><br><span class="line">    <span class="keyword">const</span> keys = [],</span><br><span class="line">        res = &#123;&#125;</span><br><span class="line">    <span class="comment">// 处理所有的键名-数组后一个元素 键值-数组前一个元素</span></span><br><span class="line">    people.forEach(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (keys.indexOf(v[<span class="number">1</span>]) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            keys.push(v[<span class="number">1</span>])</span><br><span class="line">            res[v[<span class="number">1</span>]] = []</span><br><span class="line">        &#125;</span><br><span class="line">        res[v[<span class="number">1</span>]].push(v[<span class="number">0</span>])</span><br><span class="line">    &#125;)</span><br><span class="line">    keys.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line">    <span class="keyword">const</span> len = keys.length</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) res[keys[i]].sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line">    <span class="comment">// 初始化为0的数组</span></span><br><span class="line">    <span class="keyword">const</span> cur = [].concat(res[<span class="number">0</span>].map(<span class="function"><span class="params">v</span> =&gt;</span> [v, <span class="number">0</span>]))</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> t = keys[i]</span><br><span class="line">        <span class="keyword">let</span> pre = <span class="number">0</span></span><br><span class="line">        res[t].forEach(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> pos = <span class="number">0</span></span><br><span class="line">            <span class="keyword">const</span> lens = cur.length</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; lens; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (cur[j][<span class="number">0</span>] &gt;= v) pos++</span><br><span class="line">                <span class="keyword">if</span> (pos &gt;= t &amp;&amp; j &gt;= pre) &#123;</span><br><span class="line">                    <span class="comment">// 已经找到为止</span></span><br><span class="line">                    cur.splice(j + <span class="number">1</span>, <span class="number">0</span>, [v, t])</span><br><span class="line">                    pre = j + <span class="number">1</span></span><br><span class="line">                    <span class="keyword">return</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cur</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(reconstructQueue([[<span class="number">7</span>, <span class="number">0</span>], [<span class="number">4</span>, <span class="number">4</span>], [<span class="number">7</span>, <span class="number">1</span>], [<span class="number">5</span>, <span class="number">0</span>], [<span class="number">6</span>, <span class="number">1</span>], [<span class="number">5</span>, <span class="number">2</span>]]))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/16/LeetCode-406-根据身高重建队列/" data-id="cjh8v6y5d0000w8kfhftqdnwl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/15/CSS-径向渐变/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CSS: 径向渐变</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS-radial-gradient/" style="font-size: 10px;">CSS radial-gradient</a> <a href="/tags/LeetCode-JavaScript-算法/" style="font-size: 20px;">LeetCode JavaScript 算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/16/LeetCode-406-根据身高重建队列/">LeetCode 406 根据身高重建队列</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/15/CSS-径向渐变/">CSS: 径向渐变</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/">LeetCode 592 Fraction Addition and Subtraction</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/15/LeetCode-20-有效的括号/">LeetCode 20 有效的括号</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/">LeetCode 462 最少移动次数使数组元素相等 II</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Yongj Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
