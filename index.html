@@ -70,6 +70,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LeetCode-633" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/17/LeetCode-633/" class="article-date">
+  <time datetime="2018-05-17T06:45:38.000Z" itemprop="datePublished">2018-05-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/17/LeetCode-633/">LeetCode 633</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="这里是一些简单题的集锦-旨在利用-JS-简便书写"><a href="#这里是一些简单题的集锦-旨在利用-JS-简便书写" class="headerlink" title="这里是一些简单题的集锦, 旨在利用 JS 简便书写"></a>这里是一些简单题的集锦, 旨在利用 JS 简便书写</h2><h3 id="633-平方数之和"><a href="#633-平方数之和" class="headerlink" title="633. 平方数之和"></a>633. 平方数之和</h3><p>给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a*a + b*b = c。</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>根据一些平方数特性, 可以简便计算</p>
+<p>平方数 mod8 一定是 0 或 1 或 4 或 1 因此和一定是 0 或 1 或 2 或 4 或 5 因此是 3 或 6 或 7 直接排除</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; c</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> judgeSquareSum = <span class="function"><span class="keyword">function</span>(<span class="params">c</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (c % <span class="number">8</span>) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i * i &gt; c) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        <span class="keyword">const</span> r = c - i * i</span><br><span class="line">        <span class="keyword">const</span> j = ~~<span class="built_in">Math</span>.sqrt(r)</span><br><span class="line">        <span class="keyword">if</span> (j * j === r) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        i++</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(judgeSquareSum(<span class="number">5</span>))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/17/LeetCode-633/" data-id="cjha7ld8r000diokfh65tjoip" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LeetCode-321-拼接最大数" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/17/LeetCode-321-拼接最大数/" class="article-date">
@@ -104,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/17/LeetCode-321-拼接最大数/" data-id="cjha66adg0008agkf1b4m9760" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/17/LeetCode-321-拼接最大数/" data-id="cjha7ld8d0004iokftkgb3t8w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -149,7 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/17/LeetCode-102-二叉树的层次遍历/" data-id="cjha66ad20001agkfbqxrw7ne" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/17/LeetCode-102-二叉树的层次遍历/" data-id="cjha7ld800000iokfp9w0rc69" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -192,7 +234,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/17/LeetCode-354-Russian-Doll-Envelopes/" data-id="cjha66ad80003agkfsfi5uuro" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/17/LeetCode-354-Russian-Doll-Envelopes/" data-id="cjha7ld8g0005iokfqn1eq6vv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -236,7 +278,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/16/LeetCode-668-乘法表中第k小的数/" data-id="cjha66ado000fagkfxvcdey5v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/16/LeetCode-668-乘法表中第k小的数/" data-id="cjha7ld9e000liokf7n90dfvq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -280,7 +322,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/16/LeetCode-406-根据身高重建队列/" data-id="cjha66adb0005agkfjtjdvg1f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/16/LeetCode-406-根据身高重建队列/" data-id="cjha7ld8m0008iokfssxevbbh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -395,7 +437,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/15/CSS-径向渐变/" data-id="cjha66ada0004agkfdt95oyfp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/15/CSS-径向渐变/" data-id="cjha7ld880001iokflm60q55l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li></ul>
@@ -445,7 +487,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/" data-id="cjha66adk000aagkft1p3nvzn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/" data-id="cjha7ld8o000aiokfkgpuxwcd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -489,7 +531,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/15/LeetCode-20-有效的括号/" data-id="cjha66act0000agkf78d97bkm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/15/LeetCode-20-有效的括号/" data-id="cjha7ld8b0003iokfhi53nff5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -538,7 +580,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/" data-id="cjha66adn000dagkf5hi8laeo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/" data-id="cjha7ld8s000fiokf62oo7iyx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -595,6 +637,10 @@ $$k = \frac{1}{2}$$
       <ul>
         
           <li>
+            <a href="/2018/05/17/LeetCode-633/">LeetCode 633</a>
+          </li>
+        
+          <li>
             <a href="/2018/05/17/LeetCode-321-拼接最大数/">LeetCode 321 拼接最大数</a>
           </li>
         
@@ -608,10 +654,6 @@ $$k = \frac{1}{2}$$
         
           <li>
             <a href="/2018/05/16/LeetCode-668-乘法表中第k小的数/">LeetCode 668 乘法表中第k小的数</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/16/LeetCode-406-根据身高重建队列/">LeetCode 406 根据身高重建队列</a>
           </li>
         
       </ul>
