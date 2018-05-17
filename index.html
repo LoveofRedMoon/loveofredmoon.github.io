@@ -70,6 +70,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LeetCode-321-拼接最大数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/17/LeetCode-321-拼接最大数/" class="article-date">
+  <time datetime="2018-05-17T02:44:38.000Z" itemprop="datePublished">2018-05-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/17/LeetCode-321-拼接最大数/">LeetCode 321 拼接最大数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="create-maximum-number"><a href="#create-maximum-number" class="headerlink" title="create maximum number"></a>create maximum number</h3><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>已知长度分别为 m 和 n 的两个数组，其元素由 0-9 构成，直观地表示两个自然数各位上的数字。现在从这两个数组中选出 k (k &lt;= m + n) 个数字拼接成一个新的数，要求从同一个数组中取出的数字保持其在原数组中的相对顺序。</p>
+<p>求满足该条件的最大数。结果返回一个表示该最大数的长度为 k 的数组。</p>
+<p>尽可能优化你的算法的时间和空间复杂度。</p>
+<p>例 1:</p>
+<p>nums1 = [3, 4, 6, 5]<br>nums2 = [9, 1, 2, 5, 8, 3]<br>k = 5<br>返回 [9, 8, 6, 5, 3]</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>第一思路:<br>如果确定了每个数组使用的个数, 那毫无疑问 应该取出最大的几个数 , 然后类似于插入排序插入得到结果</p>
+<p>向来时间复杂度和空间复杂度学的不好… 以后优化…</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一版</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums1</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums2</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; k</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxNumber = <span class="function"><span class="keyword">function</span>(<span class="params">nums1, nums2, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> l1 = nums1.length,</span><br><span class="line">        l2 = nums2.length,</span><br><span class="line">        res = []</span><br><span class="line">    <span class="keyword">const</span> _last_len = <span class="built_in">Math</span>.min(l1, k)</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="built_in">Math</span>.max(<span class="number">0</span>, k - l2); i &lt;= _last_len; i++) &#123;</span><br><span class="line">        <span class="comment">// 这里遍历所有结果</span></span><br><span class="line">        <span class="comment">// nums1 中取出 i个元素</span></span><br><span class="line">        <span class="comment">// nums2 中取出 k-i个元素</span></span><br><span class="line">        <span class="keyword">const</span> n1 = g(nums1, i),</span><br><span class="line">            n2 = g(nums2, k - i)</span><br><span class="line">        res.push(cr(n1, n2))</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res.reduce(<span class="function">(<span class="params">p, v</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; k; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (v[i] &gt; p[i]) <span class="keyword">return</span> v</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (v[i] &lt; p[i]) <span class="keyword">return</span> p</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> p</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">g</span>(<span class="params">a, p</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 求数组a的前p大数</span></span><br><span class="line">        <span class="keyword">if</span> (!p) <span class="keyword">return</span> []</span><br><span class="line">        <span class="keyword">if</span> (a.length === p) <span class="keyword">return</span> [...a]</span><br><span class="line">        <span class="keyword">const</span> b = a.length - p</span><br><span class="line">        <span class="keyword">let</span> max = a[<span class="number">0</span>],</span><br><span class="line">            pos = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= b; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (max &lt; a[i]) &#123;</span><br><span class="line">                max = a[i]</span><br><span class="line">                pos = i</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> [max, ...g(a.slice(pos + <span class="number">1</span>), p - <span class="number">1</span>)]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">cr</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 将a,b插入变成一个数组</span></span><br><span class="line">        <span class="keyword">const</span> m = a.length,</span><br><span class="line">            n = b.length,</span><br><span class="line">            res = []</span><br><span class="line">        <span class="keyword">let</span> i = <span class="number">0</span>,</span><br><span class="line">            j = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i === m) <span class="keyword">return</span> res.concat(b.slice(j))</span><br><span class="line">            <span class="keyword">if</span> (j === n) <span class="keyword">return</span> res.concat(a.slice(i))</span><br><span class="line">            <span class="keyword">if</span> (chooseWhich(a, i, b, j)) res.push(a[i++])</span><br><span class="line">            <span class="keyword">else</span> res.push(b[j++])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">chooseWhich</span>(<span class="params">a, i, b, j</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 在同等条件下的判断</span></span><br><span class="line">        <span class="keyword">if</span> (a[i] === <span class="literal">undefined</span>) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        <span class="keyword">if</span> (b[j] === <span class="literal">undefined</span>) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        <span class="keyword">if</span> (a[i] &gt; b[j]) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        <span class="keyword">if</span> (a[i] &lt; b[j]) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        <span class="keyword">return</span> chooseWhich(a, i + <span class="number">1</span>, b, j + <span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(maxNumber([<span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">5</span>], [<span class="number">9</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">3</span>], <span class="number">5</span>))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/17/LeetCode-321-拼接最大数/" data-id="cjha66adg0008agkf1b4m9760" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LeetCode-102-二叉树的层次遍历" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/17/LeetCode-102-二叉树的层次遍历/" class="article-date">
@@ -103,7 +149,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/17/LeetCode-102-二叉树的层次遍历/" data-id="cjh9xg2p900003skf01rvqohx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/17/LeetCode-102-二叉树的层次遍历/" data-id="cjha66ad20001agkfbqxrw7ne" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -146,7 +192,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/17/LeetCode-354-Russian-Doll-Envelopes/" data-id="cjh9xg2pl00033skfjhxvb7mt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/17/LeetCode-354-Russian-Doll-Envelopes/" data-id="cjha66ad80003agkfsfi5uuro" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -190,7 +236,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/16/LeetCode-668-乘法表中第k小的数/" data-id="cjh9xg2po00053skfu62xgqmc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/16/LeetCode-668-乘法表中第k小的数/" data-id="cjha66ado000fagkfxvcdey5v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -234,7 +280,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/16/LeetCode-406-根据身高重建队列/" data-id="cjh9xg2q1000g3skftr208rv0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/16/LeetCode-406-根据身高重建队列/" data-id="cjha66adb0005agkfjtjdvg1f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -349,7 +395,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/15/CSS-径向渐变/" data-id="cjh9xg2pr00083skfthyy58su" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/15/CSS-径向渐变/" data-id="cjha66ada0004agkfdt95oyfp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li></ul>
@@ -399,7 +445,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/" data-id="cjh9xg2q7000i3skfa11r6dy4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/" data-id="cjha66adk000aagkft1p3nvzn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -443,7 +489,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/15/LeetCode-20-有效的括号/" data-id="cjh9xg2pi00013skf8rcku6ev" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/15/LeetCode-20-有效的括号/" data-id="cjha66act0000agkf78d97bkm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -492,7 +538,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/" data-id="cjh9xg2pn00043skf7g687vmc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/" data-id="cjha66adn000dagkf5hi8laeo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -549,6 +595,10 @@ $$k = \frac{1}{2}$$
       <ul>
         
           <li>
+            <a href="/2018/05/17/LeetCode-321-拼接最大数/">LeetCode 321 拼接最大数</a>
+          </li>
+        
+          <li>
             <a href="/2018/05/17/LeetCode-102-二叉树的层次遍历/">LeetCode 102 二叉树的层次遍历</a>
           </li>
         
@@ -562,10 +612,6 @@ $$k = \frac{1}{2}$$
         
           <li>
             <a href="/2018/05/16/LeetCode-406-根据身高重建队列/">LeetCode 406 根据身高重建队列</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/15/CSS-径向渐变/">CSS: 径向渐变</a>
           </li>
         
       </ul>
