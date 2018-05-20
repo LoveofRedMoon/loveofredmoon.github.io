@@ -5,19 +5,20 @@
   
 
   
-  <title>Tag: CSS radial-gradient | Love of Red Moon Blog</title>
+  <title>兼容性处理(慢慢更新) | Love of Red Moon Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我的博客">
-<meta name="keywords" content="JS CSS">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Love of Red Moon Blog">
-<meta property="og:url" content="http://yoursite.com/tags/CSS-radial-gradient/index.html">
+  <meta name="description" content="绑定事件  &amp;lt;= IE8 elem.attachEvent(&amp;#39;on...&amp;#39;, callback)其他 elem.addEventListener(&amp;#39;...&amp;#39;, callback, isCapture)  同样的, 删除事件也要改成 elem.detachEvent  elem.removeEventListener    获取元素  通过类名获取 getEl">
+<meta name="keywords" content="兼容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="兼容性处理(慢慢更新)">
+<meta property="og:url" content="http://yoursite.com/2018/05/19/兼容性处理-慢慢更新/index.html">
 <meta property="og:site_name" content="Love of Red Moon Blog">
-<meta property="og:description" content="我的博客">
+<meta property="og:description" content="绑定事件  &amp;lt;= IE8 elem.attachEvent(&amp;#39;on...&amp;#39;, callback)其他 elem.addEventListener(&amp;#39;...&amp;#39;, callback, isCapture)  同样的, 删除事件也要改成 elem.detachEvent  elem.removeEventListener    获取元素  通过类名获取 getEl">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-05-19T07:04:38.681Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Love of Red Moon Blog">
-<meta name="twitter:description" content="我的博客">
+<meta name="twitter:title" content="兼容性处理(慢慢更新)">
+<meta name="twitter:description" content="绑定事件  &amp;lt;= IE8 elem.attachEvent(&amp;#39;on...&amp;#39;, callback)其他 elem.addEventListener(&amp;#39;...&amp;#39;, callback, isCapture)  同样的, 删除事件也要改成 elem.detachEvent  elem.removeEventListener    获取元素  通过类名获取 getEl">
   
     <link rel="alternate" href="/atom.xml" title="Love of Red Moon Blog" type="application/atom+xml">
   
@@ -68,40 +69,100 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/15/CSS-径向渐变/" class="archive-article-date">
-  <time datetime="2018-05-15T09:09:12.000Z" itemprop="datePublished">5月 15</time>
+        <section id="main"><article id="post-兼容性处理-慢慢更新" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/19/兼容性处理-慢慢更新/" class="article-date">
+  <time datetime="2018-05-19T05:03:52.000Z" itemprop="datePublished">2018-05-19</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/15/CSS-径向渐变/">CSS: 径向渐变</a>
+    <h1 class="article-title" itemprop="name">
+      兼容性处理(慢慢更新)
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>绑定事件</p>
+<ul>
+<li><p>&lt;= IE8 <code>elem.attachEvent(&#39;on...&#39;, callback)</code><br>其他 <code>elem.addEventListener(&#39;...&#39;, callback, isCapture)</code></p>
+</li>
+<li><p>同样的, 删除事件也要改成 <code>elem.detachEvent</code>  <code>elem.removeEventListener</code></p>
+</li>
+</ul>
+</li>
+<li><p>获取元素</p>
+<ul>
+<li>通过类名获取 <code>getElementsByClassName</code> 在 &lt;= IE8 时不兼容, 解决方法: IE8 可以通过<code>querySelectorAll</code> 获取, IE7及以下得用hack进行编写</li>
+<li>通过选择器获取 <code>querySelectorAll</code> 在 &lt;= IE7 时不兼容, 解决方法: hack编写</li>
+</ul>
+</li>
+<li><p>scrollTop获取</p>
+<ul>
+<li>使用 <code>document.documentElement || document.body</code> <code>.scrollTop</code>来获取</li>
+</ul>
+</li>
+<li><p>获取CSS样式</p>
+<ul>
+<li>通用做法是 <code>window.getComputedStyle(elem, 伪类)</code> 来获取</li>
+<li>&lt;= IE8 时不支持, 可以使用 <code>elem.currentStyle</code> 来获取</li>
+<li>&lt;= IE10 是不支持伪类</li>
+</ul>
+</li>
+<li><p>before, after伪元素</p>
+<ul>
+<li>&lt;= IE7 时不支持伪元素 建议不用, 改直接写元素, 使用before after类名假装伪元素</li>
+</ul>
+</li>
+<li><p>正则表达式</p>
+<ul>
+<li>并没与兼容问题, 只是着重提一句, 一般字符串的处理, 都可以使用正则+replace match来处理</li>
+</ul>
+</li>
+</ol>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/19/兼容性处理-慢慢更新/" data-id="cjhe5m7f2000oa8kfk3z649c0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/兼容/">兼容</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/19/常用代码处理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          常用代码处理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/17/LeetCode-633/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LeetCode 633</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>常用代码处理 | Love of Red Moon Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="123456// 驼峰转短横线var toKeCase = function(str) &amp;#123;    return str.replace(/[A-Z]/g, function(v) &amp;#123;        return &apos;-&apos; + v.toLowerCase()    &amp;#125;)&amp;#125; 123456// 短横线转驼峰var toCamelCase = function(str">
+<meta name="keywords" content="常用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用代码处理">
+<meta property="og:url" content="http://yoursite.com/2018/05/19/常用代码处理/index.html">
+<meta property="og:site_name" content="Love of Red Moon Blog">
+<meta property="og:description" content="123456// 驼峰转短横线var toKeCase = function(str) &amp;#123;    return str.replace(/[A-Z]/g, function(v) &amp;#123;        return &apos;-&apos; + v.toLowerCase()    &amp;#125;)&amp;#125; 123456// 短横线转驼峰var toCamelCase = function(str">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-05-19T08:01:04.793Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常用代码处理">
+<meta name="twitter:description" content="123456// 驼峰转短横线var toKeCase = function(str) &amp;#123;    return str.replace(/[A-Z]/g, function(v) &amp;#123;        return &apos;-&apos; + v.toLowerCase()    &amp;#125;)&amp;#125; 123456// 短横线转驼峰var toCamelCase = function(str">
+  
+    <link rel="alternate" href="/atom.xml" title="Love of Red Moon Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Love of Red Moon Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">赤月之爱的博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-常用代码处理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/19/常用代码处理/" class="article-date">
+  <time datetime="2018-05-19T07:05:35.000Z" itemprop="datePublished">2018-05-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      常用代码处理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 驼峰转短横线</span></span><br><span class="line"><span class="keyword">var</span> toKeCase = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.replace(<span class="regexp">/[A-Z]/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'-'</span> + v.toLowerCase()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 短横线转驼峰</span></span><br><span class="line"><span class="keyword">var</span> toCamelCase = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.replace(<span class="regexp">/-([a-z])/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">v, a</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a.toUpperCase()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 封装选择器获取元素, (其中还有一些其他方法另写)</span></span><br><span class="line"><span class="keyword">var</span> querySelector = <span class="function"><span class="keyword">function</span>(<span class="params">sel</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.querySelectorAll) &#123;</span><br><span class="line">        sel = <span class="built_in">document</span>.querySelectorAll(sel)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 针对IE7 不支持querySelectAll</span></span><br><span class="line">        <span class="comment">// 处理一下选择器 后代( ) id(#) class(.) tagName() 子代(&gt;) 属性选择器(不能单独作为最后一个选择器)</span></span><br><span class="line">        <span class="comment">// 暂时不支持逗号选择器</span></span><br><span class="line">        <span class="comment">// 不考虑性能, 将从第一个id选择器或者第一个开始查询</span></span><br><span class="line">        sel = sel.split(<span class="regexp">/\b(?=[ &gt;])/</span>)</span><br><span class="line">        <span class="keyword">var</span> cur = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">var</span> ppp = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = sel.length; i--; ) &#123;</span><br><span class="line">            <span class="keyword">var</span> flag = <span class="literal">false</span></span><br><span class="line">            <span class="keyword">if</span> (sel[i].charAt(<span class="number">0</span>) === <span class="string">'&gt;'</span>) flag = <span class="literal">true</span></span><br><span class="line">            sel[i] = sel[i].replace(<span class="regexp">/(^[ &gt;]|"|')/g</span>, <span class="string">''</span>)</span><br><span class="line">            <span class="keyword">var</span> v = sel[i].split(<span class="regexp">/(\b(?=[ #\.\[])|\])/</span>)</span><br><span class="line">            <span class="keyword">var</span> j = <span class="number">0</span></span><br><span class="line">            <span class="comment">// 这里cur保存当前满足条件的所有元素</span></span><br><span class="line">            <span class="comment">// 这里ppp保存当前满足条件的底层元素</span></span><br><span class="line">            <span class="keyword">if</span> (ppp === <span class="literal">null</span>) &#123;</span><br><span class="line">                ppp = $$.getElem(v[j++])</span><br><span class="line">                <span class="keyword">if</span> (!ppp.length) <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">                cur = $$.map(ppp, <span class="function"><span class="keyword">function</span>(<span class="params">vv, ii</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> [vv, ii]</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//筛选所有不满足条件的元素</span></span><br><span class="line">            <span class="keyword">for</span> (; j &lt; v.length; j++)</span><br><span class="line">                cur = $$.reduce(</span><br><span class="line">                    cur,</span><br><span class="line">                    <span class="function"><span class="keyword">function</span>(<span class="params">p, curr</span>) </span>&#123;</span><br><span class="line">                        <span class="keyword">if</span> ($$.check(curr[<span class="number">0</span>], v[j])) p.push(curr)</span><br><span class="line">                        <span class="keyword">return</span> p</span><br><span class="line">                    &#125;,</span><br><span class="line">                    []</span><br><span class="line">                )</span><br><span class="line">            <span class="keyword">if</span> (i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (flag)</span><br><span class="line">                    cur = $$.reduce(</span><br><span class="line">                        cur,</span><br><span class="line">                        <span class="function"><span class="keyword">function</span>(<span class="params">p, curr</span>) </span>&#123;</span><br><span class="line">                            <span class="keyword">var</span> z = curr[<span class="number">0</span>].parentNode</span><br><span class="line">                            <span class="keyword">if</span> (z !== <span class="literal">null</span>) p.push([z, curr[<span class="number">1</span>]])</span><br><span class="line">                            <span class="keyword">return</span> p</span><br><span class="line">                        &#125;,</span><br><span class="line">                        []</span><br><span class="line">                    )</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    cur = $$.reduce(</span><br><span class="line">                        cur,</span><br><span class="line">                        <span class="function"><span class="keyword">function</span>(<span class="params">p, curr</span>) </span>&#123;</span><br><span class="line">                            <span class="keyword">var</span> z = curr[<span class="number">0</span>]</span><br><span class="line">                            <span class="keyword">while</span> ((z = z.parentNode)) p.push([z, curr[<span class="number">1</span>]])</span><br><span class="line">                            <span class="keyword">return</span> p</span><br><span class="line">                        &#125;,</span><br><span class="line">                        []</span><br><span class="line">                    )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cur = $$.map(</span><br><span class="line">            $$.removeRepeat(</span><br><span class="line">                $$.map(cur, <span class="function"><span class="keyword">function</span>(<span class="params">vv</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> vv[<span class="number">1</span>]</span><br><span class="line">                &#125;)</span><br><span class="line">            ),</span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params">vv</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> ppp[vv]</span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line">        sel = cur</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">``</span><span class="string">`</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">``</span><span class="string">`</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br></pre></td></tr></table></figure>
+<pre><code class="js">
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/19/常用代码处理/" data-id="cjhe5m7f4000qa8kfb6heei8h" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常用/">常用</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/19/正则表达式-JS/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          正则表达式-JS
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/19/兼容性处理-慢慢更新/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">兼容性处理(慢慢更新)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/兼容/">兼容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-JS/">正则 JS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS-radial-gradient/" style="font-size: 10px;">CSS radial-gradient</a> <a href="/tags/LeetCode-JavaScript-算法/" style="font-size: 20px;">LeetCode JavaScript 算法</a> <a href="/tags/兼容/" style="font-size: 10px;">兼容</a> <a href="/tags/常用/" style="font-size: 10px;">常用</a> <a href="/tags/正则-JS/" style="font-size: 10px;">正则 JS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/19/正则表达式-JS/">正则表达式-JS</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/19/常用代码处理/">常用代码处理</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/19/兼容性处理-慢慢更新/">兼容性处理(慢慢更新)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/17/LeetCode-633/">LeetCode 633</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/17/LeetCode-321-拼接最大数/">LeetCode 321 拼接最大数</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018  <a href="/cyj.html" target="_blank"> Yongj Chen </a><br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
