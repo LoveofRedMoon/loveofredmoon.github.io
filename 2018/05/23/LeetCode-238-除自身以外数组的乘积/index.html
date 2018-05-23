@@ -5,20 +5,20 @@
   
 
   
-  <title>LeetCode 20 有效的括号 | Love of Red Moon Blog</title>
+  <title>LeetCode 238 除自身以外数组的乘积 | Love of Red Moon Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="valid parentheses题目给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。 有效字符串需满足： 左括号必须用相同类型的右括号闭合。左括号必须以正确的顺序闭合。注意空字符串可被认为是有效字符串。 思路括号匹配是一个经典例题, 一般用计数器进行处理, 如果出现异常会在计数器表现出来.例如当处理到一个后括号时, 会去寻找与之匹配的前括号, 然后进">
+  <meta name="description" content="题目给定长度为 n 的整数数组 nums，其中 n &amp;gt; 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。 思路从前至后并且从后往前遍历两次, 当前位置不计入乘法中 代码1234567891011121314151617181920/** * @param &amp;#123;number[]&amp;#125; nums * @retu">
 <meta name="keywords" content="LeetCode JavaScript 算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode 20 有效的括号">
-<meta property="og:url" content="https://loveofredmoon.github.io/2018/05/15/LeetCode-20-有效的括号/index.html">
+<meta property="og:title" content="LeetCode 238 除自身以外数组的乘积">
+<meta property="og:url" content="https://loveofredmoon.github.io/2018/05/23/LeetCode-238-除自身以外数组的乘积/index.html">
 <meta property="og:site_name" content="Love of Red Moon Blog">
-<meta property="og:description" content="valid parentheses题目给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。 有效字符串需满足： 左括号必须用相同类型的右括号闭合。左括号必须以正确的顺序闭合。注意空字符串可被认为是有效字符串。 思路括号匹配是一个经典例题, 一般用计数器进行处理, 如果出现异常会在计数器表现出来.例如当处理到一个后括号时, 会去寻找与之匹配的前括号, 然后进">
+<meta property="og:description" content="题目给定长度为 n 的整数数组 nums，其中 n &amp;gt; 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。 思路从前至后并且从后往前遍历两次, 当前位置不计入乘法中 代码1234567891011121314151617181920/** * @param &amp;#123;number[]&amp;#125; nums * @retu">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-05-15T09:08:25.144Z">
+<meta property="og:updated_time" content="2018-05-23T01:41:13.544Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode 20 有效的括号">
-<meta name="twitter:description" content="valid parentheses题目给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。 有效字符串需满足： 左括号必须用相同类型的右括号闭合。左括号必须以正确的顺序闭合。注意空字符串可被认为是有效字符串。 思路括号匹配是一个经典例题, 一般用计数器进行处理, 如果出现异常会在计数器表现出来.例如当处理到一个后括号时, 会去寻找与之匹配的前括号, 然后进">
+<meta name="twitter:title" content="LeetCode 238 除自身以外数组的乘积">
+<meta name="twitter:description" content="题目给定长度为 n 的整数数组 nums，其中 n &amp;gt; 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。 思路从前至后并且从后往前遍历两次, 当前位置不计入乘法中 代码1234567891011121314151617181920/** * @param &amp;#123;number[]&amp;#125; nums * @retu">
   
     <link rel="alternate" href="/atom.xml" title="Love of Red Moon Blog" type="application/atom+xml">
   
@@ -69,10 +69,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-LeetCode-20-有效的括号" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-LeetCode-238-除自身以外数组的乘积" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/15/LeetCode-20-有效的括号/" class="article-date">
-  <time datetime="2018-05-15T07:53:34.000Z" itemprop="datePublished">2018-05-15</time>
+    <a href="/2018/05/23/LeetCode-238-除自身以外数组的乘积/" class="article-date">
+  <time datetime="2018-05-23T01:35:02.000Z" itemprop="datePublished">2018-05-23</time>
 </a>
     
   </div>
@@ -83,7 +83,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      LeetCode 20 有效的括号
+      LeetCode 238 除自身以外数组的乘积
     </h1>
   
 
@@ -91,17 +91,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="valid-parentheses"><a href="#valid-parentheses" class="headerlink" title="valid parentheses"></a>valid parentheses</h3><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。</p>
-<p>有效字符串需满足：</p>
-<p>左括号必须用相同类型的右括号闭合。左括号必须以正确的顺序闭合。注意空字符串可被认为是有效字符串。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>括号匹配是一个经典例题, 一般用计数器进行处理, 如果出现异常会在计数器表现出来.<br>例如当处理到一个后括号时, 会去寻找与之匹配的前括号, 然后进行判断里面的内容是否为合法</p>
-<p>我这里寻找一个投机取巧的方法, 每次直接替换 <code>() [] {}</code> 直到再也替换不了,如果还剩下字符串, 肯定就是不合法字符串</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> isValid = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> len = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> (s.length != len) &#123;</span><br><span class="line">        len = s.length</span><br><span class="line">        s = s.replace(<span class="regexp">/(\(\)|\[\]|\&#123;\&#125;)/g</span>, <span class="string">''</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s === <span class="string">''</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(isValid(<span class="string">'([)]'</span>))</span><br></pre></td></tr></table></figure>
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定长度为 n 的整数数组 nums，其中 n &gt; 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>从前至后并且从后往前遍历两次, 当前位置不计入乘法中</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> productExceptSelf = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> len = nums.length</span><br><span class="line">    <span class="keyword">const</span> outPut = []</span><br><span class="line">    <span class="keyword">let</span> curJ = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        outPut[i] = curJ</span><br><span class="line">        curJ *= nums[i]</span><br><span class="line">    &#125;</span><br><span class="line">    curJ = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = len; i--; ) &#123;</span><br><span class="line">        outPut[i] *= curJ</span><br><span class="line">        curJ *= nums[i]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> outPut</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(productExceptSelf([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]))</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/15/LeetCode-20-有效的括号/" data-id="cjhik7k2i000csckftte41l5n" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-238-除自身以外数组的乘积/" data-id="cjhik7k1l0001sckfh8lhpuxh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -112,19 +109,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          LeetCode 592 Fraction Addition and Subtraction
+          LeetCode 798 Smallest Rotation with Highest Score
         
       </div>
     </a>
   
   
-    <a href="/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/05/23/LeetCode-200-岛屿的个数/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">LeetCode 462 最少移动次数使数组元素相等 II</div>
+      <div class="article-nav-title">LeetCode 200 岛屿的个数</div>
     </a>
   
 </nav>

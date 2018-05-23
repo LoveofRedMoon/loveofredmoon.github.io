@@ -5,13 +5,13 @@
   
 
   
-  <title>Tag: 常用 | Love of Red Moon Blog</title>
+  <title>Love of Red Moon Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="我的博客">
 <meta name="keywords" content="JS CSS">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Love of Red Moon Blog">
-<meta property="og:url" content="https://loveofredmoon.github.io/tags/常用/index.html">
+<meta property="og:url" content="https://loveofredmoon.github.io/page/3/index.html">
 <meta property="og:site_name" content="Love of Red Moon Blog">
 <meta property="og:description" content="我的博客">
 <meta property="og:locale" content="zh-cn">
@@ -70,38 +70,61 @@
       <div class="outer">
         <section id="main">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/19/常用代码处理/" class="archive-article-date">
-  <time datetime="2018-05-19T07:05:35.000Z" itemprop="datePublished">5月 19</time>
+    <article id="post-LeetCode-462-最少移动次数使数组元素相等-II" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/" class="article-date">
+  <time datetime="2018-05-15T07:40:26.000Z" itemprop="datePublished">2018-05-15</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/19/常用代码处理/">常用代码处理</a>
+      <a class="article-title" href="/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/">LeetCode 462 最少移动次数使数组元素相等 II</a>
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="minimum-moves-to-equal-array-elements-ii"><a href="#minimum-moves-to-equal-array-elements-ii" class="headerlink" title="minimum moves to equal array elements ii"></a>minimum moves to equal array elements ii</h3><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个非空整数数组，找到使所有数组元素相等所需的最小移动数，其中每次移动可将选定的一个元素加 1 或减 1。 您可以假设数组的长度最多为 10000。</p>
+<p>例如:</p>
+<p>输入:<br>[1,2,3]</p>
+<p>输出:<br>2</p>
+<p>说明：只有两个动作是必要的（记得每一步仅可使其中一个元素加 1 或减 1）：</p>
+<p>[1,2,3] =&gt; [2,2,3] =&gt; [2,2,2]</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>举个栗子 , 对于数组 <code>[0, 0, 1, 7, 8]</code> 来说, 第一想法肯定是取中间的数例如取 <code>4</code> ,那么此时各个位置的差值为 <code>4 4 3 3 4</code><br>如果取 <code>3</code> ,那么此时各个位置的差值为 <code>3 3 2 4 5</code></p>
+<p>也就是当取值减 <code>1</code> 时, 比它小的数的差值会减一, 比它大的数的差值就会加一所以如果<strong>比它小的数</strong>的个数比<strong>比它大的数</strong>的个数多, 那我们就是赚的那什么时候可以停止呢? 肯定是比它小的数比比它大的数的个数不多的时候</p>
+<p>因此我们取的值应当是居中的一个<strong>中位数</strong>值可以测试得知, 如果数组长度为偶数, 取中间两个数任意一个都可以</p>
+<p>因此对于长度为 <code>len</code> 的数组而言, 取 <code>Math.floor(len/2)</code> 即可</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 462</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> minMoves2 = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> len = nums.length,</span><br><span class="line">        per = nums.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)[<span class="built_in">Math</span>.floor(len / <span class="number">2</span>)]</span><br><span class="line">    <span class="keyword">return</span> nums.reduce(<span class="function">(<span class="params">p, v</span>) =&gt;</span> p + <span class="built_in">Math</span>.abs(v - per), <span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(minMoves2([<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">6</span>]))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/" data-id="cjhik7k2t000ksckflrklhvtf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
   </div>
+  
 </article>
-  
-  
-    </div></section>
+
+
   
 
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 
 </section>
         

@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Love of Red Moon Blog">
 <meta property="og:description" content="绑定事件  &amp;lt;= IE8 elem.attachEvent(&amp;#39;on...&amp;#39;, callback)其他 elem.addEventListener(&amp;#39;...&amp;#39;, callback, isCapture)  同样的, 删除事件也要改成 elem.detachEvent  elem.removeEventListener    获取元素  通过类名获取 getEl">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-05-19T07:04:38.681Z">
+<meta property="og:updated_time" content="2018-05-20T11:55:26.456Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="兼容性处理(慢慢更新)">
 <meta name="twitter:description" content="绑定事件  &amp;lt;= IE8 elem.attachEvent(&amp;#39;on...&amp;#39;, callback)其他 elem.addEventListener(&amp;#39;...&amp;#39;, callback, isCapture)  同样的, 删除事件也要改成 elem.detachEvent  elem.removeEventListener    获取元素  通过类名获取 getEl">
@@ -116,6 +116,7 @@
 <li>通用做法是 <code>window.getComputedStyle(elem, 伪类)</code> 来获取</li>
 <li>&lt;= IE8 时不支持, 可以使用 <code>elem.currentStyle</code> 来获取</li>
 <li>&lt;= IE10 是不支持伪类</li>
+<li>在未设置宽高时, <code>currentStyle</code> 获得的是 <code>auto</code> 而不是具体宽高值, 因此需要做兼容性处理 <code>offsetHeight offsetWidth</code></li>
 </ul>
 </li>
 <li><p>before, after伪元素</p>
@@ -128,12 +129,17 @@
 <li>并没与兼容问题, 只是着重提一句, 一般字符串的处理, 都可以使用正则+replace match来处理</li>
 </ul>
 </li>
+<li><p>关于CSS3属性, 显然CSS3属性低版本IE不支持</p>
+<ul>
+<li>opacity: &lt;= IE8 使用 <code>filter: &quot;alpha(opacity=50)&quot;</code> 因此需要作额外处理</li>
+</ul>
+</li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/19/兼容性处理-慢慢更新/" data-id="cjheis25k000nzckftitdxzu7" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/19/兼容性处理-慢慢更新/" data-id="cjhik7k3a0012sckf4harr7lx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/兼容/">兼容</a></li></ul>
@@ -156,7 +162,7 @@
   
     <a href="/2018/05/17/LeetCode-集锦/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">LeetCode 633 746 453</div>
+      <div class="article-nav-title">LeetCode 633 746 453 766 66 387</div>
     </a>
   
 </nav>
@@ -207,23 +213,23 @@
       <ul>
         
           <li>
-            <a href="/2018/05/20/LeetCode-738-单调递增的数字/">LeetCode 738 单调递增的数字</a>
+            <a href="/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/">LeetCode 798 Smallest Rotation with Highest Score</a>
           </li>
         
           <li>
-            <a href="/2018/05/19/正则表达式-JS/">正则表达式-JS</a>
+            <a href="/2018/05/23/LeetCode-238-除自身以外数组的乘积/">LeetCode 238 除自身以外数组的乘积</a>
           </li>
         
           <li>
-            <a href="/2018/05/19/常用代码处理/">常用代码处理</a>
+            <a href="/2018/05/23/LeetCode-200-岛屿的个数/">LeetCode 200 岛屿的个数</a>
           </li>
         
           <li>
-            <a href="/2018/05/19/兼容性处理-慢慢更新/">兼容性处理(慢慢更新)</a>
+            <a href="/2018/05/23/LeetCode-393-UTF-8-编码验证/">LeetCode 393 UTF-8 编码验证</a>
           </li>
         
           <li>
-            <a href="/2018/05/17/LeetCode-集锦/">LeetCode 633 746 453</a>
+            <a href="/2018/05/22/LeetCode-524-通过删除字母匹配到字典里最长单词/">LeetCode 524 通过删除字母匹配到字典里最长单词</a>
           </li>
         
       </ul>

@@ -5,19 +5,19 @@
   
 
   
-  <title>LeetCode 633 746 453 | Love of Red Moon Blog</title>
+  <title>LeetCode 633 746 453 766 66 387 | Love of Red Moon Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="这里是一些简单题的集锦, 旨在利用 JS 简便书写633. 平方数之和给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a*a + b*b = c。 思路根据一些平方数特性, 可以简便计算 平方数 mod8 一定是 0 或 1 或 4 或 1 因此和一定是 0 或 1 或 2 或 4 或 5 因此是 3 或 6 或 7 直接排除 代码12345678910111213141516">
 <meta name="keywords" content="LeetCode JavaScript 算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode 633 746 453">
+<meta property="og:title" content="LeetCode 633 746 453 766 66 387">
 <meta property="og:url" content="https://loveofredmoon.github.io/2018/05/17/LeetCode-集锦/index.html">
 <meta property="og:site_name" content="Love of Red Moon Blog">
 <meta property="og:description" content="这里是一些简单题的集锦, 旨在利用 JS 简便书写633. 平方数之和给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a*a + b*b = c。 思路根据一些平方数特性, 可以简便计算 平方数 mod8 一定是 0 或 1 或 4 或 1 因此和一定是 0 或 1 或 2 或 4 或 5 因此是 3 或 6 或 7 直接排除 代码12345678910111213141516">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-05-20T07:18:06.371Z">
+<meta property="og:updated_time" content="2018-05-23T02:01:44.721Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode 633 746 453">
+<meta name="twitter:title" content="LeetCode 633 746 453 766 66 387">
 <meta name="twitter:description" content="这里是一些简单题的集锦, 旨在利用 JS 简便书写633. 平方数之和给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a*a + b*b = c。 思路根据一些平方数特性, 可以简便计算 平方数 mod8 一定是 0 或 1 或 4 或 1 因此和一定是 0 或 1 或 2 或 4 或 5 因此是 3 或 6 或 7 直接排除 代码12345678910111213141516">
   
     <link rel="alternate" href="/atom.xml" title="Love of Red Moon Blog" type="application/atom+xml">
@@ -83,7 +83,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      LeetCode 633 746 453
+      LeetCode 633 746 453 766 66 387
     </h1>
   
 
@@ -103,11 +103,24 @@
 <h3 id="453-最小移动次数使数组元素相等"><a href="#453-最小移动次数使数组元素相等" class="headerlink" title="453. 最小移动次数使数组元素相等"></a>453. 最小移动次数使数组元素相等</h3><p>给定一个长度为 n 的非空整数数组，找到让数组所有元素相等的最小移动次数。每次移动可以使 n - 1 个元素增加 1。</p>
 <h4 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h4><p>转换思路, 将每次增加 n-1 个 1 改为每次减少 1 个 1 ,效果是完全一致的, 因此主需要将所有数都变成最小数</p>
 <h4 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> minMoves = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (nums.length &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> nums.reduce(<span class="function">(<span class="params">p, v</span>) =&gt;</span> p + v) - nums.length * <span class="built_in">Math</span>.min(...nums)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(minMoves([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]))</span><br></pre></td></tr></table></figure>
+<h3 id="766-托普利茨矩阵"><a href="#766-托普利茨矩阵" class="headerlink" title="766. 托普利茨矩阵"></a>766. 托普利茨矩阵</h3><p>如果一个矩阵的每一方向由左上到右下的对角线上具有相同元素，那么这个矩阵是托普利茨矩阵。给定一个 M x N 的矩阵，当且仅当它是托普利茨矩阵时返回 True。</p>
+<h4 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h4><p>从第一行开始, 依次右移一位, 如果能匹配下一行, 那么则是</p>
+<h4 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[][]&#125; matrix</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> isToeplitzMatrix = <span class="function"><span class="keyword">function</span>(<span class="params">matrix</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> m = matrix.length</span><br><span class="line">    <span class="keyword">if</span> (m &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    <span class="keyword">const</span> n = matrix[<span class="number">0</span>].length</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; m; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> p = matrix[i]</span><br><span class="line">        <span class="keyword">const</span> q = matrix[i - <span class="number">1</span>]</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">1</span>; j &lt; n; j++) <span class="keyword">if</span> (p[j] !== q[j - <span class="number">1</span>]) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(isToeplitzMatrix([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">5</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">9</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">2</span>]]))</span><br></pre></td></tr></table></figure>
+<h3 id="66-加一"><a href="#66-加一" class="headerlink" title="66. 加一"></a>66. 加一</h3><p>给定一个非负整数组成的非空数组，在该数的基础上加一，返回一个新的数组。最高位数字存放在数组的首位， 数组中每个元素只存储一个数字。你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
+<h4 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h4><p>注意 9+1=10 的问题即可</p>
+<h4 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; digits</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> plusOne = <span class="function"><span class="keyword">function</span>(<span class="params">digits</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> i = digits.length - <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> (digits[i] === <span class="number">9</span> &amp;&amp; i &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        digits[i--] = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (i &lt; <span class="number">0</span>) digits.unshift(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">else</span> digits[i]++</span><br><span class="line">    <span class="keyword">return</span> digits</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="387-字符串中的第一个唯一字符"><a href="#387-字符串中的第一个唯一字符" class="headerlink" title="387. 字符串中的第一个唯一字符"></a>387. 字符串中的第一个唯一字符</h3><p>给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。</p>
+<p>案例:</p>
+<p>s = “leetcode”<br>返回 0.</p>
+<p>s = “loveleetcode”,<br>返回 2.</p>
+<p>注意事项：您可以假定该字符串只包含小写字母。</p>
+<h4 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a>思路</h4><p>循环遍历</p>
+<h4 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> firstUniqChar = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> len = s.length</span><br><span class="line">    <span class="keyword">const</span> res = []</span><br><span class="line">    <span class="keyword">const</span> dele = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> character = s[i]</span><br><span class="line">        <span class="keyword">if</span> (dele.indexOf(character) &gt; <span class="number">-1</span>) <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = res.length; j--; ) &#123;</span><br><span class="line">            <span class="keyword">if</span> (res[j][<span class="number">0</span>] === character) &#123;</span><br><span class="line">                res.splice(j, <span class="number">1</span>)</span><br><span class="line">                dele.push(character)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (j &lt; <span class="number">0</span>) res.push([character, i])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res.length ? res[<span class="number">0</span>][<span class="number">1</span>] : <span class="number">-1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-集锦/" data-id="cjheis253000hzckf3ymxgd8c" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-集锦/" data-id="cjhik7k34000wsckf2guqz1ri" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -181,23 +194,23 @@
       <ul>
         
           <li>
-            <a href="/2018/05/20/LeetCode-738-单调递增的数字/">LeetCode 738 单调递增的数字</a>
+            <a href="/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/">LeetCode 798 Smallest Rotation with Highest Score</a>
           </li>
         
           <li>
-            <a href="/2018/05/19/正则表达式-JS/">正则表达式-JS</a>
+            <a href="/2018/05/23/LeetCode-238-除自身以外数组的乘积/">LeetCode 238 除自身以外数组的乘积</a>
           </li>
         
           <li>
-            <a href="/2018/05/19/常用代码处理/">常用代码处理</a>
+            <a href="/2018/05/23/LeetCode-200-岛屿的个数/">LeetCode 200 岛屿的个数</a>
           </li>
         
           <li>
-            <a href="/2018/05/19/兼容性处理-慢慢更新/">兼容性处理(慢慢更新)</a>
+            <a href="/2018/05/23/LeetCode-393-UTF-8-编码验证/">LeetCode 393 UTF-8 编码验证</a>
           </li>
         
           <li>
-            <a href="/2018/05/17/LeetCode-集锦/">LeetCode 633 746 453</a>
+            <a href="/2018/05/22/LeetCode-524-通过删除字母匹配到字典里最长单词/">LeetCode 524 通过删除字母匹配到字典里最长单词</a>
           </li>
         
       </ul>
