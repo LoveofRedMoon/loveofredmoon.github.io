@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>LeetCode 808 分汤 | Love of Red Moon Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目有 A 和 B 两种类型的汤。一开始每种类型的汤有 N 毫升。有四种分配操作： 提供 100ml 的汤 A 和 0ml 的汤 B。提供 75ml 的汤 A 和 25ml 的汤 B。提供 50ml 的汤 A 和 50ml 的汤 B。提供 25ml 的汤 A 和 75ml 的汤 B。当我们把汤分配给某人之后，汤就没有了。每个回合，我们将从四种概率同为 0.25 的操作中进行分配选择。如果汤的剩余量">
+<meta name="keywords" content="LeetCode JavaScript 算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 808 分汤">
+<meta property="og:url" content="https://loveofredmoon.github.io/2018/05/24/LeetCode-808-分汤/index.html">
+<meta property="og:site_name" content="Love of Red Moon Blog">
+<meta property="og:description" content="题目有 A 和 B 两种类型的汤。一开始每种类型的汤有 N 毫升。有四种分配操作： 提供 100ml 的汤 A 和 0ml 的汤 B。提供 75ml 的汤 A 和 25ml 的汤 B。提供 50ml 的汤 A 和 50ml 的汤 B。提供 25ml 的汤 A 和 75ml 的汤 B。当我们把汤分配给某人之后，汤就没有了。每个回合，我们将从四种概率同为 0.25 的操作中进行分配选择。如果汤的剩余量">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-05-24T09:05:51.344Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode 808 分汤">
+<meta name="twitter:description" content="题目有 A 和 B 两种类型的汤。一开始每种类型的汤有 N 毫升。有四种分配操作： 提供 100ml 的汤 A 和 0ml 的汤 B。提供 75ml 的汤 A 和 25ml 的汤 B。提供 50ml 的汤 A 和 50ml 的汤 B。提供 25ml 的汤 A 和 75ml 的汤 B。当我们把汤分配给某人之后，汤就没有了。每个回合，我们将从四种概率同为 0.25 的操作中进行分配选择。如果汤的剩余量">
+  
+    <link rel="alternate" href="/atom.xml" title="Love of Red Moon Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Love of Red Moon Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">赤月之爱的博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://loveofredmoon.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-LeetCode-808-分汤" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/24/LeetCode-808-分汤/" class="article-date">
+  <time datetime="2018-05-24T08:08:18.000Z" itemprop="datePublished">2018-05-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LeetCode 808 分汤
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>有 A 和 B 两种类型的汤。一开始每种类型的汤有 N 毫升。有四种分配操作：</p>
+<p>提供 100ml 的汤 A 和 0ml 的汤 B。提供 75ml 的汤 A 和 25ml 的汤 B。提供 50ml 的汤 A 和 50ml 的汤 B。提供 25ml 的汤 A 和 75ml 的汤 B。当我们把汤分配给某人之后，汤就没有了。每个回合，我们将从四种概率同为 0.25 的操作中进行分配选择。如果汤的剩余量不足以完成某次操作，我们将尽可能分配。当两种类型的汤都分配完时，停止操作。</p>
+<p>注意不存在先分配 100 ml 汤 B 的操作。</p>
+<p>需要返回的值： 汤 A 先分配完的概率 + 汤 A 和汤 B 同时分配完的概率 / 2。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>迭代的思想</p>
+<p>当 N 很大的时候, 投机取巧了一把, 概率都为 0.999999, 在误差范围内</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; N</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> soupServings = <span class="function"><span class="keyword">function</span>(<span class="params">N</span>) </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 化简为所有整数</span></span><br><span class="line"><span class="comment">     * 1 1 =&gt; 1 3 0 0</span></span><br><span class="line"><span class="comment">     * 1 2 =&gt; 2 2 0 0</span></span><br><span class="line"><span class="comment">     * 1 3 =&gt; 3 1 0 0</span></span><br><span class="line"><span class="comment">     * 1 4 =&gt; 4 0 0 0</span></span><br><span class="line"><span class="comment">     * 1 5 =&gt; 4 0 0 0</span></span><br><span class="line"><span class="comment">     * ...</span></span><br><span class="line"><span class="comment">     * 2 1 =&gt; 1 2 1 0</span></span><br><span class="line"><span class="comment">     * 2 2 =&gt; 2 1 1 0</span></span><br><span class="line"><span class="comment">     * 2 3 =&gt; 3 0 1 0</span></span><br><span class="line"><span class="comment">     * 2 4 =&gt; 3 0 0 1 =&gt; 1 1</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    N = <span class="built_in">Math</span>.ceil(N / <span class="number">25</span>)</span><br><span class="line">    <span class="keyword">if</span> (N &gt; <span class="number">300</span>) N = <span class="number">300</span></span><br><span class="line">    <span class="keyword">const</span> choice = [[<span class="number">4</span>, <span class="number">0</span>], [<span class="number">3</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">2</span>], [<span class="number">1</span>, <span class="number">3</span>]]</span><br><span class="line">    <span class="keyword">const</span> g = gf()</span><br><span class="line">    <span class="keyword">return</span> g(N, N)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">gf</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> res = &#123;&#125;</span><br><span class="line">        <span class="keyword">const</span> g = <span class="function"><span class="keyword">function</span>(<span class="params">i, j</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">const</span> key = i + <span class="string">','</span> + j</span><br><span class="line">            <span class="keyword">if</span> (res[key] !== <span class="literal">undefined</span>) <span class="keyword">return</span> res[key]</span><br><span class="line">            res[key] =</span><br><span class="line">                choice.reduce(<span class="function">(<span class="params">p, v</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">let</span> r = <span class="number">0</span></span><br><span class="line">                    <span class="keyword">if</span> (i &lt;= v[<span class="number">0</span>]) r += <span class="number">2</span></span><br><span class="line">                    <span class="keyword">if</span> (j &lt;= v[<span class="number">1</span>]) r += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">switch</span> (r) &#123;</span><br><span class="line">                        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                            <span class="keyword">return</span> p + <span class="number">0.5</span></span><br><span class="line">                        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                            <span class="keyword">return</span> p + <span class="number">1</span></span><br><span class="line">                        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                            <span class="keyword">return</span> p</span><br><span class="line">                        <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                            <span class="keyword">return</span> p + g(i - v[<span class="number">0</span>], j - v[<span class="number">1</span>])</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;, <span class="number">0</span>) / <span class="number">4</span></span><br><span class="line">            <span class="keyword">return</span> res[key]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> g</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(soupServings(<span class="number">25</span> * <span class="number">300</span>))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-808-分汤/" data-id="cjhmop563001fo4kfscv67t1u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          LeetCode 826 Most Profit Assigning Work
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/24/LeetCode-565-数组嵌套/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LeetCode 565 数组嵌套</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/兼容/">兼容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-JS/">正则 JS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS-radial-gradient/" style="font-size: 10px;">CSS radial-gradient</a> <a href="/tags/LeetCode-JavaScript-算法/" style="font-size: 20px;">LeetCode JavaScript 算法</a> <a href="/tags/兼容/" style="font-size: 10px;">兼容</a> <a href="/tags/常用/" style="font-size: 10px;">常用</a> <a href="/tags/正则-JS/" style="font-size: 10px;">正则 JS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/26/LeetCode-392-判断子序列/">LeetCode 392 判断子序列</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/">LeetCode 826 Most Profit Assigning Work</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/24/LeetCode-808-分汤/">LeetCode 808 分汤</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/24/LeetCode-565-数组嵌套/">LeetCode 565 数组嵌套</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/23/LeetCode-3-无重复字符的最长子串/">LeetCode 3 无重复字符的最长子串</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018  <a href="/cyj.html" target="_blank"> Yongj Chen </a><br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

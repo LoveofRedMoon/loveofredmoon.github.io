@@ -5,19 +5,19 @@
   
 
   
-  <title>LeetCode 633 746 453 766 66 387 | Love of Red Moon Blog</title>
+  <title>LeetCode 633 746 453 766 66 387 223 46 274 | Love of Red Moon Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="这里是一些简单题的集锦, 旨在利用 JS 简便书写633. 平方数之和给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a*a + b*b = c。 思路根据一些平方数特性, 可以简便计算 平方数 mod8 一定是 0 或 1 或 4 或 1 因此和一定是 0 或 1 或 2 或 4 或 5 因此是 3 或 6 或 7 直接排除 代码12345678910111213141516">
 <meta name="keywords" content="LeetCode JavaScript 算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode 633 746 453 766 66 387">
+<meta property="og:title" content="LeetCode 633 746 453 766 66 387 223 46 274">
 <meta property="og:url" content="https://loveofredmoon.github.io/2018/05/17/LeetCode-集锦/index.html">
 <meta property="og:site_name" content="Love of Red Moon Blog">
 <meta property="og:description" content="这里是一些简单题的集锦, 旨在利用 JS 简便书写633. 平方数之和给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a*a + b*b = c。 思路根据一些平方数特性, 可以简便计算 平方数 mod8 一定是 0 或 1 或 4 或 1 因此和一定是 0 或 1 或 2 或 4 或 5 因此是 3 或 6 或 7 直接排除 代码12345678910111213141516">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-05-23T02:01:44.721Z">
+<meta property="og:updated_time" content="2018-05-26T00:55:39.681Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode 633 746 453 766 66 387">
+<meta name="twitter:title" content="LeetCode 633 746 453 766 66 387 223 46 274">
 <meta name="twitter:description" content="这里是一些简单题的集锦, 旨在利用 JS 简便书写633. 平方数之和给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a*a + b*b = c。 思路根据一些平方数特性, 可以简便计算 平方数 mod8 一定是 0 或 1 或 4 或 1 因此和一定是 0 或 1 或 2 或 4 或 5 因此是 3 或 6 或 7 直接排除 代码12345678910111213141516">
   
     <link rel="alternate" href="/atom.xml" title="Love of Red Moon Blog" type="application/atom+xml">
@@ -83,7 +83,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      LeetCode 633 746 453 766 66 387
+      LeetCode 633 746 453 766 66 387 223 46 274
     </h1>
   
 
@@ -116,11 +116,21 @@
 <p>注意事项：您可以假定该字符串只包含小写字母。</p>
 <h4 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a>思路</h4><p>循环遍历</p>
 <h4 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> firstUniqChar = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> len = s.length</span><br><span class="line">    <span class="keyword">const</span> res = []</span><br><span class="line">    <span class="keyword">const</span> dele = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> character = s[i]</span><br><span class="line">        <span class="keyword">if</span> (dele.indexOf(character) &gt; <span class="number">-1</span>) <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = res.length; j--; ) &#123;</span><br><span class="line">            <span class="keyword">if</span> (res[j][<span class="number">0</span>] === character) &#123;</span><br><span class="line">                res.splice(j, <span class="number">1</span>)</span><br><span class="line">                dele.push(character)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (j &lt; <span class="number">0</span>) res.push([character, i])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res.length ? res[<span class="number">0</span>][<span class="number">1</span>] : <span class="number">-1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="223-矩形面积"><a href="#223-矩形面积" class="headerlink" title="223. 矩形面积"></a>223. 矩形面积</h3><p>在二维平面上计算出两个由直线构成的矩形叠加覆盖后的面积。</p>
+<p>每个矩形由其左下顶点和右上顶点坐标表示，如图所示。</p>
+<h4 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a>思路</h4><p>直接在两个维度上判断重合长度即可</p>
+<h4 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> computeArea = <span class="function"><span class="keyword">function</span>(<span class="params">A, B, C, D, E, F, G, H</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        (C - A) * (D - B) +</span><br><span class="line">        (G - E) * (H - F) -</span><br><span class="line">        checkLen(A, C, E, G) * checkLen(B, D, F, H)</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">checkLen</span>(<span class="params">a, b, c, d</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> r = <span class="built_in">Math</span>.min(b, d) - <span class="built_in">Math</span>.max(a, c)</span><br><span class="line">        <span class="keyword">return</span> r &lt; <span class="number">0</span> ? <span class="number">0</span> : r</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="46-全排列"><a href="#46-全排列" class="headerlink" title="46. 全排列"></a>46. 全排列</h3><p>给定一个没有重复数字的序列，返回其所有可能的全排列。</p>
+<h3 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;number[][]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> permute = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> res = []</span><br><span class="line">    <span class="keyword">if</span> (!nums.length) <span class="keyword">return</span> []</span><br><span class="line">    g([], nums)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">g</span>(<span class="params">ar, remain</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!remain.length) res.push(ar)</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            remain.forEach(<span class="function">(<span class="params">v, i</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">const</span> arr = [...remain]</span><br><span class="line">                arr.splice(i, <span class="number">1</span>)</span><br><span class="line">                g([...ar, v], arr)</span><br><span class="line">            &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="274-H-指数"><a href="#274-H-指数" class="headerlink" title="274. H 指数"></a>274. H 指数</h3><p>给定一位研究者论文被引用次数的数组（被引用次数是非负整数）。编写一个方法，计算出研究者的 h 指数。</p>
+<p>h 指数的定义: “一位有 h 指数的学者，代表他（她）的 N 篇论文中至多有 h 篇论文，分别被引用了至少 h 次，其余的 N - h 篇论文每篇被引用次数不多于 h 次。”</p>
+<h4 id="思路-7"><a href="#思路-7" class="headerlink" title="思路"></a>思路</h4><p>先排序, 然后看是否值小于等于序号即可</p>
+<h4 id="代码-8"><a href="#代码-8" class="headerlink" title="代码"></a>代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; citations</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> hIndex = <span class="function"><span class="keyword">function</span>(<span class="params">citations</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> s = citations.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = s.length; i--; ) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] - i &lt;= <span class="number">1</span>) <span class="keyword">return</span> i + <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-集锦/" data-id="cjhirxzo10010mckfxkyi2t7r" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-集锦/" data-id="cjhmop55n0014o4kf0dm00sph" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -194,23 +204,23 @@
       <ul>
         
           <li>
+            <a href="/2018/05/26/LeetCode-392-判断子序列/">LeetCode 392 判断子序列</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/">LeetCode 826 Most Profit Assigning Work</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/24/LeetCode-808-分汤/">LeetCode 808 分汤</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/24/LeetCode-565-数组嵌套/">LeetCode 565 数组嵌套</a>
+          </li>
+        
+          <li>
             <a href="/2018/05/23/LeetCode-3-无重复字符的最长子串/">LeetCode 3 无重复字符的最长子串</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/">LeetCode 798 Smallest Rotation with Highest Score</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/23/LeetCode-238-除自身以外数组的乘积/">LeetCode 238 除自身以外数组的乘积</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/23/LeetCode-200-岛屿的个数/">LeetCode 200 岛屿的个数</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/23/LeetCode-393-UTF-8-编码验证/">LeetCode 393 UTF-8 编码验证</a>
           </li>
         
       </ul>

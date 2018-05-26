@@ -70,6 +70,184 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LeetCode-392-判断子序列" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/26/LeetCode-392-判断子序列/" class="article-date">
+  <time datetime="2018-05-26T00:31:24.000Z" itemprop="datePublished">2018-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/26/LeetCode-392-判断子序列/">LeetCode 392 判断子序列</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定字符串 s 和 t ，判断 s 是否为 t 的子序列。</p>
+<p>你可以认为 s 和 t 中仅包含英文小写字母。字符串 t 可能会很长（长度 ~= 500,000），而 s 是个短字符串（长度 &lt;=100）。</p>
+<p>字符串的一个子序列是原始字符串删除一些（也可以不删除）字符而不改变剩余字符相对位置形成的新字符串。（例如，”ace”是”abcde”的一个子序列，而”aec”不是）。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>本质上是正则表达式的回溯算法</p>
+<p>从前往后寻找对应字母, 如果找不到那么回溯到上次寻找, 继续寻找</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; t</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> isSubsequence = <span class="function"><span class="keyword">function</span>(<span class="params">s, t</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> m = s.length,</span><br><span class="line">        n = t.length,</span><br><span class="line">        maxPos = n - m</span><br><span class="line">    <span class="keyword">if</span> (maxPos &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">if</span> (!maxPos) <span class="keyword">return</span> s === t</span><br><span class="line">    <span class="keyword">let</span> curPos = <span class="number">0</span>, <span class="comment">//保存当前查找s的第几个字符</span></span><br><span class="line">        poss = [<span class="number">-1</span>] <span class="comment">//保存当前所有查找位置</span></span><br><span class="line">    <span class="keyword">while</span> (curPos &lt; m) &#123;</span><br><span class="line">        <span class="keyword">const</span> pos = t.indexOf(s[curPos], poss[curPos] + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> (pos &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (curPos-- === <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            poss[curPos] = pos</span><br><span class="line">            poss[++curPos] = pos</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(isSubsequence(<span class="string">'agc'</span>, <span class="string">'ahbgdc'</span>))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-392-判断子序列/" data-id="cjhmop54s000do4kf55luj7r4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-826-Most-Profit-Assigning-Work" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/" class="article-date">
+  <time datetime="2018-05-24T10:51:41.000Z" itemprop="datePublished">2018-05-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/">LeetCode 826 Most Profit Assigning Work</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>We have jobs: difficulty[i] is the difficulty of the ith job, and profit[i] is the profit of the ith job.</p>
+<p>Now we have some workers. worker[i] is the ability of the ith worker, which means that this worker can only complete a job with difficulty at most worker[i].</p>
+<p>Every worker can be assigned at most one job, but one job can be completed multiple times.</p>
+<p>For example, if 3 people attempt the same job that pays $1, then the total profit will be $3. If a worker cannot complete any job, his profit is $0.</p>
+<p>What is the most profit we can make?</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>想实现很简单, 直接将收益排序, 让员工选择收益最大的且自己能完成的项目即可</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; difficulty</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; profit</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; worker</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxProfitAssignment = <span class="function"><span class="keyword">function</span>(<span class="params">difficulty, profit, worker</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> x = profit</span><br><span class="line">        .map(<span class="function">(<span class="params">v, i</span>) =&gt;</span> [v, difficulty[i]])</span><br><span class="line">        .sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> b[<span class="number">0</span>] - a[<span class="number">0</span>])</span><br><span class="line">    worker = worker.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> b - a)</span><br><span class="line">    <span class="keyword">let</span> i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> (i &lt; x.length - <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x[i][<span class="number">1</span>] &lt; x[i + <span class="number">1</span>][<span class="number">1</span>]) x.splice(i + <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">else</span> i++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> sum = <span class="number">0</span>,</span><br><span class="line">        workerNum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">const</span> len = x.length,</span><br><span class="line">        lens = worker.length</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len &amp;&amp; workerNum &lt; lens; ) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x[i][<span class="number">1</span>] &gt; worker[workerNum]) i++</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            sum += x[i][<span class="number">0</span>]</span><br><span class="line">            workerNum++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(</span><br><span class="line">    maxProfitAssignment([<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>], [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>])</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/" data-id="cjhmop5630018o4kfh8cgua8d" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-808-分汤" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/24/LeetCode-808-分汤/" class="article-date">
+  <time datetime="2018-05-24T08:08:18.000Z" itemprop="datePublished">2018-05-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/24/LeetCode-808-分汤/">LeetCode 808 分汤</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>有 A 和 B 两种类型的汤。一开始每种类型的汤有 N 毫升。有四种分配操作：</p>
+<p>提供 100ml 的汤 A 和 0ml 的汤 B。提供 75ml 的汤 A 和 25ml 的汤 B。提供 50ml 的汤 A 和 50ml 的汤 B。提供 25ml 的汤 A 和 75ml 的汤 B。当我们把汤分配给某人之后，汤就没有了。每个回合，我们将从四种概率同为 0.25 的操作中进行分配选择。如果汤的剩余量不足以完成某次操作，我们将尽可能分配。当两种类型的汤都分配完时，停止操作。</p>
+<p>注意不存在先分配 100 ml 汤 B 的操作。</p>
+<p>需要返回的值： 汤 A 先分配完的概率 + 汤 A 和汤 B 同时分配完的概率 / 2。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>迭代的思想</p>
+<p>当 N 很大的时候, 投机取巧了一把, 概率都为 0.999999, 在误差范围内</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; N</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> soupServings = <span class="function"><span class="keyword">function</span>(<span class="params">N</span>) </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 化简为所有整数</span></span><br><span class="line"><span class="comment">     * 1 1 =&gt; 1 3 0 0</span></span><br><span class="line"><span class="comment">     * 1 2 =&gt; 2 2 0 0</span></span><br><span class="line"><span class="comment">     * 1 3 =&gt; 3 1 0 0</span></span><br><span class="line"><span class="comment">     * 1 4 =&gt; 4 0 0 0</span></span><br><span class="line"><span class="comment">     * 1 5 =&gt; 4 0 0 0</span></span><br><span class="line"><span class="comment">     * ...</span></span><br><span class="line"><span class="comment">     * 2 1 =&gt; 1 2 1 0</span></span><br><span class="line"><span class="comment">     * 2 2 =&gt; 2 1 1 0</span></span><br><span class="line"><span class="comment">     * 2 3 =&gt; 3 0 1 0</span></span><br><span class="line"><span class="comment">     * 2 4 =&gt; 3 0 0 1 =&gt; 1 1</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    N = <span class="built_in">Math</span>.ceil(N / <span class="number">25</span>)</span><br><span class="line">    <span class="keyword">if</span> (N &gt; <span class="number">300</span>) N = <span class="number">300</span></span><br><span class="line">    <span class="keyword">const</span> choice = [[<span class="number">4</span>, <span class="number">0</span>], [<span class="number">3</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">2</span>], [<span class="number">1</span>, <span class="number">3</span>]]</span><br><span class="line">    <span class="keyword">const</span> g = gf()</span><br><span class="line">    <span class="keyword">return</span> g(N, N)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">gf</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> res = &#123;&#125;</span><br><span class="line">        <span class="keyword">const</span> g = <span class="function"><span class="keyword">function</span>(<span class="params">i, j</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">const</span> key = i + <span class="string">','</span> + j</span><br><span class="line">            <span class="keyword">if</span> (res[key] !== <span class="literal">undefined</span>) <span class="keyword">return</span> res[key]</span><br><span class="line">            res[key] =</span><br><span class="line">                choice.reduce(<span class="function">(<span class="params">p, v</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">let</span> r = <span class="number">0</span></span><br><span class="line">                    <span class="keyword">if</span> (i &lt;= v[<span class="number">0</span>]) r += <span class="number">2</span></span><br><span class="line">                    <span class="keyword">if</span> (j &lt;= v[<span class="number">1</span>]) r += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">switch</span> (r) &#123;</span><br><span class="line">                        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                            <span class="keyword">return</span> p + <span class="number">0.5</span></span><br><span class="line">                        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                            <span class="keyword">return</span> p + <span class="number">1</span></span><br><span class="line">                        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                            <span class="keyword">return</span> p</span><br><span class="line">                        <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                            <span class="keyword">return</span> p + g(i - v[<span class="number">0</span>], j - v[<span class="number">1</span>])</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;, <span class="number">0</span>) / <span class="number">4</span></span><br><span class="line">            <span class="keyword">return</span> res[key]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> g</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(soupServings(<span class="number">25</span> * <span class="number">300</span>))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-808-分汤/" data-id="cjhmop563001fo4kfscv67t1u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-565-数组嵌套" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/24/LeetCode-565-数组嵌套/" class="article-date">
+  <time datetime="2018-05-24T00:28:54.000Z" itemprop="datePublished">2018-05-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/24/LeetCode-565-数组嵌套/">LeetCode 565 数组嵌套</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>索引从 0 开始长度为 N 的数组 A，包含 0 到 N - 1 的所有整数。找到并返回最大的集合 S，S[i] = {A[i], A[A[i]], A[A[A[i]]], … }且遵守以下的规则。</p>
+<p>假设选择索引为 i 的元素 A[i]为 S 的第一个元素，S 的下一个元素应该是 A[A[i]]，之后是 A[A[A[i]]]… 以此类推，不断添加直到 S 出现重复的元素。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>本质上是数学中群的概念.</p>
+<p>这道题的难点在于在找完一组数之后快速定位到 未被找过的数中</p>
+<p>将找过的数重定义为 N, 并用一个最小索引进行记录,直到最小索引超过所有索引</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> arrayNesting = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> N = nums.length</span><br><span class="line">    <span class="keyword">if</span> (N &lt; <span class="number">2</span>) <span class="keyword">return</span> N</span><br><span class="line">    <span class="keyword">let</span> minIndex = <span class="number">0</span>, <span class="comment">// 记录最小索引</span></span><br><span class="line">        maxLen = <span class="number">0</span> <span class="comment">// 记录最大长度</span></span><br><span class="line">    <span class="keyword">while</span> (minIndex &lt; N) &#123;</span><br><span class="line">        <span class="comment">// 从最小索引开始遍历, 直到下一个不为N的数</span></span><br><span class="line">        <span class="keyword">while</span> (minIndex &lt; N) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[minIndex] !== N) <span class="keyword">break</span></span><br><span class="line">            minIndex++</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果遍历到最后, 说明找完了, 因此结束</span></span><br><span class="line">        <span class="keyword">if</span> (minIndex &gt;= N) <span class="keyword">return</span> maxLen</span><br><span class="line">        <span class="comment">// 否则继续寻找</span></span><br><span class="line">        <span class="keyword">let</span> temp = minIndex++</span><br><span class="line">        <span class="keyword">let</span> curLen = <span class="number">0</span></span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            curLen++</span><br><span class="line">            <span class="keyword">const</span> t = nums[temp]</span><br><span class="line">            nums[temp] = N</span><br><span class="line">            temp = t</span><br><span class="line">        &#125; <span class="keyword">while</span> (nums[temp] &lt; N)</span><br><span class="line">        <span class="keyword">if</span> (maxLen &lt; curLen) maxLen = curLen</span><br><span class="line">        <span class="keyword">if</span> (N - minIndex - <span class="number">1</span> &lt; maxLen) <span class="keyword">return</span> maxLen</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxLen</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(arrayNesting([<span class="number">5</span>, <span class="number">4</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">2</span>]))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-565-数组嵌套/" data-id="cjhmop55n000wo4kfzvz4mmag" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LeetCode-3-无重复字符的最长子串" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/23/LeetCode-3-无重复字符的最长子串/" class="article-date">
@@ -103,7 +281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-3-无重复字符的最长子串/" data-id="cjhirxzmz0003mckfu43z5kjk" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-3-无重复字符的最长子串/" data-id="cjhmop558000jo4kfzymcx47f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -165,7 +343,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/" data-id="cjhirxznw000wmckflgyljtsn" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/" data-id="cjhmop55n0012o4kfoik9ns48" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -206,7 +384,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-238-除自身以外数组的乘积/" data-id="cjhirxzn20004mckf9efnt1mc" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-238-除自身以外数组的乘积/" data-id="cjhmop54s0003o4kfaa4azqoz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -247,7 +425,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-200-岛屿的个数/" data-id="cjhirxzmw0001mckf65t6bakz" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-200-岛屿的个数/" data-id="cjhmop54s0005o4kfp7sp6ajc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -299,7 +477,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-393-UTF-8-编码验证/" data-id="cjhirxzne000dmckfqdzijzor" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-393-UTF-8-编码验证/" data-id="cjhmop55n000ko4kfaemjiogd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -339,271 +517,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/22/LeetCode-524-通过删除字母匹配到字典里最长单词/" data-id="cjhirxznp000mmckfuyulhfkc" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/22/LeetCode-524-通过删除字母匹配到字典里最长单词/" data-id="cjhmop55n000oo4kfr214mz37" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-336-回文对" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/21/LeetCode-336-回文对/" class="article-date">
-  <time datetime="2018-05-21T08:43:09.000Z" itemprop="datePublished">2018-05-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/21/LeetCode-336-回文对/">LeetCode 336 回文对</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一组独特的单词， 找出在给定列表中不同 的索引对(i, j),使得关联的两个单词，例如：words[i] + words[j]形成回文。</p>
-<p>示例 1:<br>给定 words = [“bat”, “tab”, “cat”]<br>返回 [[0, 1], [1, 0]]<br>回文是 [“battab”, “tabbat”]</p>
-<p>示例 2:<br>给定 words = [“abcd”, “dcba”, “lls”, “s”, “sssll”]<br>返回 [[0, 1], [1, 0], [3, 2], [2, 4]]<br>回文是 [“dcbaabcd”, “abcddcba”, “slls”, “llssssll”]</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>每次将数组根据首尾字母进行分割, 然后对空字符串进行匹配, 迭代的思想</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string[]&#125; words</span></span><br><span class="line"><span class="comment"> * @return &#123;number[][]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> palindromePairs = <span class="function"><span class="keyword">function</span>(<span class="params">words</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> len = words.length</span><br><span class="line">    <span class="keyword">if</span> (len &lt; <span class="number">2</span>) <span class="keyword">return</span> []</span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line">    <span class="keyword">const</span> ss = &#123;</span><br><span class="line">        a: words.map(<span class="function">(<span class="params">v, i</span>) =&gt;</span> [v, i])</span><br><span class="line">    &#125;</span><br><span class="line">    check(ss, ss)</span><br><span class="line">    <span class="keyword">return</span> [...res]</span><br><span class="line">        .map(<span class="function"><span class="params">v</span> =&gt;</span> v.split(<span class="string">','</span>).map(<span class="function"><span class="params">v</span> =&gt;</span> v | <span class="number">0</span>))</span><br><span class="line">        .filter(<span class="function"><span class="params">v</span> =&gt;</span> v[<span class="number">0</span>] !== v[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">S, E</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> k <span class="keyword">in</span> S) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!E[k]) <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">const</span> cS = &#123;&#125;,</span><br><span class="line">                cE = &#123;&#125;,</span><br><span class="line">                ckS = [],</span><br><span class="line">                ckE = []</span><br><span class="line">            S[k].forEach(</span><br><span class="line">                v =&gt;</span><br><span class="line">                    v[<span class="number">0</span>] === <span class="string">''</span></span><br><span class="line">                        ? ckS.push(v)</span><br><span class="line">                        : cS[v[<span class="number">0</span>][<span class="number">0</span>]]</span><br><span class="line">                            ? cS[v[<span class="number">0</span>][<span class="number">0</span>]].push([v[<span class="number">0</span>].substr(<span class="number">1</span>), v[<span class="number">1</span>]])</span><br><span class="line">                            : (cS[v[<span class="number">0</span>][<span class="number">0</span>]] = [[v[<span class="number">0</span>].substr(<span class="number">1</span>), v[<span class="number">1</span>]]])</span><br><span class="line">            )</span><br><span class="line">            E[k].forEach(</span><br><span class="line">                v =&gt;</span><br><span class="line">                    v[<span class="number">0</span>] === <span class="string">''</span></span><br><span class="line">                        ? ckE.push(v)</span><br><span class="line">                        : cE[v[<span class="number">0</span>][v[<span class="number">0</span>].length - <span class="number">1</span>]]</span><br><span class="line">                            ? cE[v[<span class="number">0</span>][v[<span class="number">0</span>].length - <span class="number">1</span>]].push([</span><br><span class="line">                                  v[<span class="number">0</span>].substr(<span class="number">0</span>, v[<span class="number">0</span>].length - <span class="number">1</span>),</span><br><span class="line">                                  v[<span class="number">1</span>]</span><br><span class="line">                              ])</span><br><span class="line">                            : (cE[v[<span class="number">0</span>][v[<span class="number">0</span>].length - <span class="number">1</span>]] = [</span><br><span class="line">                                  [v[<span class="number">0</span>].substr(<span class="number">0</span>, v[<span class="number">0</span>].length - <span class="number">1</span>), v[<span class="number">1</span>]]</span><br><span class="line">                              ])</span><br><span class="line">            )</span><br><span class="line">            S[k]</span><br><span class="line">                .filter(<span class="function"><span class="params">v</span> =&gt;</span> isH(v[<span class="number">0</span>]))</span><br><span class="line">                .forEach(<span class="function"><span class="params">v</span> =&gt;</span> ckE.forEach(<span class="function"><span class="params">vv</span> =&gt;</span> res.add(v[<span class="number">1</span>] + <span class="string">','</span> + vv[<span class="number">1</span>])))</span><br><span class="line">            E[k]</span><br><span class="line">                .filter(<span class="function"><span class="params">v</span> =&gt;</span> isH(v[<span class="number">0</span>]))</span><br><span class="line">                .forEach(<span class="function"><span class="params">v</span> =&gt;</span> ckS.forEach(<span class="function"><span class="params">vv</span> =&gt;</span> res.add(vv[<span class="number">1</span>] + <span class="string">','</span> + v[<span class="number">1</span>])))</span><br><span class="line">            check(cS, cE)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">isH</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            s ===</span><br><span class="line">            s</span><br><span class="line">                .split(<span class="string">''</span>)</span><br><span class="line">                .reverse()</span><br><span class="line">                .join(<span class="string">''</span>)</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(palindromePairs([<span class="string">'abcd'</span>, <span class="string">'dcba'</span>, <span class="string">'lls'</span>, <span class="string">'s'</span>, <span class="string">'sssll'</span>]))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/21/LeetCode-336-回文对/" data-id="cjhirxzna0008mckfmw7kdztj" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-394-字符串解码" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/21/LeetCode-394-字符串解码/" class="article-date">
-  <time datetime="2018-05-21T08:35:17.000Z" itemprop="datePublished">2018-05-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/21/LeetCode-394-字符串解码/">LeetCode 394 字符串解码</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个经过编码的字符串，返回它解码后的字符串。</p>
-<p>编码规则为: k[encoded_string]，表示其中方括号内部的 encoded_string 正好重复 k 次。注意 k 保证为正整数。</p>
-<p>你可以认为输入字符串总是有效的；输入字符串中没有额外的空格，且输入的方括号总是符合格式要求的。</p>
-<p>此外，你可以认为原始数据不包含数字，所有的数字只表示重复的次数 k ，例如不会出现像 3a 或 2[4] 的输入。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>字符串替换</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> decodeString = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> changed = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">while</span> (changed) &#123;</span><br><span class="line">        changed = <span class="literal">false</span></span><br><span class="line">        s = s.replace(<span class="regexp">/(\d*)\[([^\[\]]*)\]/g</span>, (v, p1, p2) =&gt; &#123;</span><br><span class="line">            changed = <span class="literal">true</span></span><br><span class="line">            <span class="keyword">return</span> p2.repeat(p1 | <span class="number">0</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(decodeString(<span class="string">'3[a2[c]]'</span>))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/21/LeetCode-394-字符串解码/" data-id="cjhirxznr000omckfgbs3aueb" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-738-单调递增的数字" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/20/LeetCode-738-单调递增的数字/" class="article-date">
-  <time datetime="2018-05-20T07:23:03.000Z" itemprop="datePublished">2018-05-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/20/LeetCode-738-单调递增的数字/">LeetCode 738 单调递增的数字</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个非负整数 N，找出小于或等于 N 的最大的整数，同时这个整数需要满足其各个位数上的数字是单调递增。</p>
-<p>（当且仅当每个相邻位数上的数字 x 和 y 满足 x &lt;= y 时，我们称这个整数是单调递增的。）</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>从小化大</p>
-<p>1 位数: 均满足<br>2 位数: 除非直接满足, 否则都是 十位数减一, 个位数为 9 例如 52 -&gt; 49<br>3 位数: 除非直接满足, 否则先判断后两位(根据两位数可知)的最小值, 然后判断百位和十位的关系</p>
-<p>以此类推, 每次判断, 都应该从最后两位判断, 然后依次往前推</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; N</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> monotoneIncreasingDigits = <span class="function"><span class="keyword">function</span>(<span class="params">N</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (N &lt; <span class="number">10</span>) <span class="keyword">return</span> N</span><br><span class="line">    N = N.toString()</span><br><span class="line">        .split(<span class="string">''</span>)</span><br><span class="line">        .reverse()</span><br><span class="line">    <span class="keyword">const</span> len = N.length - <span class="number">1</span></span><br><span class="line">    check(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> N.reverse().join(<span class="string">''</span>) | <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">pos</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (N[pos] &lt; N[++pos]) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; pos; i++) N[i] = <span class="number">9</span></span><br><span class="line">            N[pos] = N[pos] - <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (pos &lt; len) check(pos)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(monotoneIncreasingDigits(<span class="number">1651</span>))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/20/LeetCode-738-单调递增的数字/" data-id="cjhirxznu000umckftvldwpx8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-正则表达式-JS" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/19/正则表达式-JS/" class="article-date">
-  <time datetime="2018-05-19T08:18:26.000Z" itemprop="datePublished">2018-05-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/19/正则表达式-JS/">正则表达式-JS</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="什么是正则"><a href="#什么是正则" class="headerlink" title="什么是正则?"></a>什么是正则?</h2><p>根据自己的理解, 正则是用来’快速’处理字符串的工具, 在 JavaScript 中, 通常使用以下方法来使用正则表达式</p>
-<ol>
-<li><code>String.prototype.split</code> 字符串分割</li>
-<li><code>String.prototype.replace</code> 字符串替换</li>
-<li><code>String.prototype.match</code> 字符串匹配</li>
-<li><code>RegExp.prototype.exec</code> 正则匹配</li>
-<li><code>RegExp.prototype.test</code> 正则匹配判断</li>
-<li><code>String.prototype.search</code> 字符串检索</li>
-</ol>
-<h2 id="正则对象"><a href="#正则对象" class="headerlink" title="正则对象"></a>正则对象</h2><p>正则对象通常有两种构造方式</p>
-<ol>
-<li>new <code>reg = new RegExp(&quot;^abcdef.&quot;,&#39;gi&#39;)</code></li>
-<li>省略 new 关键字 <code>RegExp(&quot;^abcdef.&quot;,&#39;gi&#39;)</code></li>
-<li>字面量 <code>/^abcdef./gi</code></li>
-</ol>
-<p>具体函数的使用方式参照 MDN</p>
-<p>正则对象一般有以下属性|方法</p>
-<ol>
-<li><code>source</code> 创建的字面量</li>
-<li><code>flags</code> 一些使用选项, 如下</li>
-<li><code>global</code> 是否全局匹配, 标识为 g</li>
-<li><code>ignoreCase</code> 是否不区分大小写, 标识为 i</li>
-<li><code>multiline</code> 是否跨行匹配, 标识为 m</li>
-<li><code>unicode</code> 是否支持较长 Unicode 字符, 标识为 u, 是 ES6 新增标识(使用较少)</li>
-<li><code>sticky</code> 粘性匹配(几乎不用吧, 浏览器支持也不行)</li>
-<li><code>lastIndex</code> 上一次匹配的位置, 新创建的正则对象没有这个属性</li>
-</ol>
-<h2 id="普通标志"><a href="#普通标志" class="headerlink" title="普通标志"></a>普通标志</h2><ol>
-<li><code>.</code> 表示一个非换行字符(即非<code>\n</code> <code>\r</code> <code>\u2028</code> <code>\u2029</code>)</li>
-<li><code>\d</code> 表示一个数字字符, 等同于<code>[0-9]</code> (可以不记)</li>
-<li><code>\D</code> 表示一个非数字字符, 等同于<code>[^0-9]</code> (可以不记)</li>
-<li><code>\s</code> 表示一个空白字符, 包含换行符等等</li>
-<li><code>\S</code> 表示一个非空白字符</li>
-<li><code>\w</code> 表示一个数字字符, 或英文字符, 或下划线, 等同于 <code>[A-Za-z0-9_]</code></li>
-<li><code>\W</code> 表示一个非<code>\w</code> 等同于 <code>[^A-Za-z0-9_]</code></li>
-<li>与字符串类似, <code>\</code> 表示转义, 即有特殊含义的字符搜索时得加转义, 例如想寻找小数点 得写作<code>\.</code></li>
-<li><code>\b</code> 表示一个单词边界</li>
-<li><code>\B</code> 表示一个非单词边界</li>
-<li><code>[]</code> 表示这个中括号中的任意一个字符</li>
-<li><code>()</code> 表示将这个小括号中的所有字符当做一个整体, 并在搜索结果中提供匹配(下面讲)</li>
-<li><code>{}</code> 表示次数, 写法通常有如下几种 <code>{3}</code>表示前一个字符精确匹配 3 次 <code>{3,}</code>表示前一个字符匹配至少三次, <code>{2,3}</code>表示前一个字符匹配 2-3 次</li>
-<li><code>^</code> 在中括号<code>[]</code>中表示<strong>非</strong>的意思, 否则表示字符串开始位置</li>
-<li><code>$</code> 表示字符串结束位置</li>
-<li><code>*</code> 等同于{0,} 尽可能多的匹配</li>
-<li><code>+</code> 等同于{1,} 尽可能多的匹配</li>
-<li><code>?</code> 等同于{0,1} 尽可能少的匹配</li>
-<li><code>*?</code> 等同于{0,} 尽可能少的匹配</li>
-<li><code>+?</code> 等同于{1,} 尽可能少的匹配</li>
-<li><code>|</code> 或</li>
-</ol>
-<h2 id="匹配结果"><a href="#匹配结果" class="headerlink" title="匹配结果"></a>匹配结果</h2><ol>
-<li>全部匹配结果 <code>$0</code> 一般不包括 <code>(?:xxxx)</code> <code>(?=xxxx)</code> <code>(?!xxxx)</code></li>
-<li><code>$1</code> <code>$2</code> … <code>$n</code> (一般最多<code>$9</code> 或<code>$99</code>), 表示匹配中的括号匹配结果<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">;<span class="regexp">/\d([a-z])/</span>.exec(<span class="string">'8ab'</span>)</span><br><span class="line"><span class="comment">// 匹配结果是 8a  此外的$1匹配结果是 a    $2匹配结果没有</span></span><br><span class="line"><span class="comment">// 并不是额外的匹配结果!!!</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h2><p><em>什么是断言?</em> 断言就是判断是否匹配, 但是断言的内容不在结果范围内</p>
-<p>例如我想匹配 后面跟着感叹号的英文字母, 那么此时结果应该只有英文字母, 而没有感叹号</p>
-<ol>
-<li><p>JS 中没有前置断言(后行断言) 即你不能预先判断你要搜索的字符串前面有什么. 但是我们可以绕过这个限制</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取所有前置有数字的两位英文字符</span></span><br><span class="line"><span class="comment">// 利用括号匹配结果进行提取需要的字符串</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/\d([a-zA-z]&#123;2&#125;)/g</span></span><br><span class="line"><span class="keyword">var</span> matches</span><br><span class="line"><span class="keyword">while</span> ((matches = reg.exec(<span class="string">'a3dfr55f12fa'</span>))) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(matches[<span class="number">1</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>JS 中有后置断言(前行断言) 即可以判断后面是什么(或者不能使什么) 使用 <code>(?=xxxx)</code> 作为后置肯定断言 使用 <code>(?!xxxx)</code> 作为后置否定断言</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取所有后置有数字的两位英文字符</span></span><br><span class="line"></span><br><span class="line">;<span class="regexp">/[a-zA-Z]&#123;2&#125;(?=\d)/</span>.exec(<span class="string">'a3dfr55f12fa'</span>)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="方法详解"><a href="#方法详解" class="headerlink" title="方法详解"></a>方法详解</h2><ol>
-<li><p><code>split</code> 字符串分割使用<code>split+RegExp</code>会默认使用全局匹配, 将字符串按照匹配结果进行分割为数组</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'fseb.aesrb.awrb.'</span>.split(<span class="regexp">/\b(?=\.)/</span>)</span><br><span class="line"><span class="comment">// 表示后置断言为 / 的前一个单词边界</span></span><br><span class="line"><span class="comment">// 结果: ["fseb", ".aesrb", ".awrb", "."]</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>replace</code> 字符串替换使用<code>replace+RegExp</code>替换仅会处理第一个匹配结果, 全局匹配请用标识 g<br>replace 函数有两个参数 第一个表示匹配的字符串或正则表达式第二个参数用于替换的字符串或函数</p>
-<p><em>replace不会修改原字符串, 需要重新赋值</em></p>
-<ul>
-<li><p>字符串 字符串中的$会被处理为特殊字符, 因此输出按照以下匹配</p>
-<p>| 变量名 | 表示值               |<br>| —— | ——————– |<br>| <code>$$</code>   | 一个<code>$</code>字符          |<br>| <code>$&amp;</code>   | 匹配的结果           |<br>| <code>$&#39;</code>   | 匹配结果右边的字符串 |<br>| <code>$\`</code>  | 匹配结果左边的字符串 |<br>| <code>$n</code>   | 括号匹配结果         |</p>
-</li>
-<li><p>函数 函数会一次传入以下参数<br>  <code>function($&amp;, $1, $2, $3, $4..., $n, offset, string){}</code><br>  其中的<code>offset</code>表示匹配偏移量(位置), string表示原来的字符串</p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 驼峰命名法转短横线命名法</span></span><br><span class="line"><span class="comment">// 思路: 找到所有的大写字母, 替换为-和小写字母</span></span><br><span class="line"></span><br><span class="line"><span class="string">"camelNameHaha"</span>.replace(<span class="regexp">/[A-Z]/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'-'</span> + res.toLowerCase();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>match</code> 用于匹配结果<br> 如果是非全局匹配 等同于 <code>exec</code> 如果是全局匹配 返回一个数组作为存放结果</p>
-</li>
-<li><p><code>exec</code> 用于返回单个结果, 并且储存匹配位置<br> exec会从上次匹配结果的位置开始, 继续搜索匹配结果, 上次匹配位置储存在正则对象身上</p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/\d/</span></span><br><span class="line"><span class="keyword">var</span> res;</span><br><span class="line"><span class="keyword">while</span>(res = reg.exec(<span class="string">"abc0123"</span>)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res[<span class="number">0</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> 其中匹配结果是一个数组 0 表示匹配结果 其他表示括号匹配结果<br> 思考下面的代码为什么会死循环?</p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(res = <span class="regexp">/\d/</span>.exec(<span class="string">"abc0123"</span>)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res[<span class="number">0</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>test</code> 用于测试是否成功匹配, 返回<code>true false</code><br> 全局标识 g 并不会在结果有直接体现, 但是会改变正则的<code>lastIndex</code>属性</p>
-</li>
-<li><p><code>search</code> 用于得到第一个匹配结果的位置, 没有则返回<code>-1</code><br> 类似于<code>indexOf</code>, 只是匹配字符串</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/19/正则表达式-JS/" data-id="cjhirxzod0017mckfbxhna9ly" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则-JS/">正则 JS</a></li></ul>
 
     </footer>
   </div>
@@ -662,23 +579,23 @@
       <ul>
         
           <li>
+            <a href="/2018/05/26/LeetCode-392-判断子序列/">LeetCode 392 判断子序列</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/">LeetCode 826 Most Profit Assigning Work</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/24/LeetCode-808-分汤/">LeetCode 808 分汤</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/24/LeetCode-565-数组嵌套/">LeetCode 565 数组嵌套</a>
+          </li>
+        
+          <li>
             <a href="/2018/05/23/LeetCode-3-无重复字符的最长子串/">LeetCode 3 无重复字符的最长子串</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/">LeetCode 798 Smallest Rotation with Highest Score</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/23/LeetCode-238-除自身以外数组的乘积/">LeetCode 238 除自身以外数组的乘积</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/23/LeetCode-200-岛屿的个数/">LeetCode 200 岛屿的个数</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/23/LeetCode-393-UTF-8-编码验证/">LeetCode 393 UTF-8 编码验证</a>
           </li>
         
       </ul>

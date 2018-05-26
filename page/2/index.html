@@ -70,6 +70,267 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LeetCode-336-回文对" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/21/LeetCode-336-回文对/" class="article-date">
+  <time datetime="2018-05-21T08:43:09.000Z" itemprop="datePublished">2018-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/21/LeetCode-336-回文对/">LeetCode 336 回文对</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一组独特的单词， 找出在给定列表中不同 的索引对(i, j),使得关联的两个单词，例如：words[i] + words[j]形成回文。</p>
+<p>示例 1:<br>给定 words = [“bat”, “tab”, “cat”]<br>返回 [[0, 1], [1, 0]]<br>回文是 [“battab”, “tabbat”]</p>
+<p>示例 2:<br>给定 words = [“abcd”, “dcba”, “lls”, “s”, “sssll”]<br>返回 [[0, 1], [1, 0], [3, 2], [2, 4]]<br>回文是 [“dcbaabcd”, “abcddcba”, “slls”, “llssssll”]</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>每次将数组根据首尾字母进行分割, 然后对空字符串进行匹配, 迭代的思想</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string[]&#125; words</span></span><br><span class="line"><span class="comment"> * @return &#123;number[][]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> palindromePairs = <span class="function"><span class="keyword">function</span>(<span class="params">words</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> len = words.length</span><br><span class="line">    <span class="keyword">if</span> (len &lt; <span class="number">2</span>) <span class="keyword">return</span> []</span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line">    <span class="keyword">const</span> ss = &#123;</span><br><span class="line">        a: words.map(<span class="function">(<span class="params">v, i</span>) =&gt;</span> [v, i])</span><br><span class="line">    &#125;</span><br><span class="line">    check(ss, ss)</span><br><span class="line">    <span class="keyword">return</span> [...res]</span><br><span class="line">        .map(<span class="function"><span class="params">v</span> =&gt;</span> v.split(<span class="string">','</span>).map(<span class="function"><span class="params">v</span> =&gt;</span> v | <span class="number">0</span>))</span><br><span class="line">        .filter(<span class="function"><span class="params">v</span> =&gt;</span> v[<span class="number">0</span>] !== v[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">S, E</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> k <span class="keyword">in</span> S) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!E[k]) <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">const</span> cS = &#123;&#125;,</span><br><span class="line">                cE = &#123;&#125;,</span><br><span class="line">                ckS = [],</span><br><span class="line">                ckE = []</span><br><span class="line">            S[k].forEach(</span><br><span class="line">                v =&gt;</span><br><span class="line">                    v[<span class="number">0</span>] === <span class="string">''</span></span><br><span class="line">                        ? ckS.push(v)</span><br><span class="line">                        : cS[v[<span class="number">0</span>][<span class="number">0</span>]]</span><br><span class="line">                            ? cS[v[<span class="number">0</span>][<span class="number">0</span>]].push([v[<span class="number">0</span>].substr(<span class="number">1</span>), v[<span class="number">1</span>]])</span><br><span class="line">                            : (cS[v[<span class="number">0</span>][<span class="number">0</span>]] = [[v[<span class="number">0</span>].substr(<span class="number">1</span>), v[<span class="number">1</span>]]])</span><br><span class="line">            )</span><br><span class="line">            E[k].forEach(</span><br><span class="line">                v =&gt;</span><br><span class="line">                    v[<span class="number">0</span>] === <span class="string">''</span></span><br><span class="line">                        ? ckE.push(v)</span><br><span class="line">                        : cE[v[<span class="number">0</span>][v[<span class="number">0</span>].length - <span class="number">1</span>]]</span><br><span class="line">                            ? cE[v[<span class="number">0</span>][v[<span class="number">0</span>].length - <span class="number">1</span>]].push([</span><br><span class="line">                                  v[<span class="number">0</span>].substr(<span class="number">0</span>, v[<span class="number">0</span>].length - <span class="number">1</span>),</span><br><span class="line">                                  v[<span class="number">1</span>]</span><br><span class="line">                              ])</span><br><span class="line">                            : (cE[v[<span class="number">0</span>][v[<span class="number">0</span>].length - <span class="number">1</span>]] = [</span><br><span class="line">                                  [v[<span class="number">0</span>].substr(<span class="number">0</span>, v[<span class="number">0</span>].length - <span class="number">1</span>), v[<span class="number">1</span>]]</span><br><span class="line">                              ])</span><br><span class="line">            )</span><br><span class="line">            S[k]</span><br><span class="line">                .filter(<span class="function"><span class="params">v</span> =&gt;</span> isH(v[<span class="number">0</span>]))</span><br><span class="line">                .forEach(<span class="function"><span class="params">v</span> =&gt;</span> ckE.forEach(<span class="function"><span class="params">vv</span> =&gt;</span> res.add(v[<span class="number">1</span>] + <span class="string">','</span> + vv[<span class="number">1</span>])))</span><br><span class="line">            E[k]</span><br><span class="line">                .filter(<span class="function"><span class="params">v</span> =&gt;</span> isH(v[<span class="number">0</span>]))</span><br><span class="line">                .forEach(<span class="function"><span class="params">v</span> =&gt;</span> ckS.forEach(<span class="function"><span class="params">vv</span> =&gt;</span> res.add(vv[<span class="number">1</span>] + <span class="string">','</span> + v[<span class="number">1</span>])))</span><br><span class="line">            check(cS, cE)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">isH</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            s ===</span><br><span class="line">            s</span><br><span class="line">                .split(<span class="string">''</span>)</span><br><span class="line">                .reverse()</span><br><span class="line">                .join(<span class="string">''</span>)</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(palindromePairs([<span class="string">'abcd'</span>, <span class="string">'dcba'</span>, <span class="string">'lls'</span>, <span class="string">'s'</span>, <span class="string">'sssll'</span>]))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/21/LeetCode-336-回文对/" data-id="cjhmop54s0008o4kf3b2ehiur" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-394-字符串解码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/21/LeetCode-394-字符串解码/" class="article-date">
+  <time datetime="2018-05-21T08:35:17.000Z" itemprop="datePublished">2018-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/21/LeetCode-394-字符串解码/">LeetCode 394 字符串解码</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个经过编码的字符串，返回它解码后的字符串。</p>
+<p>编码规则为: k[encoded_string]，表示其中方括号内部的 encoded_string 正好重复 k 次。注意 k 保证为正整数。</p>
+<p>你可以认为输入字符串总是有效的；输入字符串中没有额外的空格，且输入的方括号总是符合格式要求的。</p>
+<p>此外，你可以认为原始数据不包含数字，所有的数字只表示重复的次数 k ，例如不会出现像 3a 或 2[4] 的输入。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>字符串替换</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> decodeString = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> changed = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">while</span> (changed) &#123;</span><br><span class="line">        changed = <span class="literal">false</span></span><br><span class="line">        s = s.replace(<span class="regexp">/(\d*)\[([^\[\]]*)\]/g</span>, (v, p1, p2) =&gt; &#123;</span><br><span class="line">            changed = <span class="literal">true</span></span><br><span class="line">            <span class="keyword">return</span> p2.repeat(p1 | <span class="number">0</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(decodeString(<span class="string">'3[a2[c]]'</span>))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/21/LeetCode-394-字符串解码/" data-id="cjhmop55n000so4kfg28fepzi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-738-单调递增的数字" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/20/LeetCode-738-单调递增的数字/" class="article-date">
+  <time datetime="2018-05-20T07:23:03.000Z" itemprop="datePublished">2018-05-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/20/LeetCode-738-单调递增的数字/">LeetCode 738 单调递增的数字</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个非负整数 N，找出小于或等于 N 的最大的整数，同时这个整数需要满足其各个位数上的数字是单调递增。</p>
+<p>（当且仅当每个相邻位数上的数字 x 和 y 满足 x &lt;= y 时，我们称这个整数是单调递增的。）</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>从小化大</p>
+<p>1 位数: 均满足<br>2 位数: 除非直接满足, 否则都是 十位数减一, 个位数为 9 例如 52 -&gt; 49<br>3 位数: 除非直接满足, 否则先判断后两位(根据两位数可知)的最小值, 然后判断百位和十位的关系</p>
+<p>以此类推, 每次判断, 都应该从最后两位判断, 然后依次往前推</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; N</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> monotoneIncreasingDigits = <span class="function"><span class="keyword">function</span>(<span class="params">N</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (N &lt; <span class="number">10</span>) <span class="keyword">return</span> N</span><br><span class="line">    N = N.toString()</span><br><span class="line">        .split(<span class="string">''</span>)</span><br><span class="line">        .reverse()</span><br><span class="line">    <span class="keyword">const</span> len = N.length - <span class="number">1</span></span><br><span class="line">    check(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> N.reverse().join(<span class="string">''</span>) | <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">pos</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (N[pos] &lt; N[++pos]) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; pos; i++) N[i] = <span class="number">9</span></span><br><span class="line">            N[pos] = N[pos] - <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (pos &lt; len) check(pos)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(monotoneIncreasingDigits(<span class="number">1651</span>))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/20/LeetCode-738-单调递增的数字/" data-id="cjhmop55n000yo4kfk6hcmexp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-正则表达式-JS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/19/正则表达式-JS/" class="article-date">
+  <time datetime="2018-05-19T08:18:26.000Z" itemprop="datePublished">2018-05-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/19/正则表达式-JS/">正则表达式-JS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是正则"><a href="#什么是正则" class="headerlink" title="什么是正则?"></a>什么是正则?</h2><p>根据自己的理解, 正则是用来’快速’处理字符串的工具, 在 JavaScript 中, 通常使用以下方法来使用正则表达式</p>
+<ol>
+<li><code>String.prototype.split</code> 字符串分割</li>
+<li><code>String.prototype.replace</code> 字符串替换</li>
+<li><code>String.prototype.match</code> 字符串匹配</li>
+<li><code>RegExp.prototype.exec</code> 正则匹配</li>
+<li><code>RegExp.prototype.test</code> 正则匹配判断</li>
+<li><code>String.prototype.search</code> 字符串检索</li>
+</ol>
+<h2 id="正则对象"><a href="#正则对象" class="headerlink" title="正则对象"></a>正则对象</h2><p>正则对象通常有两种构造方式</p>
+<ol>
+<li>new <code>reg = new RegExp(&quot;^abcdef.&quot;,&#39;gi&#39;)</code></li>
+<li>省略 new 关键字 <code>RegExp(&quot;^abcdef.&quot;,&#39;gi&#39;)</code></li>
+<li>字面量 <code>/^abcdef./gi</code></li>
+</ol>
+<p>具体函数的使用方式参照 MDN</p>
+<p>正则对象一般有以下属性|方法</p>
+<ol>
+<li><code>source</code> 创建的字面量</li>
+<li><code>flags</code> 一些使用选项, 如下</li>
+<li><code>global</code> 是否全局匹配, 标识为 g</li>
+<li><code>ignoreCase</code> 是否不区分大小写, 标识为 i</li>
+<li><code>multiline</code> 是否跨行匹配, 标识为 m</li>
+<li><code>unicode</code> 是否支持较长 Unicode 字符, 标识为 u, 是 ES6 新增标识(使用较少)</li>
+<li><code>sticky</code> 粘性匹配(几乎不用吧, 浏览器支持也不行)</li>
+<li><code>lastIndex</code> 上一次匹配的位置, 新创建的正则对象没有这个属性</li>
+</ol>
+<h2 id="普通标志"><a href="#普通标志" class="headerlink" title="普通标志"></a>普通标志</h2><ol>
+<li><code>.</code> 表示一个非换行字符(即非<code>\n</code> <code>\r</code> <code>\u2028</code> <code>\u2029</code>)</li>
+<li><code>\d</code> 表示一个数字字符, 等同于<code>[0-9]</code> (可以不记)</li>
+<li><code>\D</code> 表示一个非数字字符, 等同于<code>[^0-9]</code> (可以不记)</li>
+<li><code>\s</code> 表示一个空白字符, 包含换行符等等</li>
+<li><code>\S</code> 表示一个非空白字符</li>
+<li><code>\w</code> 表示一个数字字符, 或英文字符, 或下划线, 等同于 <code>[A-Za-z0-9_]</code></li>
+<li><code>\W</code> 表示一个非<code>\w</code> 等同于 <code>[^A-Za-z0-9_]</code></li>
+<li>与字符串类似, <code>\</code> 表示转义, 即有特殊含义的字符搜索时得加转义, 例如想寻找小数点 得写作<code>\.</code></li>
+<li><code>\b</code> 表示一个单词边界</li>
+<li><code>\B</code> 表示一个非单词边界</li>
+<li><code>[]</code> 表示这个中括号中的任意一个字符</li>
+<li><code>()</code> 表示将这个小括号中的所有字符当做一个整体, 并在搜索结果中提供匹配(下面讲)</li>
+<li><code>{}</code> 表示次数, 写法通常有如下几种 <code>{3}</code>表示前一个字符精确匹配 3 次 <code>{3,}</code>表示前一个字符匹配至少三次, <code>{2,3}</code>表示前一个字符匹配 2-3 次</li>
+<li><code>^</code> 在中括号<code>[]</code>中表示<strong>非</strong>的意思, 否则表示字符串开始位置</li>
+<li><code>$</code> 表示字符串结束位置</li>
+<li><code>*</code> 等同于{0,} 尽可能多的匹配</li>
+<li><code>+</code> 等同于{1,} 尽可能多的匹配</li>
+<li><code>?</code> 等同于{0,1} 尽可能少的匹配</li>
+<li><code>*?</code> 等同于{0,} 尽可能少的匹配</li>
+<li><code>+?</code> 等同于{1,} 尽可能少的匹配</li>
+<li><code>|</code> 或</li>
+</ol>
+<h2 id="匹配结果"><a href="#匹配结果" class="headerlink" title="匹配结果"></a>匹配结果</h2><ol>
+<li>全部匹配结果 <code>$0</code> 一般不包括 <code>(?:xxxx)</code> <code>(?=xxxx)</code> <code>(?!xxxx)</code></li>
+<li><code>$1</code> <code>$2</code> … <code>$n</code> (一般最多<code>$9</code> 或<code>$99</code>), 表示匹配中的括号匹配结果<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">;<span class="regexp">/\d([a-z])/</span>.exec(<span class="string">'8ab'</span>)</span><br><span class="line"><span class="comment">// 匹配结果是 8a  此外的$1匹配结果是 a    $2匹配结果没有</span></span><br><span class="line"><span class="comment">// 并不是额外的匹配结果!!!</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h2><p><em>什么是断言?</em> 断言就是判断是否匹配, 但是断言的内容不在结果范围内</p>
+<p>例如我想匹配 后面跟着感叹号的英文字母, 那么此时结果应该只有英文字母, 而没有感叹号</p>
+<ol>
+<li><p>JS 中没有前置断言(后行断言) 即你不能预先判断你要搜索的字符串前面有什么. 但是我们可以绕过这个限制</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取所有前置有数字的两位英文字符</span></span><br><span class="line"><span class="comment">// 利用括号匹配结果进行提取需要的字符串</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/\d([a-zA-z]&#123;2&#125;)/g</span></span><br><span class="line"><span class="keyword">var</span> matches</span><br><span class="line"><span class="keyword">while</span> ((matches = reg.exec(<span class="string">'a3dfr55f12fa'</span>))) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(matches[<span class="number">1</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>JS 中有后置断言(前行断言) 即可以判断后面是什么(或者不能使什么) 使用 <code>(?=xxxx)</code> 作为后置肯定断言 使用 <code>(?!xxxx)</code> 作为后置否定断言</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取所有后置有数字的两位英文字符</span></span><br><span class="line"></span><br><span class="line">;<span class="regexp">/[a-zA-Z]&#123;2&#125;(?=\d)/</span>.exec(<span class="string">'a3dfr55f12fa'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="方法详解"><a href="#方法详解" class="headerlink" title="方法详解"></a>方法详解</h2><ol>
+<li><p><code>split</code> 字符串分割使用<code>split+RegExp</code>会默认使用全局匹配, 将字符串按照匹配结果进行分割为数组</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'fseb.aesrb.awrb.'</span>.split(<span class="regexp">/\b(?=\.)/</span>)</span><br><span class="line"><span class="comment">// 表示后置断言为 / 的前一个单词边界</span></span><br><span class="line"><span class="comment">// 结果: ["fseb", ".aesrb", ".awrb", "."]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>replace</code> 字符串替换使用<code>replace+RegExp</code>替换仅会处理第一个匹配结果, 全局匹配请用标识 g<br>replace 函数有两个参数 第一个表示匹配的字符串或正则表达式第二个参数用于替换的字符串或函数</p>
+<p><em>replace不会修改原字符串, 需要重新赋值</em></p>
+<ul>
+<li><p>字符串 字符串中的$会被处理为特殊字符, 因此输出按照以下匹配</p>
+<p>| 变量名 | 表示值               |<br>| —— | ——————– |<br>| <code>$$</code>   | 一个<code>$</code>字符          |<br>| <code>$&amp;</code>   | 匹配的结果           |<br>| <code>$&#39;</code>   | 匹配结果右边的字符串 |<br>| <code>$\`</code>  | 匹配结果左边的字符串 |<br>| <code>$n</code>   | 括号匹配结果         |</p>
+</li>
+<li><p>函数 函数会一次传入以下参数<br>  <code>function($&amp;, $1, $2, $3, $4..., $n, offset, string){}</code><br>  其中的<code>offset</code>表示匹配偏移量(位置), string表示原来的字符串</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 驼峰命名法转短横线命名法</span></span><br><span class="line"><span class="comment">// 思路: 找到所有的大写字母, 替换为-和小写字母</span></span><br><span class="line"></span><br><span class="line"><span class="string">"camelNameHaha"</span>.replace(<span class="regexp">/[A-Z]/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'-'</span> + res.toLowerCase();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>match</code> 用于匹配结果<br> 如果是非全局匹配 等同于 <code>exec</code> 如果是全局匹配 返回一个数组作为存放结果</p>
+</li>
+<li><p><code>exec</code> 用于返回单个结果, 并且储存匹配位置<br> exec会从上次匹配结果的位置开始, 继续搜索匹配结果, 上次匹配位置储存在正则对象身上</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/\d/</span></span><br><span class="line"><span class="keyword">var</span> res;</span><br><span class="line"><span class="keyword">while</span>(res = reg.exec(<span class="string">"abc0123"</span>)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res[<span class="number">0</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 其中匹配结果是一个数组 0 表示匹配结果 其他表示括号匹配结果<br> 思考下面的代码为什么会死循环?</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(res = <span class="regexp">/\d/</span>.exec(<span class="string">"abc0123"</span>)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res[<span class="number">0</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>test</code> 用于测试是否成功匹配, 返回<code>true false</code><br> 全局标识 g 并不会在结果有直接体现, 但是会改变正则的<code>lastIndex</code>属性</p>
+</li>
+<li><p><code>search</code> 用于得到第一个匹配结果的位置, 没有则返回<code>-1</code><br> 类似于<code>indexOf</code>, 只是匹配字符串</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/19/正则表达式-JS/" data-id="cjhmop563001co4kfqdvuezwy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则-JS/">正则 JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-常用代码处理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/19/常用代码处理/" class="article-date">
@@ -103,7 +364,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/19/常用代码处理/" data-id="cjhirxzoh0019mckftxrqw0m3" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/19/常用代码处理/" data-id="cjhmop563001eo4kf2cv66u2f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常用/">常用</a></li></ul>
@@ -185,7 +446,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/19/兼容性处理-慢慢更新/" data-id="cjhirxzoc0016mckfcuhb22r1" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/19/兼容性处理-慢慢更新/" data-id="cjhmop563001ao4kf8i7eltuw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/兼容/">兼容</a></li></ul>
@@ -211,7 +472,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/17/LeetCode-集锦/">LeetCode 633 746 453 766 66 387</a>
+      <a class="article-title" href="/2018/05/17/LeetCode-集锦/">LeetCode 633 746 453 766 66 387 223 46 274</a>
     </h1>
   
 
@@ -244,11 +505,21 @@
 <p>注意事项：您可以假定该字符串只包含小写字母。</p>
 <h4 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a>思路</h4><p>循环遍历</p>
 <h4 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> firstUniqChar = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> len = s.length</span><br><span class="line">    <span class="keyword">const</span> res = []</span><br><span class="line">    <span class="keyword">const</span> dele = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> character = s[i]</span><br><span class="line">        <span class="keyword">if</span> (dele.indexOf(character) &gt; <span class="number">-1</span>) <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = res.length; j--; ) &#123;</span><br><span class="line">            <span class="keyword">if</span> (res[j][<span class="number">0</span>] === character) &#123;</span><br><span class="line">                res.splice(j, <span class="number">1</span>)</span><br><span class="line">                dele.push(character)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (j &lt; <span class="number">0</span>) res.push([character, i])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res.length ? res[<span class="number">0</span>][<span class="number">1</span>] : <span class="number">-1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="223-矩形面积"><a href="#223-矩形面积" class="headerlink" title="223. 矩形面积"></a>223. 矩形面积</h3><p>在二维平面上计算出两个由直线构成的矩形叠加覆盖后的面积。</p>
+<p>每个矩形由其左下顶点和右上顶点坐标表示，如图所示。</p>
+<h4 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a>思路</h4><p>直接在两个维度上判断重合长度即可</p>
+<h4 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> computeArea = <span class="function"><span class="keyword">function</span>(<span class="params">A, B, C, D, E, F, G, H</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        (C - A) * (D - B) +</span><br><span class="line">        (G - E) * (H - F) -</span><br><span class="line">        checkLen(A, C, E, G) * checkLen(B, D, F, H)</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">checkLen</span>(<span class="params">a, b, c, d</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> r = <span class="built_in">Math</span>.min(b, d) - <span class="built_in">Math</span>.max(a, c)</span><br><span class="line">        <span class="keyword">return</span> r &lt; <span class="number">0</span> ? <span class="number">0</span> : r</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="46-全排列"><a href="#46-全排列" class="headerlink" title="46. 全排列"></a>46. 全排列</h3><p>给定一个没有重复数字的序列，返回其所有可能的全排列。</p>
+<h3 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;number[][]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> permute = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> res = []</span><br><span class="line">    <span class="keyword">if</span> (!nums.length) <span class="keyword">return</span> []</span><br><span class="line">    g([], nums)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">g</span>(<span class="params">ar, remain</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!remain.length) res.push(ar)</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            remain.forEach(<span class="function">(<span class="params">v, i</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">const</span> arr = [...remain]</span><br><span class="line">                arr.splice(i, <span class="number">1</span>)</span><br><span class="line">                g([...ar, v], arr)</span><br><span class="line">            &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="274-H-指数"><a href="#274-H-指数" class="headerlink" title="274. H 指数"></a>274. H 指数</h3><p>给定一位研究者论文被引用次数的数组（被引用次数是非负整数）。编写一个方法，计算出研究者的 h 指数。</p>
+<p>h 指数的定义: “一位有 h 指数的学者，代表他（她）的 N 篇论文中至多有 h 篇论文，分别被引用了至少 h 次，其余的 N - h 篇论文每篇被引用次数不多于 h 次。”</p>
+<h4 id="思路-7"><a href="#思路-7" class="headerlink" title="思路"></a>思路</h4><p>先排序, 然后看是否值小于等于序号即可</p>
+<h4 id="代码-8"><a href="#代码-8" class="headerlink" title="代码"></a>代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; citations</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> hIndex = <span class="function"><span class="keyword">function</span>(<span class="params">citations</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> s = citations.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = s.length; i--; ) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] - i &lt;= <span class="number">1</span>) <span class="keyword">return</span> i + <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-集锦/" data-id="cjhirxzo10010mckfxkyi2t7r" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-集锦/" data-id="cjhmop55n0014o4kf0dm00sph" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -294,7 +565,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-321-拼接最大数/" data-id="cjhirxzn60005mckf1qp00k4v" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-321-拼接最大数/" data-id="cjhmop54s0004o4kf2jz1g58w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -339,7 +610,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-102-二叉树的层次遍历/" data-id="cjhirxzmq0000mckfx2mftubw" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-102-二叉树的层次遍历/" data-id="cjhmop54s0000o4kfkkqgcqsg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -382,260 +653,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-354-Russian-Doll-Envelopes/" data-id="cjhirxznn000kmckfoiyzfehm" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-668-乘法表中第k小的数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/16/LeetCode-668-乘法表中第k小的数/" class="article-date">
-  <time datetime="2018-05-16T08:53:46.000Z" itemprop="datePublished">2018-05-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/16/LeetCode-668-乘法表中第k小的数/">LeetCode 668 乘法表中第k小的数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="kth-smallest-number-in-multiplication-table"><a href="#kth-smallest-number-in-multiplication-table" class="headerlink" title="kth smallest number in multiplication table"></a>kth smallest number in multiplication table</h3><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>几乎每一个人都用 乘法表。但是你能在乘法表中快速找到第 k 小的数字吗？</p>
-<p>给定高度 m 、宽度 n 的一张 m * n 的乘法表，以及正整数 k，你需要返回表中第 k 小的数字。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先处理简单情况:<br>如果 <code>m</code> , <code>n</code> 其中一个为 <code>1</code> , 那么就是正整数排列, 直接返回 <code>k</code><br>如果 <code>k===m*n</code> 那么一定是最后一个, 返回 <code>k</code></p>
-<p>观察乘法表<br><code>1 2 3</code><br><code>2 4 6</code><br><code>3 6 9</code><br>第一想法:<br>发现第 <code>i</code> 行每一个数都能被 <code>i+1</code> 整除因此从 <code>1</code> 开始有 <code>1</code> 个以后每次自增 <code>1</code> 变为 <code>p</code> 如果 <code>p</code> 能整除 且在范围内, 那么即算一个</p>
-<p>跑了一下 发现了巨大问题, 一旦数据量较大, 很多事情都是无用功.<br>第二想法:<br>例如在上面 3*3 的乘法表中查找第 8 大的数字, 那完全可以使用二分法 先查找到中间数所在的 k 值, 然后进一步缩小范围<br>(其实这里可以进一步优化, 因为当值较小时, 包含的数量较多, 因此不应当直接选取中间值)</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">findKthNumber</span>(<span class="params">m, n, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (m === <span class="number">1</span> || n === <span class="number">1</span> || m * n &lt;= k) <span class="keyword">return</span> k</span><br><span class="line">    <span class="keyword">if</span> (k &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> (k &lt; <span class="number">4</span>) <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">    <span class="keyword">let</span> curNum = <span class="number">1</span>,</span><br><span class="line">        left = <span class="number">1</span>,</span><br><span class="line">        right = m * n,</span><br><span class="line">        last = [<span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> temp = ~~((left + right) / <span class="number">2</span>),</span><br><span class="line">            t = calcu(temp)</span><br><span class="line">        <span class="built_in">console</span>.log(temp, t, k, last)</span><br><span class="line">        <span class="keyword">if</span> (t &gt; k) &#123;</span><br><span class="line">            last = [temp, t]</span><br><span class="line">            right = temp</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (t === k) &#123;</span><br><span class="line">            <span class="keyword">return</span> check(temp, t)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (last[<span class="number">0</span>] - temp === <span class="number">1</span>) <span class="keyword">return</span> check(...last)</span><br><span class="line">            left = temp</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">l, t</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (calcu(l - <span class="number">1</span>) === t) l--</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> l</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">calcu</span>(<span class="params">l</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> sum = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (l &lt;= i) <span class="keyword">return</span> sum</span><br><span class="line">            sum += <span class="built_in">Math</span>.min(~~(l / (i + <span class="number">1</span>)), n)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/16/LeetCode-668-乘法表中第k小的数/" data-id="cjhirxznt000smckf3m1dl09g" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-406-根据身高重建队列" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/16/LeetCode-406-根据身高重建队列/" class="article-date">
-  <time datetime="2018-05-16T07:32:13.000Z" itemprop="datePublished">2018-05-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/16/LeetCode-406-根据身高重建队列/">LeetCode 406 根据身高重建队列</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="queue-reconstruction-by-height"><a href="#queue-reconstruction-by-height" class="headerlink" title="queue reconstruction by height"></a>queue reconstruction by height</h3><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>假设有打乱顺序的一群人站成一个队列。 每个人由一个整数对(h, k)表示，其中 h 是这个人的身高，k 是排在这个人前面且身高大于或等于 h 的人数。 编写一个算法来重建这个队列。</p>
-<p>注意：总人数少于 1100 人。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>按照前置身高个数依次排序 在每组中必有前面的身高低于后者</p>
-<p>例如 <code>[[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]</code></p>
-<p>排序后的结果必有 <code>[5,0]</code> 在 <code>[7,0]</code> 之前</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[][]&#125; people</span></span><br><span class="line"><span class="comment"> * @return &#123;number[][]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> reconstructQueue = <span class="function"><span class="keyword">function</span>(<span class="params">people</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (people.length &lt; <span class="number">1</span>) <span class="keyword">return</span> people</span><br><span class="line">    <span class="keyword">const</span> keys = [],</span><br><span class="line">        res = &#123;&#125;</span><br><span class="line">    <span class="comment">// 处理所有的键名-数组后一个元素 键值-数组前一个元素</span></span><br><span class="line">    people.forEach(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (keys.indexOf(v[<span class="number">1</span>]) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            keys.push(v[<span class="number">1</span>])</span><br><span class="line">            res[v[<span class="number">1</span>]] = []</span><br><span class="line">        &#125;</span><br><span class="line">        res[v[<span class="number">1</span>]].push(v[<span class="number">0</span>])</span><br><span class="line">    &#125;)</span><br><span class="line">    keys.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line">    <span class="keyword">const</span> len = keys.length</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) res[keys[i]].sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line">    <span class="comment">// 初始化为0的数组</span></span><br><span class="line">    <span class="keyword">const</span> cur = [].concat(res[<span class="number">0</span>].map(<span class="function"><span class="params">v</span> =&gt;</span> [v, <span class="number">0</span>]))</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> t = keys[i]</span><br><span class="line">        <span class="keyword">let</span> pre = <span class="number">0</span></span><br><span class="line">        res[t].forEach(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> pos = <span class="number">0</span></span><br><span class="line">            <span class="keyword">const</span> lens = cur.length</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; lens; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (cur[j][<span class="number">0</span>] &gt;= v) pos++</span><br><span class="line">                <span class="keyword">if</span> (pos &gt;= t &amp;&amp; j &gt;= pre) &#123;</span><br><span class="line">                    <span class="comment">// 已经找到为止</span></span><br><span class="line">                    cur.splice(j + <span class="number">1</span>, <span class="number">0</span>, [v, t])</span><br><span class="line">                    pre = j + <span class="number">1</span></span><br><span class="line">                    <span class="keyword">return</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cur</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(reconstructQueue([[<span class="number">7</span>, <span class="number">0</span>], [<span class="number">4</span>, <span class="number">4</span>], [<span class="number">7</span>, <span class="number">1</span>], [<span class="number">5</span>, <span class="number">0</span>], [<span class="number">6</span>, <span class="number">1</span>], [<span class="number">5</span>, <span class="number">2</span>]]))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/16/LeetCode-406-根据身高重建队列/" data-id="cjhirxznf000fmckfgu1pnpba" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-CSS-径向渐变" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/15/CSS-径向渐变/" class="article-date">
-  <time datetime="2018-05-15T09:09:12.000Z" itemprop="datePublished">2018-05-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/15/CSS-径向渐变/">CSS: 径向渐变</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>CSS 中的线性渐变已经有很多文章了, 但是径向渐变文章却很少, 一是大家对径向渐变的使用依旧很少, 二是代码依旧非常冗长. 因此在此研究了一下 radial-gradient 参数.</p>
-<hr>
-<p>[TOC]</p>
-<hr>
-<h2 id="标准语法"><a href="#标准语法" class="headerlink" title="标准语法"></a>标准语法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">radial-gradient( [ circle || &lt;length&gt; ] [ at &lt;position&gt; ]? ,</span><br><span class="line">| [ ellipse || [&lt;length&gt; | &lt;percentage&gt; ]&#123;2&#125;] [ at &lt;position&gt; ]? ,</span><br><span class="line">| [ [ circle | ellipse ] || &lt;extent-keyword&gt; ] [ at &lt;position&gt; ]? ,</span><br><span class="line">| at &lt;position&gt; ,</span><br><span class="line">&lt;color-stop&gt; [ , &lt;color-stop&gt; ]+ )</span><br></pre></td></tr></table></figure>
-<h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><p>根据实际操作(实际上是 Chrome 上的测试)</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">radial-gradient(</span><br><span class="line">	参数<span class="number">1</span>: 形状/大小(半径)  at  中心点位置,</span><br><span class="line">	参数<span class="number">2</span>-...: 起止颜色</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>下文中的中心点特指 <strong>渐变中心</strong> 而不是盒子中心</li>
-<li>下文中的角/边指的是 <code>background-size</code> 的角/边 (一般默认都是盒子大小)</li>
-</ul>
-<h3 id="形状"><a href="#形状" class="headerlink" title="形状"></a>形状</h3><p>形状仅有两种可选值 <code>circle</code> (圆形)与 <code>ellipse</code> (椭圆形), 并且这不是主要属性, 仅用作提供半径的默认值</p>
-<p>###半径</p>
-<p>半径的定义来自两种:</p>
-<ul>
-<li><p>默认值 + 若形状设置为 <code>circle</code> , 则默认半径为<strong>中心点距离最远的一个角</strong>的距离<br><code>html background-image: radial-gradient(circle at 0 0, #000, #eee);</code></p>
-<pre><code>![circle 默认半径](https://img-blog.csdn.net/20180414101219377?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xvdmVvZlJlZE1vb24=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-
- + 若形状设置为 `ellipse` , 则默认横纵半径**分别**为为**中心点距离最远的一个角**的距离
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background-image: radial-gradient(ellipse at 0 0, #000, #eee);</span><br></pre></td></tr></table></figure>
-
-![ellipse 默认半径](https://img-blog.csdn.net/20180414101709175?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xvdmVvZlJlZE1vb24=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-
-**以下仅作为深究半径的计算方法的内容, 若不关心可以跳过这部分剩下的计算过程**
-以上是建立在中心点为四个角时的结论, 若中心点不在四个角上, 则只有 (其实是统一的)
-$$\frac{{{横向半径}}}{纵向半径} = \frac{中心点到最远的角的横向距离}{中心点到最远的角的纵向距离}$$
-
-&gt; 根据数学方法 [*高中*] 我们可以算出横向半径与纵向半径.
-&gt; 以下假设均建立在中心点在四个角上的时候
-&gt; 假设 中心点到最远的角的横纵向距离分别为*m,n*
-&gt; 椭圆的标准方程为
-$$\frac{{{x^2}}}{{{km^2}}} + \frac{{{y^2}}}{{{kn^2}}} = 1$$
-&gt; 将坐标 (*m,n*) 代入标准方程得到
-$$k = \frac{1}{2}$$
-因此半长轴和半短轴长度分别为$$a = \sqrt 2 m, b = \sqrt 2 n $$
-
-根据上面的结论可以知道, ellipse椭圆形渐变的半径一定是 中心点到最远的角的横纵向距离 的$\sqrt 2$倍
-</code></pre></li>
-<li><p>设定值—具体值 + 就是具体半径, 若只写一个半径, 则默认为圆形渐变, 否则必须指定两个半径</p>
-<pre><code><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">background-image: radial-gradient(50px, #000, #eee);</span><br><span class="line">// 圆形渐变, 半径为50px</span><br><span class="line">background-image: radial-gradient(50px 60px, #000, #eee);</span><br><span class="line">// 椭圆形渐变, 横向半径为50px, 纵向半径为 60px</span><br></pre></td></tr></table></figure>
-</code></pre></li>
-<li><p>设定值—百分比 + <strong>错误</strong>!! 这是径向渐变唯一不能使用百分比指定的地方!!</p>
-</li>
-<li>未设定 + 默认值 <code>ellipse</code></li>
-</ul>
-<h3 id="位置"><a href="#位置" class="headerlink" title="位置"></a>位置</h3><p>位置即中心点的位置位置要求一定要跟在第一个参数后面, 并用 <code>at</code> 进行连接</p>
-<ul>
-<li>默认值 + 默认在盒子的中心位置</li>
-<li>设定值—具体值 + 这个已经写过很多了, 屏幕坐标系默认盒子左上角为坐标原点, 横向向右为 <code>x</code> 轴, 纵向向下为 <code>y</code> 轴</li>
-<li>设定值—百分比 + 这个百分比是相对于盒子而言的, 也符合我们一般 CSS 百分比的要求.</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 举很多个栗子来规范书写</span><br><span class="line">background-image: radial-gradient(ellipse at 0 0, #000, #eee);</span><br><span class="line">// 修改为左上角为中心点</span><br><span class="line">background-image: radial-gradient(50px 60px at 100% 100%, #000, #eee);</span><br><span class="line">// 修改为右下角为中心点</span><br><span class="line">background-image: radial-gradient(at 50px 5em, #000, #eee);</span><br><span class="line">// 什么样的数据都可以</span><br></pre></td></tr></table></figure>
-<p>###起止颜色</p>
-<blockquote>
-<p>起止颜色用于规定从中心点到渐变边缘的颜色变化, 更多妙用请看线性渐变的介绍</p>
-</blockquote>
-<p>起止颜色, 顾名思义, 至少得有两种颜色并且每种颜色后允许跟着一个距离值(即距离中心点的距离)</p>
-<blockquote>
-<p>又要举个栗子~~ 就像播放电影, 电影播放的并不是连续画面, 而是一帧一帧的画面, 只是我们的大脑会自动把 (间隔时间较短的) 画面自动连接起来 (又叫做补间动画) 我们就是导演, 负责控制每种颜色具体的位置, 剩下的每两种颜色中间的过渡由浏览器帮我们解决.</p>
-</blockquote>
-<p><strong>在渐变半径之外的部分由最后一个 (止颜色) 填充, 而不是由 backgroundColor 填充! </strong><br><em>当然这是在 backgroundSize 为整个盒子的时候的效果, 如果 background 大小仅有一小部分, 那剩下的还是由 backgroundColor 填充, 例子将在这节后面书写</em></p>
-<ul>
-<li>颜色值 + 不多说, <code>skyblue</code> <code>#87ceeb</code> <code>hsla(197, 71%, 73%, 0.6)</code> <code>rgba(137, 207, 235, 0.6)</code> 都是可取的值</li>
-<li><p>位置<br>首先只能有一个值, 因此如果想达到特殊的效果, 请用径向渐变的叠加效果设置 + 默认值<br>默认值和书写位置有关, 浏览器会先确定那些你书写了的位置的颜色, 然后利用平均分布求出每种颜色应该在的位置, 最特别的, <strong>起颜色</strong>默认为 <code>0%</code> , <strong>末颜色</strong>默认为 <code>100%</code></p>
-<ul>
-<li><p>固定值固定值就是固定值, 不一样的烟火当然, 固定值一定是转化为百分比进行使用的 (计算公式当然是 固定值/半径=百分比)<br>在转化为百分比的过程中, <strong>半径</strong>一定指的是<strong>横向的半径</strong> (即 固定值/横向半径=百分比)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">```html</span><br><span class="line">width: 300px;</span><br><span class="line">height: 200px;</span><br><span class="line">background-image: radial-gradient( #000, #eee 100px, #000);</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">![横向半径展示1](https://img-blog.csdn.net/20180414095215386?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xvdmVvZlJlZE1vb24=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)</span><br><span class="line"></span><br><span class="line">```html</span><br><span class="line">width: 200px;</span><br><span class="line">height: 300px;</span><br><span class="line">background-image: radial-gradient( #000, #eee 100px, #000);</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">![横向半径展示2](https://img-blog.csdn.net/20180414095348396?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xvdmVvZlJlZE1vb24=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>百分比<br><strong>百分比是相对于半径而言的!!</strong><br><strong>百分比是相对于半径而言的!!</strong><br><strong>百分比是相对于半径而言的!!</strong><br>在上面我们看到了, 不设置半径时的默认值并不是中心点到某条边的距离, 因此如果想精确地定位到固定位置, 建议提前设定好渐变半径以方便操作</li>
-</ul>
-<p>关于径向渐变的参数介绍就到这了, 但是对于它的研究以及各种样式的研究以及例如 background-repeat 的使用技巧还需要不断加强~</p>
-<p>后续有时间再分析各种样式~</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/15/CSS-径向渐变/" data-id="cjhirxznc000amckfdpausll3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-592-Fraction-Addition-and-Subtraction" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/" class="article-date">
-  <time datetime="2018-05-15T08:52:01.000Z" itemprop="datePublished">2018-05-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/">LeetCode 592 Fraction Addition and Subtraction</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>Given a string representing an expression of fraction addition and subtraction, you need to return the calculation result in string format. The final result should be irreducible fraction. If your final result is an integer, say 2, you need to change it to the format of fraction that has denominator 1. So in this case, 2 should be converted to 2/1.</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>其实就是正常计算的思路进行</p>
-<ul>
-<li>先通过字符串进行划分分子分母</li>
-<li>将相同分母的分至同一类中, 并计算同类的和 例如 <code>1/3+2/3</code> 会分到分母为 <code>3</code> 的类中, 且和为 <code>3</code></li>
-<li>将分子和为 <code>0</code> 的项剔除</li>
-<li>求分母的最大公倍数</li>
-<li>将所有分母分子扩大 让分母为最大公倍数</li>
-<li>计算所有和</li>
-<li>约分</li>
-</ul>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; expression</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> fractionAddition = <span class="function"><span class="keyword">function</span>(<span class="params">expression</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> re = &#123;&#125;</span><br><span class="line">    expression.split(<span class="regexp">/\b(?=[\-\+])/</span>).forEach(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> r = v.split(<span class="string">'/'</span>)</span><br><span class="line">        <span class="keyword">if</span> (!re[r[<span class="number">1</span>]]) re[r[<span class="number">1</span>]] = []</span><br><span class="line">        re[r[<span class="number">1</span>]].push(<span class="built_in">Number</span>(r[<span class="number">0</span>]))</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">const</span> keys = <span class="built_in">Object</span>.keys(re)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = keys.length; i--; ) &#123;</span><br><span class="line">        re[keys[i]] = re[keys[i]].reduce(<span class="function">(<span class="params">p, v</span>) =&gt;</span> p + v)</span><br><span class="line">        <span class="keyword">if</span> (!re[keys[i]]) &#123;</span><br><span class="line">            <span class="keyword">delete</span> re[keys[i]]</span><br><span class="line">            keys.splice(i, <span class="number">1</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (keys.length === <span class="number">0</span>) <span class="keyword">return</span> <span class="string">'0/1'</span></span><br><span class="line">    <span class="keyword">if</span> (keys.length === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> g = mcd(keys[<span class="number">0</span>], re[keys[<span class="number">0</span>]], <span class="literal">true</span>)</span><br><span class="line">        <span class="keyword">return</span> re[keys[<span class="number">0</span>]] / g + <span class="string">'/'</span> + keys[<span class="number">0</span>] / g</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> max = keys.reduce(<span class="function">(<span class="params">p, v</span>) =&gt;</span> mcd(p, v), <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">let</span> sum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = keys.length; i--; ) sum += max * re[keys[i]] / keys[i]</span><br><span class="line">    <span class="keyword">const</span> g = mcd(sum, max, <span class="literal">true</span>)</span><br><span class="line">    <span class="keyword">return</span> sum / g + <span class="string">'/'</span> + max / g</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">mcd</span>(<span class="params">x, y, flag</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> [m, n] = x &lt; y ? [y, x] : [x, y]</span><br><span class="line">        <span class="keyword">while</span> (n) &#123;</span><br><span class="line">            ;[m, n] = [n, m % n]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag) <span class="keyword">return</span> <span class="built_in">Math</span>.abs(m)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Math</span>.abs(x * y / m)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(fractionAddition(<span class="string">'1/3-1/2'</span>))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/" data-id="cjhirxzns000qmckfnjv9v4sc" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-354-Russian-Doll-Envelopes/" data-id="cjhmop55n000mo4kfz97o7aos" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -697,23 +715,23 @@ $$k = \frac{1}{2}$$
       <ul>
         
           <li>
+            <a href="/2018/05/26/LeetCode-392-判断子序列/">LeetCode 392 判断子序列</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/">LeetCode 826 Most Profit Assigning Work</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/24/LeetCode-808-分汤/">LeetCode 808 分汤</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/24/LeetCode-565-数组嵌套/">LeetCode 565 数组嵌套</a>
+          </li>
+        
+          <li>
             <a href="/2018/05/23/LeetCode-3-无重复字符的最长子串/">LeetCode 3 无重复字符的最长子串</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/">LeetCode 798 Smallest Rotation with Highest Score</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/23/LeetCode-238-除自身以外数组的乘积/">LeetCode 238 除自身以外数组的乘积</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/23/LeetCode-200-岛屿的个数/">LeetCode 200 岛屿的个数</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/23/LeetCode-393-UTF-8-编码验证/">LeetCode 393 UTF-8 编码验证</a>
           </li>
         
       </ul>
