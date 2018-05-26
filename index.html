@@ -70,6 +70,189 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LeetCode-803-打砖块" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/26/LeetCode-803-打砖块/" class="article-date">
+  <time datetime="2018-05-26T06:44:27.000Z" itemprop="datePublished">2018-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/26/LeetCode-803-打砖块/">LeetCode 803 打砖块</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>我们有一组包含 1 和 0 的网格；其中 1 表示砖块。 当且仅当一块砖直接连接到网格的顶部，或者它至少连接着(4 个方向)相邻的砖块之一时，它才不会落下。</p>
+<p>我们会依次消除一些砖块。每当我们消除 (i, j) 位置时， 对应位置的砖块（若存在）会消失，然后其他的砖块可能因为这个消除而落下。</p>
+<p>返回一个数组表示每次消除操作对应落下的砖块数目。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>直接思路: 当某个砖块消失后, 对周围的砖块进行路径寻找, 如果能找到最上层砖块, 那么说明该路径是通达的, 不会消失, 否则就会消失, 再次触发</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[][]&#125; grid</span></span><br><span class="line"><span class="comment"> * @param &#123;number[][]&#125; hits</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> hitBricks = <span class="function"><span class="keyword">function</span>(<span class="params">grid, hits</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> l1 = grid.length,</span><br><span class="line">        l2 = grid[<span class="number">0</span>].length</span><br><span class="line">    <span class="keyword">return</span> hits.map(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> path = []</span><br><span class="line">        <span class="keyword">const</span> i = v[<span class="number">0</span>],</span><br><span class="line">            j = v[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> (!grid[i][j]) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        grid[i][j] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">let</span> result = <span class="number">0</span>,</span><br><span class="line">            curPath = []</span><br><span class="line">        <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; grid[i - <span class="number">1</span>][j])</span><br><span class="line">            <span class="keyword">if</span> (!getpath(curPath, i - <span class="number">1</span>, j)) path = curPath</span><br><span class="line">        curPath = [...path]</span><br><span class="line">        <span class="keyword">if</span> (i &lt; l1 - <span class="number">1</span> &amp;&amp; grid[i + <span class="number">1</span>][j])</span><br><span class="line">            <span class="keyword">if</span> (!getpath(curPath, i + <span class="number">1</span>, j)) path = curPath</span><br><span class="line">        curPath = [...path]</span><br><span class="line">        <span class="keyword">if</span> (j &gt; <span class="number">0</span> &amp;&amp; grid[i][j - <span class="number">1</span>])</span><br><span class="line">            <span class="keyword">if</span> (!getpath(curPath, i, j - <span class="number">1</span>)) path = curPath</span><br><span class="line">        curPath = [...path]</span><br><span class="line">        <span class="keyword">if</span> (j &lt; l2 - <span class="number">1</span> &amp;&amp; grid[i][j + <span class="number">1</span>])</span><br><span class="line">            <span class="keyword">if</span> (!getpath(curPath, i, j + <span class="number">1</span>)) path = curPath</span><br><span class="line">        path.forEach(<span class="function"><span class="params">v</span> =&gt;</span> (grid[v[<span class="number">0</span>]][v[<span class="number">1</span>]] = <span class="number">0</span>))</span><br><span class="line">        <span class="keyword">return</span> path.length</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">getpath</span>(<span class="params">arr, i, j</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// arr表示已经确定了路径的数组</span></span><br><span class="line">        <span class="comment">// 返回是否检索到了顶部, 即一维索引为0</span></span><br><span class="line">        <span class="keyword">if</span> (inArray(arr, i, j)) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        <span class="keyword">if</span> (!i) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        arr.push([i, j])</span><br><span class="line">        <span class="keyword">let</span> returnValue = <span class="literal">false</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; grid[i - <span class="number">1</span>][j])</span><br><span class="line">            <span class="keyword">if</span> (getpath(arr, i - <span class="number">1</span>, j)) returnValue = <span class="literal">true</span></span><br><span class="line">        <span class="keyword">if</span> (i &lt; l1 - <span class="number">1</span> &amp;&amp; grid[i + <span class="number">1</span>][j])</span><br><span class="line">            <span class="keyword">if</span> (getpath(arr, i + <span class="number">1</span>, j)) returnValue = <span class="literal">true</span></span><br><span class="line">        <span class="keyword">if</span> (j &gt; <span class="number">0</span> &amp;&amp; grid[i][j - <span class="number">1</span>])</span><br><span class="line">            <span class="keyword">if</span> (getpath(arr, i, j - <span class="number">1</span>)) returnValue = <span class="literal">true</span></span><br><span class="line">        <span class="keyword">if</span> (j &lt; l2 - <span class="number">1</span> &amp;&amp; grid[i][j + <span class="number">1</span>])</span><br><span class="line">            <span class="keyword">if</span> (getpath(arr, i, j + <span class="number">1</span>)) returnValue = <span class="literal">true</span></span><br><span class="line">        <span class="keyword">return</span> returnValue</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">inArray</span>(<span class="params">arr, m, n</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = arr.length; i--; ) &#123;</span><br><span class="line">            <span class="keyword">const</span> k = arr[i]</span><br><span class="line">            <span class="keyword">if</span> (k[<span class="number">0</span>] == m &amp;&amp; k[<span class="number">1</span>] == n) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(hitBricks([[<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>], [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>]], [[<span class="number">1</span>, <span class="number">0</span>]]))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-803-打砖块/" data-id="cjhn3zl7y00144ckfmicqptuz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-316-去除重复字母" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/26/LeetCode-316-去除重复字母/" class="article-date">
+  <time datetime="2018-05-26T03:10:24.000Z" itemprop="datePublished">2018-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/26/LeetCode-316-去除重复字母/">LeetCode 316 去除重复字母</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个仅包含小写字母的字符串，去除重复的字母使得所有字母出现且仅出现一次。你必须保证返回结果是所有可能结果中的以字典排序的最短结果。</p>
+<p>例如:</p>
+<p>给定 “bcabc”<br>返回 “abc”</p>
+<p>给定 “cbacdcbc”<br>返回 “acdb”</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>分别统计各个字母出现的位置</p>
+<p>如果按照字典序, 因此我们寻找位置应当从 a-&gt;z 进行寻找</p>
+<p>从前一个字符的位置向后寻找对应字符例如<code>cbacdcbc</code></p>
+<ol>
+<li>cb<strong>a</strong>cdcbc</li>
+<li>再 cb<strong>a</strong>cdc<strong>b</strong>c</li>
+<li>再 cb<strong>a</strong>cdc<strong>bc</strong></li>
+<li>发现 d 找不到了, 但是 d 必须存在, 因此直接找到最后一个<code>d</code>所在位置</li>
+</ol>
+<p>这时生成了一个相对小的字典排序 <code>adbc</code> 但是不是最小的这时哪些字母的相对位置一定确定了呢?<br><code>a</code> ,详细思路见代码</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> removeDuplicateLetters = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> res = &#123;&#125;,</span><br><span class="line">        result = [],</span><br><span class="line">        keys = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = s.length; i--; ) &#123;</span><br><span class="line">        <span class="keyword">if</span> (res[s[i]]) res[s[i]].unshift(i)</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            res[s[i]] = [i]</span><br><span class="line">            keys.push(s[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    keys.sort()</span><br><span class="line">    <span class="comment">// 依次从a-z 如果能满足: 最小序号小于其他所有的最大序号, 那么这个位置即确定, 同时更新所有数组, 去除小于这个序号的</span></span><br><span class="line">    <span class="comment">// 如果不满足这个条件, 则下一个元素, 开始找到最小的, 是否满足条件, 直到确定所有</span></span><br><span class="line">    <span class="keyword">while</span> (keys.length) &#123;</span><br><span class="line">        <span class="keyword">let</span> i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">const</span> len = keys.length</span><br><span class="line">        <span class="keyword">while</span> (!check(keys[i], res[keys[i++]][<span class="number">0</span>]));</span><br><span class="line">        <span class="keyword">const</span> k = keys[--i],</span><br><span class="line">            v = res[k][<span class="number">0</span>]</span><br><span class="line">        result.push(k)</span><br><span class="line">        <span class="keyword">delete</span> res[k]</span><br><span class="line">        keys.splice(i, <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = keys.length; i--; ) &#123;</span><br><span class="line">            res[keys[i]] = res[keys[i]].filter(<span class="function"><span class="params">vv</span> =&gt;</span> vv &gt; v)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// console.log(keys, res)</span></span><br><span class="line">        <span class="comment">// console.log('-----------------')</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// console.log(result)</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">key, value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = keys.length; i--; ) &#123;</span><br><span class="line">            <span class="keyword">const</span> k = keys[i]</span><br><span class="line">            <span class="keyword">if</span> (k !== key &amp;&amp; res[k][res[k].length - <span class="number">1</span>] &lt; value) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result.join(<span class="string">''</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(removeDuplicateLetters(<span class="string">'baa'</span>))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-316-去除重复字母/" data-id="cjhn3zl7000044ckfgl3ndgb2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-92-反转链表-II" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/26/LeetCode-92-反转链表-II/" class="article-date">
+  <time datetime="2018-05-26T02:35:14.000Z" itemprop="datePublished">2018-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/26/LeetCode-92-反转链表-II/">LeetCode 92 反转链表 II</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。</p>
+<p>说明:<br>1 ≤ m ≤ n ≤ 链表长度。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>从 m-1 开始依次记录, 直到 n</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; createList, ListNode, showList &#125; = <span class="built_in">require</span>(<span class="string">'./ListNode'</span>)</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * function ListNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.next = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;ListNode&#125; head</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; m</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n</span></span><br><span class="line"><span class="comment"> * @return &#123;ListNode&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> reverseBetween = <span class="function"><span class="keyword">function</span>(<span class="params">head, m, n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (m &gt;= n) <span class="keyword">return</span> head</span><br><span class="line">    <span class="keyword">const</span> root = &#123;</span><br><span class="line">        next: head</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> curNode = root,</span><br><span class="line">        curPos = <span class="number">0</span>,</span><br><span class="line">        changeHead = <span class="literal">null</span>,</span><br><span class="line">        changeHeadNext = <span class="literal">null</span>,</span><br><span class="line">        lastNode = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">while</span> (curPos &lt;= n) &#123;</span><br><span class="line">        <span class="keyword">const</span> temp = curNode.next</span><br><span class="line">        <span class="keyword">if</span> (curPos === m - <span class="number">1</span>) changeHead = curNode</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (curPos === m) lastNode = changeHeadNext = curNode</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (curPos &gt; m) &#123;</span><br><span class="line">            curNode.next = lastNode</span><br><span class="line">            lastNode = curNode</span><br><span class="line">        &#125;</span><br><span class="line">        curNode = temp</span><br><span class="line">        curPos++</span><br><span class="line">    &#125;</span><br><span class="line">    changeHead.next = lastNode</span><br><span class="line">    changeHeadNext.next = curNode</span><br><span class="line">    <span class="keyword">return</span> root.next</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(showList(reverseBetween(createList([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]), <span class="number">2</span>, <span class="number">4</span>)))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-92-反转链表-II/" data-id="cjhn3zl89001h4ckfm6y49ny9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-44-通配符匹配" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/26/LeetCode-44-通配符匹配/" class="article-date">
+  <time datetime="2018-05-26T00:58:17.000Z" itemprop="datePublished">2018-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/26/LeetCode-44-通配符匹配/">LeetCode 44 通配符匹配</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个字符串 (s) 和一个字符模式 (p) ，实现一个支持 ‘?’ 和 ‘*‘ 的通配符匹配。</p>
+<p>‘?’ 可以匹配任何单个字符。<br>‘*‘ 可以匹配任意字符串（包括空字符串）。两个字符串完全匹配才算匹配成功。</p>
+<p>说明:</p>
+<p>s 可能为空，且只包含从 a-z 的小写字母。<br>p 可能为空，且只包含从 a-z 的小写字母，以及字符 ? 和 *。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>将匹配字符串用*分成 n 个部分, 每个部分可以回溯匹配即可</p>
+<p>特别的, 开头的*表示是否从头匹配 结尾的*表示是否从尾部匹配为了保证匹配的一致性, 因此使用头部尾部增加<code>#</code>的效果来实现</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; p</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> isMatch = <span class="function"><span class="keyword">function</span>(<span class="params">s, p</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (s === p) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    s = <span class="string">'#'</span> + s + <span class="string">'#'</span></span><br><span class="line">    p = <span class="string">'#'</span> + p.replace(<span class="string">'**'</span>, <span class="string">'*'</span>) + <span class="string">'#'</span></span><br><span class="line">    <span class="keyword">const</span> allPart = p.split(<span class="string">'*'</span>),</span><br><span class="line">        len = allPart.length - <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> (</span><br><span class="line">        !check(s, allPart[<span class="number">0</span>], <span class="number">0</span>) ||</span><br><span class="line">        !check(s, allPart[len + <span class="number">1</span>], s.length - allPart[len + <span class="number">1</span>].length)</span><br><span class="line">    )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">if</span> (!len)</span><br><span class="line">        <span class="comment">// 这里判断有两部分, 但是判断重合的情况</span></span><br><span class="line">        <span class="keyword">return</span> s.length &gt;= allPart[<span class="number">0</span>].length + allPart[<span class="number">1</span>].length</span><br><span class="line"></span><br><span class="line">    s = s.substring(allPart[<span class="number">0</span>].length, s.length - allPart[len + <span class="number">1</span>].length)</span><br><span class="line">    <span class="keyword">let</span> pos = <span class="number">0</span></span><br><span class="line">    <span class="keyword">const</span> lens = s.length</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> checkStr = allPart[i + <span class="number">1</span>]</span><br><span class="line">        <span class="keyword">const</span> end = lens - checkStr.length</span><br><span class="line">        <span class="keyword">let</span> flag = <span class="literal">false</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = pos; i &lt;= end; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (check(s, checkStr, i)) &#123;</span><br><span class="line">                pos = i + checkStr.length</span><br><span class="line">                flag = <span class="literal">true</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">continue</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!flag) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">a, b, pos</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 从a的pos位置开始匹配b</span></span><br><span class="line">        <span class="keyword">const</span> len = b.length</span><br><span class="line">        <span class="keyword">if</span> (pos &gt; a.length - b) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (b[i] !== <span class="string">'?'</span> &amp;&amp; a[i + pos] !== b[i]) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(isMatch(<span class="string">'b'</span>, <span class="string">'?*?'</span>))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-44-通配符匹配/" data-id="cjhn3zl7k000n4ckfko9b8phm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LeetCode-392-判断子序列" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/26/LeetCode-392-判断子序列/" class="article-date">
@@ -102,7 +285,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-392-判断子序列/" data-id="cjhmop54s000do4kf55luj7r4" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-392-判断子序列/" data-id="cjhn3zl7e000h4ckfcmnay7nq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -147,7 +330,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/" data-id="cjhmop5630018o4kfh8cgua8d" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/" data-id="cjhn3zl87001e4ckfl7kbsb5t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -192,7 +375,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-808-分汤/" data-id="cjhmop563001fo4kfscv67t1u" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-808-分汤/" data-id="cjhn3zl8000184ckfv6f5caug" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -236,7 +419,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-565-数组嵌套/" data-id="cjhmop55n000wo4kfzvz4mmag" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-565-数组嵌套/" data-id="cjhn3zl7p000t4ckfhj1wjzhg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -281,7 +464,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-3-无重复字符的最长子串/" data-id="cjhmop558000jo4kfzymcx47f" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-3-无重复字符的最长子串/" data-id="cjhn3zl7400084ckf6i5a2i96" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -343,181 +526,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/" data-id="cjhmop55n0012o4kfoik9ns48" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-238-除自身以外数组的乘积" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/23/LeetCode-238-除自身以外数组的乘积/" class="article-date">
-  <time datetime="2018-05-23T01:35:02.000Z" itemprop="datePublished">2018-05-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/23/LeetCode-238-除自身以外数组的乘积/">LeetCode 238 除自身以外数组的乘积</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定长度为 n 的整数数组 nums，其中 n &gt; 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>从前至后并且从后往前遍历两次, 当前位置不计入乘法中</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> productExceptSelf = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> len = nums.length</span><br><span class="line">    <span class="keyword">const</span> outPut = []</span><br><span class="line">    <span class="keyword">let</span> curJ = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        outPut[i] = curJ</span><br><span class="line">        curJ *= nums[i]</span><br><span class="line">    &#125;</span><br><span class="line">    curJ = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = len; i--; ) &#123;</span><br><span class="line">        outPut[i] *= curJ</span><br><span class="line">        curJ *= nums[i]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> outPut</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(productExceptSelf([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-238-除自身以外数组的乘积/" data-id="cjhmop54s0003o4kfaa4azqoz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-200-岛屿的个数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/23/LeetCode-200-岛屿的个数/" class="article-date">
-  <time datetime="2018-05-23T01:16:15.000Z" itemprop="datePublished">2018-05-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/23/LeetCode-200-岛屿的个数/">LeetCode 200 岛屿的个数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个由 ‘1’（陆地）和 ‘0’（水）组成的的二维网格，计算岛屿的数量。一个岛被水包围，并且它是通过水平方向或垂直方向上相邻的陆地连接而成的。你可以假设网格的四个边均被水包围。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>其实是一道遍历的题目, 每次遍历一个岛屿, 直到没有岛屿</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;character[][]&#125; grid</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> numIslands = <span class="function"><span class="keyword">function</span>(<span class="params">grid</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> ones = []</span><br><span class="line">    <span class="keyword">let</span> gridNums = <span class="number">0</span></span><br><span class="line">    grid.forEach(<span class="function">(<span class="params">v, i</span>) =&gt;</span></span><br><span class="line">        v.forEach(<span class="function">(<span class="params">v, j</span>) =&gt;</span> (v == <span class="number">1</span> ? ones.push(i + <span class="string">','</span> + j) : <span class="literal">null</span>))</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> cas = [[<span class="number">-1</span>, <span class="number">0</span>], [<span class="number">1</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">-1</span>], [<span class="number">0</span>, <span class="number">1</span>]]</span><br><span class="line">    <span class="keyword">while</span> (ones.length) &#123;</span><br><span class="line">        gridNums++</span><br><span class="line">        <span class="keyword">const</span> curPos = ones.shift().split(<span class="string">','</span>)</span><br><span class="line">        check(+curPos[<span class="number">0</span>], +curPos[<span class="number">1</span>])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> gridNums</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">i, j</span>) </span>&#123;</span><br><span class="line">        cas.forEach(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> text = i + v[<span class="number">0</span>] + <span class="string">','</span> + (j + v[<span class="number">1</span>])</span><br><span class="line">            <span class="keyword">const</span> pos = ones.indexOf(text)</span><br><span class="line">            <span class="keyword">if</span> (pos &gt; <span class="number">-1</span>) &#123;</span><br><span class="line">                ones.splice(pos, <span class="number">1</span>)</span><br><span class="line">                check(i + v[<span class="number">0</span>], j + v[<span class="number">1</span>])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(</span><br><span class="line">    numIslands([</span><br><span class="line">        [<span class="string">'1'</span>, <span class="string">'1'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>],</span><br><span class="line">        [<span class="string">'1'</span>, <span class="string">'1'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>],</span><br><span class="line">        [<span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'1'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>],</span><br><span class="line">        [<span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'1'</span>, <span class="string">'1'</span>]</span><br><span class="line">    ])</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-200-岛屿的个数/" data-id="cjhmop54s0005o4kfp7sp6ajc" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-393-UTF-8-编码验证" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/23/LeetCode-393-UTF-8-编码验证/" class="article-date">
-  <time datetime="2018-05-23T00:35:20.000Z" itemprop="datePublished">2018-05-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/23/LeetCode-393-UTF-8-编码验证/">LeetCode 393 UTF-8 编码验证</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>UTF-8 中的一个字符可能的长度为 1 到 4 字节，遵循以下的规则：</p>
-<p>对于 1 字节的字符，字节的第一位设为 0，后面 7 位为这个符号的 unicode 码。对于 n 字节的字符 (n &gt; 1)，第一个字节的前 n 位都设为 1，第 n+1 位设为 0，后面字节的前两位一律设为 10。剩下的没有提及的二进制位，全部为这个符号的 unicode 码。这是 UTF-8 编码的工作方式：</p>
-<p>Char. number range | UTF-8 octet sequence<br>(hexadecimal) | (binary)<br>——————–+———————————————<br>0000 0000-0000 007F | 0xxxxxxx<br>0000 0080-0000 07FF | 110xxxxx 10xxxxxx<br>0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx<br>0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx<br>给定一个表示数据的整数数组，返回它是否为有效的 utf-8 编码。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
-<li>若为 1 字节, 则首位为 0, 即小于 128</li>
-<li>若为多字节, 则先根据收个判断是否是合法的多字节,<ul>
-<li>192-223 2 字节</li>
-<li>224-239 3 字节</li>
-<li>240-247 4 字节</li>
-</ul>
-</li>
-<li>根据前面的字节数 来获取后面是否合乎规范 128-191</li>
-</ol>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; data</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> validUtf8 = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    data = data.map(</span><br><span class="line">        v =&gt;</span><br><span class="line">            v &amp; <span class="number">128</span></span><br><span class="line">                ? v &amp; <span class="number">64</span></span><br><span class="line">                    ? v &amp; <span class="number">32</span></span><br><span class="line">                        ? v &amp; <span class="number">16</span></span><br><span class="line">                            ? v &amp; <span class="number">8</span></span><br><span class="line">                                ? <span class="number">5</span></span><br><span class="line">                                : <span class="number">4</span></span><br><span class="line">                            : <span class="number">3</span></span><br><span class="line">                        : <span class="number">2</span></span><br><span class="line">                    : <span class="number">1</span></span><br><span class="line">                : <span class="number">0</span></span><br><span class="line">    )</span><br><span class="line">    <span class="built_in">console</span>.log(data)</span><br><span class="line">    <span class="keyword">let</span> remain = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> (data.length) &#123;</span><br><span class="line">        <span class="keyword">let</span> cur = data.shift()</span><br><span class="line">        <span class="keyword">switch</span> (cur) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                <span class="keyword">while</span> (--cur) <span class="keyword">if</span> (data.shift() !== <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(validUtf8([<span class="number">248</span>, <span class="number">130</span>, <span class="number">130</span>, <span class="number">130</span>]))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-393-UTF-8-编码验证/" data-id="cjhmop55n000ko4kfaemjiogd" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-524-通过删除字母匹配到字典里最长单词" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/22/LeetCode-524-通过删除字母匹配到字典里最长单词/" class="article-date">
-  <time datetime="2018-05-22T03:08:25.000Z" itemprop="datePublished">2018-05-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/22/LeetCode-524-通过删除字母匹配到字典里最长单词/">LeetCode 524 通过删除字母匹配到字典里最长单词</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个字符串和一个字符串字典，找到字典里面最长的字符串，该字符串可以通过删除给定字符串的某些字符来得到。如果答案不止一个，返回长度最长且字典顺序最小的字符串。如果答案不存在，则返回空字符串。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>根据题目要求, 应当使用排序, 然后依次比对</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/22/LeetCode-524-通过删除字母匹配到字典里最长单词/" data-id="cjhmop55n000oo4kfr214mz37" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/" data-id="cjhn3zl7z00164ckf6hvj9b9b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -579,23 +588,23 @@
       <ul>
         
           <li>
+            <a href="/2018/05/26/LeetCode-803-打砖块/">LeetCode 803 打砖块</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/26/LeetCode-316-去除重复字母/">LeetCode 316 去除重复字母</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/26/LeetCode-92-反转链表-II/">LeetCode 92 反转链表 II</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/26/LeetCode-44-通配符匹配/">LeetCode 44 通配符匹配</a>
+          </li>
+        
+          <li>
             <a href="/2018/05/26/LeetCode-392-判断子序列/">LeetCode 392 判断子序列</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/">LeetCode 826 Most Profit Assigning Work</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/24/LeetCode-808-分汤/">LeetCode 808 分汤</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/24/LeetCode-565-数组嵌套/">LeetCode 565 数组嵌套</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/23/LeetCode-3-无重复字符的最长子串/">LeetCode 3 无重复字符的最长子串</a>
           </li>
         
       </ul>

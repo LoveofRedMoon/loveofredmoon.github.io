@@ -5,19 +5,19 @@
   
 
   
-  <title>LeetCode 633 746 453 766 66 387 223 46 274 | Love of Red Moon Blog</title>
+  <title>LeetCode 633 746 453 766 66 387 223 46 274 189 | Love of Red Moon Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="这里是一些简单题的集锦, 旨在利用 JS 简便书写633. 平方数之和给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a*a + b*b = c。 思路根据一些平方数特性, 可以简便计算 平方数 mod8 一定是 0 或 1 或 4 或 1 因此和一定是 0 或 1 或 2 或 4 或 5 因此是 3 或 6 或 7 直接排除 代码12345678910111213141516">
 <meta name="keywords" content="LeetCode JavaScript 算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode 633 746 453 766 66 387 223 46 274">
+<meta property="og:title" content="LeetCode 633 746 453 766 66 387 223 46 274 189">
 <meta property="og:url" content="https://loveofredmoon.github.io/2018/05/17/LeetCode-集锦/index.html">
 <meta property="og:site_name" content="Love of Red Moon Blog">
 <meta property="og:description" content="这里是一些简单题的集锦, 旨在利用 JS 简便书写633. 平方数之和给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a*a + b*b = c。 思路根据一些平方数特性, 可以简便计算 平方数 mod8 一定是 0 或 1 或 4 或 1 因此和一定是 0 或 1 或 2 或 4 或 5 因此是 3 或 6 或 7 直接排除 代码12345678910111213141516">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-05-26T00:55:39.681Z">
+<meta property="og:updated_time" content="2018-05-26T02:33:25.887Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode 633 746 453 766 66 387 223 46 274">
+<meta name="twitter:title" content="LeetCode 633 746 453 766 66 387 223 46 274 189">
 <meta name="twitter:description" content="这里是一些简单题的集锦, 旨在利用 JS 简便书写633. 平方数之和给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a*a + b*b = c。 思路根据一些平方数特性, 可以简便计算 平方数 mod8 一定是 0 或 1 或 4 或 1 因此和一定是 0 或 1 或 2 或 4 或 5 因此是 3 或 6 或 7 直接排除 代码12345678910111213141516">
   
     <link rel="alternate" href="/atom.xml" title="Love of Red Moon Blog" type="application/atom+xml">
@@ -83,7 +83,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      LeetCode 633 746 453 766 66 387 223 46 274
+      LeetCode 633 746 453 766 66 387 223 46 274 189
     </h1>
   
 
@@ -126,11 +126,15 @@
 <p>h 指数的定义: “一位有 h 指数的学者，代表他（她）的 N 篇论文中至多有 h 篇论文，分别被引用了至少 h 次，其余的 N - h 篇论文每篇被引用次数不多于 h 次。”</p>
 <h4 id="思路-7"><a href="#思路-7" class="headerlink" title="思路"></a>思路</h4><p>先排序, 然后看是否值小于等于序号即可</p>
 <h4 id="代码-8"><a href="#代码-8" class="headerlink" title="代码"></a>代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; citations</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> hIndex = <span class="function"><span class="keyword">function</span>(<span class="params">citations</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> s = citations.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = s.length; i--; ) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] - i &lt;= <span class="number">1</span>) <span class="keyword">return</span> i + <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="189-旋转数组"><a href="#189-旋转数组" class="headerlink" title="189. 旋转数组"></a>189. 旋转数组</h3><p>给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。</p>
+<h4 id="思路-8"><a href="#思路-8" class="headerlink" title="思路"></a>思路</h4><p>这道题方法很多, 原地转换等等,<br>这里只考虑 JS 代码的简洁性, 使用数组方法调用</p>
+<p>注意数组方法中为 0 和为负数 的情况</p>
+<h4 id="代码-9"><a href="#代码-9" class="headerlink" title="代码"></a>代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rotate = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ((k = k % nums.length)) nums.splice(<span class="number">0</span>, <span class="number">0</span>, ...nums.splice(-k))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-集锦/" data-id="cjhmop55n0014o4kf0dm00sph" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-集锦/" data-id="cjhn3zl8d001l4ckfeivcxn29" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -204,23 +208,23 @@
       <ul>
         
           <li>
+            <a href="/2018/05/26/LeetCode-803-打砖块/">LeetCode 803 打砖块</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/26/LeetCode-316-去除重复字母/">LeetCode 316 去除重复字母</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/26/LeetCode-92-反转链表-II/">LeetCode 92 反转链表 II</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/26/LeetCode-44-通配符匹配/">LeetCode 44 通配符匹配</a>
+          </li>
+        
+          <li>
             <a href="/2018/05/26/LeetCode-392-判断子序列/">LeetCode 392 判断子序列</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/">LeetCode 826 Most Profit Assigning Work</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/24/LeetCode-808-分汤/">LeetCode 808 分汤</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/24/LeetCode-565-数组嵌套/">LeetCode 565 数组嵌套</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/23/LeetCode-3-无重复字符的最长子串/">LeetCode 3 无重复字符的最长子串</a>
           </li>
         
       </ul>
