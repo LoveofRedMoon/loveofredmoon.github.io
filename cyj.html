@@ -31,13 +31,21 @@
             width: .8rem
         }
 
+        @media screen and (max-width:450px) {
+            article.show .left {
+                min-width: auto;
+                width: auto;
+                float: none;
+            }
+        }
+
         article.show .left .content,
         article.show .left p:not(:nth-child(-n+2)) {
             display: none
         }
 
         .left {
-            min-width: 4、28571429rem;
+            min-width: 4.28571429rem;
             border-radius: 0 .21428571rem .21428571rem 0;
             float: left;
             padding: .37142857rem .28571429rem;
