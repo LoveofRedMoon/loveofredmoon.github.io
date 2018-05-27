@@ -70,6 +70,307 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LeetCode-738-单调递增的数字" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/20/LeetCode-738-单调递增的数字/" class="article-date">
+  <time datetime="2018-05-20T07:23:03.000Z" itemprop="datePublished">2018-05-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/20/LeetCode-738-单调递增的数字/">LeetCode 738 单调递增的数字</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个非负整数 N，找出小于或等于 N 的最大的整数，同时这个整数需要满足其各个位数上的数字是单调递增。</p>
+<p>（当且仅当每个相邻位数上的数字 x 和 y 满足 x &lt;= y 时，我们称这个整数是单调递增的。）</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>从小化大</p>
+<p>1 位数: 均满足<br>2 位数: 除非直接满足, 否则都是 十位数减一, 个位数为 9 例如 52 -&gt; 49<br>3 位数: 除非直接满足, 否则先判断后两位(根据两位数可知)的最小值, 然后判断百位和十位的关系</p>
+<p>以此类推, 每次判断, 都应该从最后两位判断, 然后依次往前推</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; N</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> monotoneIncreasingDigits = <span class="function"><span class="keyword">function</span>(<span class="params">N</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (N &lt; <span class="number">10</span>) <span class="keyword">return</span> N</span><br><span class="line">    N = N.toString()</span><br><span class="line">        .split(<span class="string">''</span>)</span><br><span class="line">        .reverse()</span><br><span class="line">    <span class="keyword">const</span> len = N.length - <span class="number">1</span></span><br><span class="line">    check(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> N.reverse().join(<span class="string">''</span>) | <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">pos</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (N[pos] &lt; N[++pos]) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; pos; i++) N[i] = <span class="number">9</span></span><br><span class="line">            N[pos] = N[pos] - <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (pos &lt; len) check(pos)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(monotoneIncreasingDigits(<span class="number">1651</span>))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/20/LeetCode-738-单调递增的数字/" data-id="cjhosl1ph0014l0kf61ety49u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-正则表达式-JS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/19/正则表达式-JS/" class="article-date">
+  <time datetime="2018-05-19T08:18:26.000Z" itemprop="datePublished">2018-05-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/19/正则表达式-JS/">正则表达式-JS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是正则"><a href="#什么是正则" class="headerlink" title="什么是正则?"></a>什么是正则?</h2><p>根据自己的理解, 正则是用来’快速’处理字符串的工具, 在 JavaScript 中, 通常使用以下方法来使用正则表达式</p>
+<ol>
+<li><code>String.prototype.split</code> 字符串分割</li>
+<li><code>String.prototype.replace</code> 字符串替换</li>
+<li><code>String.prototype.match</code> 字符串匹配</li>
+<li><code>RegExp.prototype.exec</code> 正则匹配</li>
+<li><code>RegExp.prototype.test</code> 正则匹配判断</li>
+<li><code>String.prototype.search</code> 字符串检索</li>
+</ol>
+<h2 id="正则对象"><a href="#正则对象" class="headerlink" title="正则对象"></a>正则对象</h2><p>正则对象通常有两种构造方式</p>
+<ol>
+<li>new <code>reg = new RegExp(&quot;^abcdef.&quot;,&#39;gi&#39;)</code></li>
+<li>省略 new 关键字 <code>RegExp(&quot;^abcdef.&quot;,&#39;gi&#39;)</code></li>
+<li>字面量 <code>/^abcdef./gi</code></li>
+</ol>
+<p>具体函数的使用方式参照 MDN</p>
+<p>正则对象一般有以下属性|方法</p>
+<ol>
+<li><code>source</code> 创建的字面量</li>
+<li><code>flags</code> 一些使用选项, 如下</li>
+<li><code>global</code> 是否全局匹配, 标识为 g</li>
+<li><code>ignoreCase</code> 是否不区分大小写, 标识为 i</li>
+<li><code>multiline</code> 是否跨行匹配, 标识为 m</li>
+<li><code>unicode</code> 是否支持较长 Unicode 字符, 标识为 u, 是 ES6 新增标识(使用较少)</li>
+<li><code>sticky</code> 粘性匹配(几乎不用吧, 浏览器支持也不行)</li>
+<li><code>lastIndex</code> 上一次匹配的位置, 新创建的正则对象没有这个属性</li>
+</ol>
+<h2 id="普通标志"><a href="#普通标志" class="headerlink" title="普通标志"></a>普通标志</h2><ol>
+<li><code>.</code> 表示一个非换行字符(即非<code>\n</code> <code>\r</code> <code>\u2028</code> <code>\u2029</code>)</li>
+<li><code>\d</code> 表示一个数字字符, 等同于<code>[0-9]</code> (可以不记)</li>
+<li><code>\D</code> 表示一个非数字字符, 等同于<code>[^0-9]</code> (可以不记)</li>
+<li><code>\s</code> 表示一个空白字符, 包含换行符等等</li>
+<li><code>\S</code> 表示一个非空白字符</li>
+<li><code>\w</code> 表示一个数字字符, 或英文字符, 或下划线, 等同于 <code>[A-Za-z0-9_]</code></li>
+<li><code>\W</code> 表示一个非<code>\w</code> 等同于 <code>[^A-Za-z0-9_]</code></li>
+<li>与字符串类似, <code>\</code> 表示转义, 即有特殊含义的字符搜索时得加转义, 例如想寻找小数点 得写作<code>\.</code></li>
+<li><code>\b</code> 表示一个单词边界</li>
+<li><code>\B</code> 表示一个非单词边界</li>
+<li><code>[]</code> 表示这个中括号中的任意一个字符</li>
+<li><code>()</code> 表示将这个小括号中的所有字符当做一个整体, 并在搜索结果中提供匹配(下面讲)</li>
+<li><code>{}</code> 表示次数, 写法通常有如下几种 <code>{3}</code>表示前一个字符精确匹配 3 次 <code>{3,}</code>表示前一个字符匹配至少三次, <code>{2,3}</code>表示前一个字符匹配 2-3 次</li>
+<li><code>^</code> 在中括号<code>[]</code>中表示<strong>非</strong>的意思, 否则表示字符串开始位置</li>
+<li><code>$</code> 表示字符串结束位置</li>
+<li><code>*</code> 等同于{0,} 尽可能多的匹配</li>
+<li><code>+</code> 等同于{1,} 尽可能多的匹配</li>
+<li><code>?</code> 等同于{0,1} 尽可能少的匹配</li>
+<li><code>*?</code> 等同于{0,} 尽可能少的匹配</li>
+<li><code>+?</code> 等同于{1,} 尽可能少的匹配</li>
+<li><code>|</code> 或</li>
+</ol>
+<h2 id="匹配结果"><a href="#匹配结果" class="headerlink" title="匹配结果"></a>匹配结果</h2><ol>
+<li>全部匹配结果 <code>$0</code> 一般不包括 <code>(?:xxxx)</code> <code>(?=xxxx)</code> <code>(?!xxxx)</code></li>
+<li><code>$1</code> <code>$2</code> … <code>$n</code> (一般最多<code>$9</code> 或<code>$99</code>), 表示匹配中的括号匹配结果<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">;<span class="regexp">/\d([a-z])/</span>.exec(<span class="string">'8ab'</span>)</span><br><span class="line"><span class="comment">// 匹配结果是 8a  此外的$1匹配结果是 a    $2匹配结果没有</span></span><br><span class="line"><span class="comment">// 并不是额外的匹配结果!!!</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h2><p><em>什么是断言?</em> 断言就是判断是否匹配, 但是断言的内容不在结果范围内</p>
+<p>例如我想匹配 后面跟着感叹号的英文字母, 那么此时结果应该只有英文字母, 而没有感叹号</p>
+<ol>
+<li><p>JS 中没有前置断言(后行断言) 即你不能预先判断你要搜索的字符串前面有什么. 但是我们可以绕过这个限制</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取所有前置有数字的两位英文字符</span></span><br><span class="line"><span class="comment">// 利用括号匹配结果进行提取需要的字符串</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/\d([a-zA-z]&#123;2&#125;)/g</span></span><br><span class="line"><span class="keyword">var</span> matches</span><br><span class="line"><span class="keyword">while</span> ((matches = reg.exec(<span class="string">'a3dfr55f12fa'</span>))) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(matches[<span class="number">1</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>JS 中有后置断言(前行断言) 即可以判断后面是什么(或者不能使什么) 使用 <code>(?=xxxx)</code> 作为后置肯定断言 使用 <code>(?!xxxx)</code> 作为后置否定断言</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取所有后置有数字的两位英文字符</span></span><br><span class="line"></span><br><span class="line">;<span class="regexp">/[a-zA-Z]&#123;2&#125;(?=\d)/</span>.exec(<span class="string">'a3dfr55f12fa'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="方法详解"><a href="#方法详解" class="headerlink" title="方法详解"></a>方法详解</h2><ol>
+<li><p><code>split</code> 字符串分割使用<code>split+RegExp</code>会默认使用全局匹配, 将字符串按照匹配结果进行分割为数组</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'fseb.aesrb.awrb.'</span>.split(<span class="regexp">/\b(?=\.)/</span>)</span><br><span class="line"><span class="comment">// 表示后置断言为 / 的前一个单词边界</span></span><br><span class="line"><span class="comment">// 结果: ["fseb", ".aesrb", ".awrb", "."]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>replace</code> 字符串替换使用<code>replace+RegExp</code>替换仅会处理第一个匹配结果, 全局匹配请用标识 g<br>replace 函数有两个参数 第一个表示匹配的字符串或正则表达式第二个参数用于替换的字符串或函数</p>
+<p><em>replace不会修改原字符串, 需要重新赋值</em></p>
+<ul>
+<li><p>字符串 字符串中的$会被处理为特殊字符, 因此输出按照以下匹配</p>
+<p>| 变量名 | 表示值               |<br>| —— | ——————– |<br>| <code>$$</code>   | 一个<code>$</code>字符          |<br>| <code>$&amp;</code>   | 匹配的结果           |<br>| <code>$&#39;</code>   | 匹配结果右边的字符串 |<br>| <code>$\`</code>  | 匹配结果左边的字符串 |<br>| <code>$n</code>   | 括号匹配结果         |</p>
+</li>
+<li><p>函数 函数会一次传入以下参数<br>  <code>function($&amp;, $1, $2, $3, $4..., $n, offset, string){}</code><br>  其中的<code>offset</code>表示匹配偏移量(位置), string表示原来的字符串</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 驼峰命名法转短横线命名法</span></span><br><span class="line"><span class="comment">// 思路: 找到所有的大写字母, 替换为-和小写字母</span></span><br><span class="line"></span><br><span class="line"><span class="string">"camelNameHaha"</span>.replace(<span class="regexp">/[A-Z]/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'-'</span> + res.toLowerCase();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>match</code> 用于匹配结果<br> 如果是非全局匹配 等同于 <code>exec</code> 如果是全局匹配 返回一个数组作为存放结果</p>
+</li>
+<li><p><code>exec</code> 用于返回单个结果, 并且储存匹配位置<br> exec会从上次匹配结果的位置开始, 继续搜索匹配结果, 上次匹配位置储存在正则对象身上</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/\d/</span></span><br><span class="line"><span class="keyword">var</span> res;</span><br><span class="line"><span class="keyword">while</span>(res = reg.exec(<span class="string">"abc0123"</span>)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res[<span class="number">0</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 其中匹配结果是一个数组 0 表示匹配结果 其他表示括号匹配结果<br> 思考下面的代码为什么会死循环?</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(res = <span class="regexp">/\d/</span>.exec(<span class="string">"abc0123"</span>)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res[<span class="number">0</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>test</code> 用于测试是否成功匹配, 返回<code>true false</code><br> 全局标识 g 并不会在结果有直接体现, 但是会改变正则的<code>lastIndex</code>属性</p>
+</li>
+<li><p><code>search</code> 用于得到第一个匹配结果的位置, 没有则返回<code>-1</code><br> 类似于<code>indexOf</code>, 只是匹配字符串</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/19/正则表达式-JS/" data-id="cjhosl1q2001tl0kfx80oodve" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则-JS/">正则 JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-常用代码处理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/19/常用代码处理/" class="article-date">
+  <time datetime="2018-05-19T07:05:35.000Z" itemprop="datePublished">2018-05-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/19/常用代码处理/">常用代码处理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 驼峰转短横线</span></span><br><span class="line"><span class="keyword">var</span> toKeCase = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.replace(<span class="regexp">/[A-Z]/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'-'</span> + v.toLowerCase()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 短横线转驼峰</span></span><br><span class="line"><span class="keyword">var</span> toCamelCase = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.replace(<span class="regexp">/-([a-z])/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">v, a</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a.toUpperCase()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 封装选择器获取元素, (其中还有一些其他方法另写)</span></span><br><span class="line"><span class="keyword">var</span> querySelector = <span class="function"><span class="keyword">function</span>(<span class="params">sel</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.querySelectorAll) &#123;</span><br><span class="line">        sel = <span class="built_in">document</span>.querySelectorAll(sel)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 针对IE7 不支持querySelectAll</span></span><br><span class="line">        <span class="comment">// 处理一下选择器 后代( ) id(#) class(.) tagName() 子代(&gt;) 属性选择器(不能单独作为最后一个选择器)</span></span><br><span class="line">        <span class="comment">// 暂时不支持逗号选择器</span></span><br><span class="line">        <span class="comment">// 不考虑性能, 将从第一个id选择器或者第一个开始查询</span></span><br><span class="line">        sel = sel.split(<span class="regexp">/\b(?=[ &gt;])/</span>)</span><br><span class="line">        <span class="keyword">var</span> cur = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">var</span> ppp = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = sel.length; i--; ) &#123;</span><br><span class="line">            <span class="keyword">var</span> flag = <span class="literal">false</span></span><br><span class="line">            <span class="keyword">if</span> (sel[i].charAt(<span class="number">0</span>) === <span class="string">'&gt;'</span>) flag = <span class="literal">true</span></span><br><span class="line">            sel[i] = sel[i].replace(<span class="regexp">/(^[ &gt;]|"|')/g</span>, <span class="string">''</span>)</span><br><span class="line">            <span class="keyword">var</span> v = sel[i].split(<span class="regexp">/(\b(?=[ #\.\[])|\])/</span>)</span><br><span class="line">            <span class="keyword">var</span> j = <span class="number">0</span></span><br><span class="line">            <span class="comment">// 这里cur保存当前满足条件的所有元素</span></span><br><span class="line">            <span class="comment">// 这里ppp保存当前满足条件的底层元素</span></span><br><span class="line">            <span class="keyword">if</span> (ppp === <span class="literal">null</span>) &#123;</span><br><span class="line">                ppp = $$.getElem(v[j++])</span><br><span class="line">                <span class="keyword">if</span> (!ppp.length) <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">                cur = $$.map(ppp, <span class="function"><span class="keyword">function</span>(<span class="params">vv, ii</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> [vv, ii]</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//筛选所有不满足条件的元素</span></span><br><span class="line">            <span class="keyword">for</span> (; j &lt; v.length; j++)</span><br><span class="line">                cur = $$.reduce(</span><br><span class="line">                    cur,</span><br><span class="line">                    <span class="function"><span class="keyword">function</span>(<span class="params">p, curr</span>) </span>&#123;</span><br><span class="line">                        <span class="keyword">if</span> ($$.check(curr[<span class="number">0</span>], v[j])) p.push(curr)</span><br><span class="line">                        <span class="keyword">return</span> p</span><br><span class="line">                    &#125;,</span><br><span class="line">                    []</span><br><span class="line">                )</span><br><span class="line">            <span class="keyword">if</span> (i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (flag)</span><br><span class="line">                    cur = $$.reduce(</span><br><span class="line">                        cur,</span><br><span class="line">                        <span class="function"><span class="keyword">function</span>(<span class="params">p, curr</span>) </span>&#123;</span><br><span class="line">                            <span class="keyword">var</span> z = curr[<span class="number">0</span>].parentNode</span><br><span class="line">                            <span class="keyword">if</span> (z !== <span class="literal">null</span>) p.push([z, curr[<span class="number">1</span>]])</span><br><span class="line">                            <span class="keyword">return</span> p</span><br><span class="line">                        &#125;,</span><br><span class="line">                        []</span><br><span class="line">                    )</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    cur = $$.reduce(</span><br><span class="line">                        cur,</span><br><span class="line">                        <span class="function"><span class="keyword">function</span>(<span class="params">p, curr</span>) </span>&#123;</span><br><span class="line">                            <span class="keyword">var</span> z = curr[<span class="number">0</span>]</span><br><span class="line">                            <span class="keyword">while</span> ((z = z.parentNode)) p.push([z, curr[<span class="number">1</span>]])</span><br><span class="line">                            <span class="keyword">return</span> p</span><br><span class="line">                        &#125;,</span><br><span class="line">                        []</span><br><span class="line">                    )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cur = $$.map(</span><br><span class="line">            $$.removeRepeat(</span><br><span class="line">                $$.map(cur, <span class="function"><span class="keyword">function</span>(<span class="params">vv</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> vv[<span class="number">1</span>]</span><br><span class="line">                &#125;)</span><br><span class="line">            ),</span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params">vv</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> ppp[vv]</span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line">        sel = cur</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">``</span><span class="string">`</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">``</span><span class="string">`</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br></pre></td></tr></table></figure>
+<pre><code class="js">
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/19/常用代码处理/" data-id="cjhosl1q7001yl0kfav0hzc7m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常用/">常用</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-兼容性处理-慢慢更新" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/19/兼容性处理-慢慢更新/" class="article-date">
+  <time datetime="2018-05-19T05:03:52.000Z" itemprop="datePublished">2018-05-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/19/兼容性处理-慢慢更新/">兼容性处理(慢慢更新)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>绑定事件</p>
+<ul>
+<li><p>&lt;= IE8 <code>elem.attachEvent(&#39;on...&#39;, callback)</code><br>其他 <code>elem.addEventListener(&#39;...&#39;, callback, isCapture)</code></p>
+</li>
+<li><p>同样的, 删除事件也要改成 <code>elem.detachEvent</code>  <code>elem.removeEventListener</code></p>
+</li>
+</ul>
+</li>
+<li><p>获取元素</p>
+<ul>
+<li>通过类名获取 <code>getElementsByClassName</code> 在 &lt;= IE8 时不兼容, 解决方法: IE8 可以通过<code>querySelectorAll</code> 获取, IE7及以下得用hack进行编写</li>
+<li>通过选择器获取 <code>querySelectorAll</code> 在 &lt;= IE7 时不兼容, 解决方法: hack编写</li>
+</ul>
+</li>
+<li><p>scrollTop获取</p>
+<ul>
+<li>使用 <code>document.documentElement || document.body</code> <code>.scrollTop</code>来获取</li>
+</ul>
+</li>
+<li><p>获取CSS样式</p>
+<ul>
+<li>通用做法是 <code>window.getComputedStyle(elem, 伪类)</code> 来获取</li>
+<li>&lt;= IE8 时不支持, 可以使用 <code>elem.currentStyle</code> 来获取</li>
+<li>&lt;= IE10 是不支持伪类</li>
+<li>在未设置宽高时, <code>currentStyle</code> 获得的是 <code>auto</code> 而不是具体宽高值, 因此需要做兼容性处理 <code>offsetHeight offsetWidth</code></li>
+</ul>
+</li>
+<li><p>before, after伪元素</p>
+<ul>
+<li>&lt;= IE7 时不支持伪元素 建议不用, 改直接写元素, 使用before after类名假装伪元素</li>
+</ul>
+</li>
+<li><p>正则表达式</p>
+<ul>
+<li>并没与兼容问题, 只是着重提一句, 一般字符串的处理, 都可以使用正则+replace match来处理</li>
+</ul>
+</li>
+<li><p>关于CSS3属性, 显然CSS3属性低版本IE不支持</p>
+<ul>
+<li>opacity: &lt;= IE8 使用 <code>filter: &quot;alpha(opacity=50)&quot;</code> 因此需要作额外处理</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/19/兼容性处理-慢慢更新/" data-id="cjhosl1py001ml0kfj8848adw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/兼容/">兼容</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LeetCode-集锦" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/17/LeetCode-集锦/" class="article-date">
@@ -135,7 +436,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-集锦/" data-id="cjhn3zl8d001l4ckfeivcxn29" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-集锦/" data-id="cjhosl1q0001ol0kf0cuwqud7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -181,7 +482,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-321-拼接最大数/" data-id="cjhn3zl77000a4ckfu3s6gil5" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-321-拼接最大数/" data-id="cjhosl1p3000ml0kfjpzynn38" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -226,7 +527,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-102-二叉树的层次遍历/" data-id="cjhn3zl6o00004ckfgmxoaoac" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-102-二叉树的层次遍历/" data-id="cjhosl1ni0000l0kfk4ocgn4q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -269,7 +570,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-354-Russian-Doll-Envelopes/" data-id="cjhn3zl7c000f4ckf6kpl9sug" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-354-Russian-Doll-Envelopes/" data-id="cjhosl1ou000el0kfumg96s4x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -313,7 +614,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/16/LeetCode-668-乘法表中第k小的数/" data-id="cjhn3zl7t000x4ckf82urc475" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/16/LeetCode-668-乘法表中第k小的数/" data-id="cjhosl1pd0010l0kfp46ebkh9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -357,265 +658,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/16/LeetCode-406-根据身高重建队列/" data-id="cjhn3zl7o000r4ckfglfktew3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-CSS-径向渐变" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/15/CSS-径向渐变/" class="article-date">
-  <time datetime="2018-05-15T09:09:12.000Z" itemprop="datePublished">2018-05-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/15/CSS-径向渐变/">CSS: 径向渐变</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>CSS 中的线性渐变已经有很多文章了, 但是径向渐变文章却很少, 一是大家对径向渐变的使用依旧很少, 二是代码依旧非常冗长. 因此在此研究了一下 radial-gradient 参数.</p>
-<hr>
-<p>[TOC]</p>
-<hr>
-<h2 id="标准语法"><a href="#标准语法" class="headerlink" title="标准语法"></a>标准语法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">radial-gradient( [ circle || &lt;length&gt; ] [ at &lt;position&gt; ]? ,</span><br><span class="line">| [ ellipse || [&lt;length&gt; | &lt;percentage&gt; ]&#123;2&#125;] [ at &lt;position&gt; ]? ,</span><br><span class="line">| [ [ circle | ellipse ] || &lt;extent-keyword&gt; ] [ at &lt;position&gt; ]? ,</span><br><span class="line">| at &lt;position&gt; ,</span><br><span class="line">&lt;color-stop&gt; [ , &lt;color-stop&gt; ]+ )</span><br></pre></td></tr></table></figure>
-<h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><p>根据实际操作(实际上是 Chrome 上的测试)</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">radial-gradient(</span><br><span class="line">	参数<span class="number">1</span>: 形状/大小(半径)  at  中心点位置,</span><br><span class="line">	参数<span class="number">2</span>-...: 起止颜色</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>下文中的中心点特指 <strong>渐变中心</strong> 而不是盒子中心</li>
-<li>下文中的角/边指的是 <code>background-size</code> 的角/边 (一般默认都是盒子大小)</li>
-</ul>
-<h3 id="形状"><a href="#形状" class="headerlink" title="形状"></a>形状</h3><p>形状仅有两种可选值 <code>circle</code> (圆形)与 <code>ellipse</code> (椭圆形), 并且这不是主要属性, 仅用作提供半径的默认值</p>
-<p>###半径</p>
-<p>半径的定义来自两种:</p>
-<ul>
-<li><p>默认值 + 若形状设置为 <code>circle</code> , 则默认半径为<strong>中心点距离最远的一个角</strong>的距离<br><code>html background-image: radial-gradient(circle at 0 0, #000, #eee);</code></p>
-<pre><code>![circle 默认半径](https://img-blog.csdn.net/20180414101219377?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xvdmVvZlJlZE1vb24=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-
- + 若形状设置为 `ellipse` , 则默认横纵半径**分别**为为**中心点距离最远的一个角**的距离
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background-image: radial-gradient(ellipse at 0 0, #000, #eee);</span><br></pre></td></tr></table></figure>
-
-![ellipse 默认半径](https://img-blog.csdn.net/20180414101709175?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xvdmVvZlJlZE1vb24=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-
-**以下仅作为深究半径的计算方法的内容, 若不关心可以跳过这部分剩下的计算过程**
-以上是建立在中心点为四个角时的结论, 若中心点不在四个角上, 则只有 (其实是统一的)
-$$\frac{{{横向半径}}}{纵向半径} = \frac{中心点到最远的角的横向距离}{中心点到最远的角的纵向距离}$$
-
-&gt; 根据数学方法 [*高中*] 我们可以算出横向半径与纵向半径.
-&gt; 以下假设均建立在中心点在四个角上的时候
-&gt; 假设 中心点到最远的角的横纵向距离分别为*m,n*
-&gt; 椭圆的标准方程为
-$$\frac{{{x^2}}}{{{km^2}}} + \frac{{{y^2}}}{{{kn^2}}} = 1$$
-&gt; 将坐标 (*m,n*) 代入标准方程得到
-$$k = \frac{1}{2}$$
-因此半长轴和半短轴长度分别为$$a = \sqrt 2 m, b = \sqrt 2 n $$
-
-根据上面的结论可以知道, ellipse椭圆形渐变的半径一定是 中心点到最远的角的横纵向距离 的$\sqrt 2$倍
-</code></pre></li>
-<li><p>设定值—具体值 + 就是具体半径, 若只写一个半径, 则默认为圆形渐变, 否则必须指定两个半径</p>
-<pre><code><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">background-image: radial-gradient(50px, #000, #eee);</span><br><span class="line">// 圆形渐变, 半径为50px</span><br><span class="line">background-image: radial-gradient(50px 60px, #000, #eee);</span><br><span class="line">// 椭圆形渐变, 横向半径为50px, 纵向半径为 60px</span><br></pre></td></tr></table></figure>
-</code></pre></li>
-<li><p>设定值—百分比 + <strong>错误</strong>!! 这是径向渐变唯一不能使用百分比指定的地方!!</p>
-</li>
-<li>未设定 + 默认值 <code>ellipse</code></li>
-</ul>
-<h3 id="位置"><a href="#位置" class="headerlink" title="位置"></a>位置</h3><p>位置即中心点的位置位置要求一定要跟在第一个参数后面, 并用 <code>at</code> 进行连接</p>
-<ul>
-<li>默认值 + 默认在盒子的中心位置</li>
-<li>设定值—具体值 + 这个已经写过很多了, 屏幕坐标系默认盒子左上角为坐标原点, 横向向右为 <code>x</code> 轴, 纵向向下为 <code>y</code> 轴</li>
-<li>设定值—百分比 + 这个百分比是相对于盒子而言的, 也符合我们一般 CSS 百分比的要求.</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 举很多个栗子来规范书写</span><br><span class="line">background-image: radial-gradient(ellipse at 0 0, #000, #eee);</span><br><span class="line">// 修改为左上角为中心点</span><br><span class="line">background-image: radial-gradient(50px 60px at 100% 100%, #000, #eee);</span><br><span class="line">// 修改为右下角为中心点</span><br><span class="line">background-image: radial-gradient(at 50px 5em, #000, #eee);</span><br><span class="line">// 什么样的数据都可以</span><br></pre></td></tr></table></figure>
-<p>###起止颜色</p>
-<blockquote>
-<p>起止颜色用于规定从中心点到渐变边缘的颜色变化, 更多妙用请看线性渐变的介绍</p>
-</blockquote>
-<p>起止颜色, 顾名思义, 至少得有两种颜色并且每种颜色后允许跟着一个距离值(即距离中心点的距离)</p>
-<blockquote>
-<p>又要举个栗子~~ 就像播放电影, 电影播放的并不是连续画面, 而是一帧一帧的画面, 只是我们的大脑会自动把 (间隔时间较短的) 画面自动连接起来 (又叫做补间动画) 我们就是导演, 负责控制每种颜色具体的位置, 剩下的每两种颜色中间的过渡由浏览器帮我们解决.</p>
-</blockquote>
-<p><strong>在渐变半径之外的部分由最后一个 (止颜色) 填充, 而不是由 backgroundColor 填充! </strong><br><em>当然这是在 backgroundSize 为整个盒子的时候的效果, 如果 background 大小仅有一小部分, 那剩下的还是由 backgroundColor 填充, 例子将在这节后面书写</em></p>
-<ul>
-<li>颜色值 + 不多说, <code>skyblue</code> <code>#87ceeb</code> <code>hsla(197, 71%, 73%, 0.6)</code> <code>rgba(137, 207, 235, 0.6)</code> 都是可取的值</li>
-<li><p>位置<br>首先只能有一个值, 因此如果想达到特殊的效果, 请用径向渐变的叠加效果设置 + 默认值<br>默认值和书写位置有关, 浏览器会先确定那些你书写了的位置的颜色, 然后利用平均分布求出每种颜色应该在的位置, 最特别的, <strong>起颜色</strong>默认为 <code>0%</code> , <strong>末颜色</strong>默认为 <code>100%</code></p>
-<ul>
-<li><p>固定值固定值就是固定值, 不一样的烟火当然, 固定值一定是转化为百分比进行使用的 (计算公式当然是 固定值/半径=百分比)<br>在转化为百分比的过程中, <strong>半径</strong>一定指的是<strong>横向的半径</strong> (即 固定值/横向半径=百分比)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">```html</span><br><span class="line">width: 300px;</span><br><span class="line">height: 200px;</span><br><span class="line">background-image: radial-gradient( #000, #eee 100px, #000);</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">![横向半径展示1](https://img-blog.csdn.net/20180414095215386?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xvdmVvZlJlZE1vb24=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)</span><br><span class="line"></span><br><span class="line">```html</span><br><span class="line">width: 200px;</span><br><span class="line">height: 300px;</span><br><span class="line">background-image: radial-gradient( #000, #eee 100px, #000);</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">![横向半径展示2](https://img-blog.csdn.net/20180414095348396?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xvdmVvZlJlZE1vb24=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>百分比<br><strong>百分比是相对于半径而言的!!</strong><br><strong>百分比是相对于半径而言的!!</strong><br><strong>百分比是相对于半径而言的!!</strong><br>在上面我们看到了, 不设置半径时的默认值并不是中心点到某条边的距离, 因此如果想精确地定位到固定位置, 建议提前设定好渐变半径以方便操作</li>
-</ul>
-<p>关于径向渐变的参数介绍就到这了, 但是对于它的研究以及各种样式的研究以及例如 background-repeat 的使用技巧还需要不断加强~</p>
-<p>后续有时间再分析各种样式~</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/15/CSS-径向渐变/" data-id="cjhn3zl7r000v4ckfj132oaz3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-592-Fraction-Addition-and-Subtraction" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/" class="article-date">
-  <time datetime="2018-05-15T08:52:01.000Z" itemprop="datePublished">2018-05-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/">LeetCode 592 Fraction Addition and Subtraction</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>Given a string representing an expression of fraction addition and subtraction, you need to return the calculation result in string format. The final result should be irreducible fraction. If your final result is an integer, say 2, you need to change it to the format of fraction that has denominator 1. So in this case, 2 should be converted to 2/1.</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>其实就是正常计算的思路进行</p>
-<ul>
-<li>先通过字符串进行划分分子分母</li>
-<li>将相同分母的分至同一类中, 并计算同类的和 例如 <code>1/3+2/3</code> 会分到分母为 <code>3</code> 的类中, 且和为 <code>3</code></li>
-<li>将分子和为 <code>0</code> 的项剔除</li>
-<li>求分母的最大公倍数</li>
-<li>将所有分母分子扩大 让分母为最大公倍数</li>
-<li>计算所有和</li>
-<li>约分</li>
-</ul>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; expression</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> fractionAddition = <span class="function"><span class="keyword">function</span>(<span class="params">expression</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> re = &#123;&#125;</span><br><span class="line">    expression.split(<span class="regexp">/\b(?=[\-\+])/</span>).forEach(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> r = v.split(<span class="string">'/'</span>)</span><br><span class="line">        <span class="keyword">if</span> (!re[r[<span class="number">1</span>]]) re[r[<span class="number">1</span>]] = []</span><br><span class="line">        re[r[<span class="number">1</span>]].push(<span class="built_in">Number</span>(r[<span class="number">0</span>]))</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">const</span> keys = <span class="built_in">Object</span>.keys(re)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = keys.length; i--; ) &#123;</span><br><span class="line">        re[keys[i]] = re[keys[i]].reduce(<span class="function">(<span class="params">p, v</span>) =&gt;</span> p + v)</span><br><span class="line">        <span class="keyword">if</span> (!re[keys[i]]) &#123;</span><br><span class="line">            <span class="keyword">delete</span> re[keys[i]]</span><br><span class="line">            keys.splice(i, <span class="number">1</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (keys.length === <span class="number">0</span>) <span class="keyword">return</span> <span class="string">'0/1'</span></span><br><span class="line">    <span class="keyword">if</span> (keys.length === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> g = mcd(keys[<span class="number">0</span>], re[keys[<span class="number">0</span>]], <span class="literal">true</span>)</span><br><span class="line">        <span class="keyword">return</span> re[keys[<span class="number">0</span>]] / g + <span class="string">'/'</span> + keys[<span class="number">0</span>] / g</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> max = keys.reduce(<span class="function">(<span class="params">p, v</span>) =&gt;</span> mcd(p, v), <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">let</span> sum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = keys.length; i--; ) sum += max * re[keys[i]] / keys[i]</span><br><span class="line">    <span class="keyword">const</span> g = mcd(sum, max, <span class="literal">true</span>)</span><br><span class="line">    <span class="keyword">return</span> sum / g + <span class="string">'/'</span> + max / g</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">mcd</span>(<span class="params">x, y, flag</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> [m, n] = x &lt; y ? [y, x] : [x, y]</span><br><span class="line">        <span class="keyword">while</span> (n) &#123;</span><br><span class="line">            ;[m, n] = [n, m % n]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag) <span class="keyword">return</span> <span class="built_in">Math</span>.abs(m)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Math</span>.abs(x * y / m)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(fractionAddition(<span class="string">'1/3-1/2'</span>))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/" data-id="cjhn3zl7w00124ckffuu4mlkr" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-20-有效的括号" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/15/LeetCode-20-有效的括号/" class="article-date">
-  <time datetime="2018-05-15T07:53:34.000Z" itemprop="datePublished">2018-05-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/15/LeetCode-20-有效的括号/">LeetCode 20 有效的括号</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="valid-parentheses"><a href="#valid-parentheses" class="headerlink" title="valid parentheses"></a>valid parentheses</h3><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。</p>
-<p>有效字符串需满足：</p>
-<p>左括号必须用相同类型的右括号闭合。左括号必须以正确的顺序闭合。注意空字符串可被认为是有效字符串。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>括号匹配是一个经典例题, 一般用计数器进行处理, 如果出现异常会在计数器表现出来.<br>例如当处理到一个后括号时, 会去寻找与之匹配的前括号, 然后进行判断里面的内容是否为合法</p>
-<p>我这里寻找一个投机取巧的方法, 每次直接替换 <code>() [] {}</code> 直到再也替换不了,如果还剩下字符串, 肯定就是不合法字符串</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> isValid = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> len = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> (s.length != len) &#123;</span><br><span class="line">        len = s.length</span><br><span class="line">        s = s.replace(<span class="regexp">/(\(\)|\[\]|\&#123;\&#125;)/g</span>, <span class="string">''</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s === <span class="string">''</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(isValid(<span class="string">'([)]'</span>))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/15/LeetCode-20-有效的括号/" data-id="cjhn3zl7200054ckf1mcxmfs2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-462-最少移动次数使数组元素相等-II" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/" class="article-date">
-  <time datetime="2018-05-15T07:40:26.000Z" itemprop="datePublished">2018-05-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/">LeetCode 462 最少移动次数使数组元素相等 II</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="minimum-moves-to-equal-array-elements-ii"><a href="#minimum-moves-to-equal-array-elements-ii" class="headerlink" title="minimum moves to equal array elements ii"></a>minimum moves to equal array elements ii</h3><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个非空整数数组，找到使所有数组元素相等所需的最小移动数，其中每次移动可将选定的一个元素加 1 或减 1。 您可以假设数组的长度最多为 10000。</p>
-<p>例如:</p>
-<p>输入:<br>[1,2,3]</p>
-<p>输出:<br>2</p>
-<p>说明：只有两个动作是必要的（记得每一步仅可使其中一个元素加 1 或减 1）：</p>
-<p>[1,2,3] =&gt; [2,2,3] =&gt; [2,2,2]</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>举个栗子 , 对于数组 <code>[0, 0, 1, 7, 8]</code> 来说, 第一想法肯定是取中间的数例如取 <code>4</code> ,那么此时各个位置的差值为 <code>4 4 3 3 4</code><br>如果取 <code>3</code> ,那么此时各个位置的差值为 <code>3 3 2 4 5</code></p>
-<p>也就是当取值减 <code>1</code> 时, 比它小的数的差值会减一, 比它大的数的差值就会加一所以如果<strong>比它小的数</strong>的个数比<strong>比它大的数</strong>的个数多, 那我们就是赚的那什么时候可以停止呢? 肯定是比它小的数比比它大的数的个数不多的时候</p>
-<p>因此我们取的值应当是居中的一个<strong>中位数</strong>值可以测试得知, 如果数组长度为偶数, 取中间两个数任意一个都可以</p>
-<p>因此对于长度为 <code>len</code> 的数组而言, 取 <code>Math.floor(len/2)</code> 即可</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 462</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> minMoves2 = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> len = nums.length,</span><br><span class="line">        per = nums.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)[<span class="built_in">Math</span>.floor(len / <span class="number">2</span>)]</span><br><span class="line">    <span class="keyword">return</span> nums.reduce(<span class="function">(<span class="params">p, v</span>) =&gt;</span> p + <span class="built_in">Math</span>.abs(v - per), <span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(minMoves2([<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">6</span>]))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/" data-id="cjhn3zl7v00104ckf3zus85pl" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/16/LeetCode-406-根据身高重建队列/" data-id="cjhosl1pb000wl0kf54vxxn6a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -631,7 +674,7 @@ $$k = \frac{1}{2}$$
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -677,23 +720,23 @@ $$k = \frac{1}{2}$$
       <ul>
         
           <li>
+            <a href="/2018/05/27/LeetCode-843-猜猜这个单词/">LeetCode 843 猜猜这个单词</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/27/LeetCode-842-将数组拆分成斐波那契序列/">LeetCode 842 将数组拆分成斐波那契序列</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/27/LeetCode-841-钥匙和房间/">LeetCode 841 钥匙和房间</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/27/LeetCode-840-矩阵中的幻方/">LeetCode 840 矩阵中的幻方</a>
+          </li>
+        
+          <li>
             <a href="/2018/05/26/LeetCode-803-打砖块/">LeetCode 803 打砖块</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/26/LeetCode-316-去除重复字母/">LeetCode 316 去除重复字母</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/26/LeetCode-92-反转链表-II/">LeetCode 92 反转链表 II</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/26/LeetCode-44-通配符匹配/">LeetCode 44 通配符匹配</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/26/LeetCode-392-判断子序列/">LeetCode 392 判断子序列</a>
           </li>
         
       </ul>
