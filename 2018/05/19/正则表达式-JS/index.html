@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Love of Red Moon Blog">
 <meta property="og:description" content="什么是正则?根据自己的理解, 正则是用来’快速’处理字符串的工具, 在 JavaScript 中, 通常使用以下方法来使用正则表达式  String.prototype.split 字符串分割 String.prototype.replace 字符串替换 String.prototype.match 字符串匹配 RegExp.prototype.exec 正则匹配 RegExp.prototype">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-05-20T01:38:46.793Z">
+<meta property="og:updated_time" content="2018-05-27T13:21:24.134Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式-JS">
 <meta name="twitter:description" content="什么是正则?根据自己的理解, 正则是用来’快速’处理字符串的工具, 在 JavaScript 中, 通常使用以下方法来使用正则表达式  String.prototype.split 字符串分割 String.prototype.replace 字符串替换 String.prototype.match 字符串匹配 RegExp.prototype.exec 正则匹配 RegExp.prototype">
@@ -164,7 +164,7 @@
 <p><em>replace不会修改原字符串, 需要重新赋值</em></p>
 <ul>
 <li><p>字符串 字符串中的$会被处理为特殊字符, 因此输出按照以下匹配</p>
-<p>| 变量名 | 表示值               |<br>| —— | ——————– |<br>| <code>$$</code>   | 一个<code>$</code>字符          |<br>| <code>$&amp;</code>   | 匹配的结果           |<br>| <code>$&#39;</code>   | 匹配结果右边的字符串 |<br>| <code>$\`</code>  | 匹配结果左边的字符串 |<br>| <code>$n</code>   | 括号匹配结果         |</p>
+<p>| 变量名 | 表示值               |<br>| :—-: | :——————: |<br>| <code>$$</code>   | 一个<code>$</code>字符          |<br>| <code>$&amp;</code>   | 匹配的结果           |<br>| <code>$&#39;</code>   | 匹配结果右边的字符串 |<br>| <code>$\`</code>  | 匹配结果左边的字符串 |<br>| <code>$n</code>   | 括号匹配结果         |</p>
 </li>
 <li><p>函数 函数会一次传入以下参数<br>  <code>function($&amp;, $1, $2, $3, $4..., $n, offset, string){}</code><br>  其中的<code>offset</code>表示匹配偏移量(位置), string表示原来的字符串</p>
 </li>
