@@ -70,6 +70,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LeetCode-826-Most-Profit-Assigning-Work" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/" class="article-date">
+  <time datetime="2018-05-24T10:51:41.000Z" itemprop="datePublished">2018-05-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/">LeetCode 826 Most Profit Assigning Work</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>We have jobs: difficulty[i] is the difficulty of the ith job, and profit[i] is the profit of the ith job.</p>
+<p>Now we have some workers. worker[i] is the ability of the ith worker, which means that this worker can only complete a job with difficulty at most worker[i].</p>
+<p>Every worker can be assigned at most one job, but one job can be completed multiple times.</p>
+<p>For example, if 3 people attempt the same job that pays $1, then the total profit will be $3. If a worker cannot complete any job, his profit is $0.</p>
+<p>What is the most profit we can make?</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>想实现很简单, 直接将收益排序, 让员工选择收益最大的且自己能完成的项目即可</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; difficulty</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; profit</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; worker</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxProfitAssignment = <span class="function"><span class="keyword">function</span>(<span class="params">difficulty, profit, worker</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> x = profit</span><br><span class="line">        .map(<span class="function">(<span class="params">v, i</span>) =&gt;</span> [v, difficulty[i]])</span><br><span class="line">        .sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> b[<span class="number">0</span>] - a[<span class="number">0</span>])</span><br><span class="line">    worker = worker.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> b - a)</span><br><span class="line">    <span class="keyword">let</span> i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> (i &lt; x.length - <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x[i][<span class="number">1</span>] &lt; x[i + <span class="number">1</span>][<span class="number">1</span>]) x.splice(i + <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">else</span> i++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> sum = <span class="number">0</span>,</span><br><span class="line">        workerNum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">const</span> len = x.length,</span><br><span class="line">        lens = worker.length</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len &amp;&amp; workerNum &lt; lens; ) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x[i][<span class="number">1</span>] &gt; worker[workerNum]) i++</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            sum += x[i][<span class="number">0</span>]</span><br><span class="line">            workerNum++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(</span><br><span class="line">    maxProfitAssignment([<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>], [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>])</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/" data-id="cjhqcmkyw001mvskfy96gucq4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LeetCode-808-分汤" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/24/LeetCode-808-分汤/" class="article-date">
@@ -103,7 +148,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-808-分汤/" data-id="cjhosl1pg0012l0kfjn590vt3" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-808-分汤/" data-id="cjhqcmkyq001gvskfpeew2p89" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -147,7 +192,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-565-数组嵌套/" data-id="cjhosl1pc000yl0kftte1g7se" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-565-数组嵌套/" data-id="cjhqcmky1000yvskfd1k3q9zk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -192,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-3-无重复字符的最长子串/" data-id="cjhosl1of0004l0kfpg99agqu" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-3-无重复字符的最长子串/" data-id="cjhqcmkxk0009vskfzbk9gbba" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -254,7 +299,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/" data-id="cjhosl1pi0016l0kfuwli2zqh" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/" data-id="cjhqcmkym001dvskfcnd5h548" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -295,7 +340,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-238-除自身以外数组的乘积/" data-id="cjhosl1oq000al0kfks213z84" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-238-除自身以外数组的乘积/" data-id="cjhqcmkxh0005vskfs9heradn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -336,7 +381,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-200-岛屿的个数/" data-id="cjhosl1os000cl0kf1yazxe67" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-200-岛屿的个数/" data-id="cjhqcmkxe0003vskfr0uqzrzc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -388,7 +433,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-393-UTF-8-编码验证/" data-id="cjhosl1oy000il0kf8lpfweot" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-393-UTF-8-编码验证/" data-id="cjhqcmkxv000qvskfqu4l90cz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -428,7 +473,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/22/LeetCode-524-通过删除字母匹配到字典里最长单词/" data-id="cjhosl1p6000ql0kfhd35f25k" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/22/LeetCode-524-通过删除字母匹配到字典里最长单词/" data-id="cjhqcmky0000wvskf2dviz0eq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -471,51 +516,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/21/LeetCode-336-回文对/" data-id="cjhosl1p8000sl0kfxlokysfz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-394-字符串解码" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/21/LeetCode-394-字符串解码/" class="article-date">
-  <time datetime="2018-05-21T08:35:17.000Z" itemprop="datePublished">2018-05-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/21/LeetCode-394-字符串解码/">LeetCode 394 字符串解码</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个经过编码的字符串，返回它解码后的字符串。</p>
-<p>编码规则为: k[encoded_string]，表示其中方括号内部的 encoded_string 正好重复 k 次。注意 k 保证为正整数。</p>
-<p>你可以认为输入字符串总是有效的；输入字符串中没有额外的空格，且输入的方括号总是符合格式要求的。</p>
-<p>此外，你可以认为原始数据不包含数字，所有的数字只表示重复的次数 k ，例如不会出现像 3a 或 2[4] 的输入。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>字符串替换</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> decodeString = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> changed = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">while</span> (changed) &#123;</span><br><span class="line">        changed = <span class="literal">false</span></span><br><span class="line">        s = s.replace(<span class="regexp">/(\d*)\[([^\[\]]*)\]/g</span>, (v, p1, p2) =&gt; &#123;</span><br><span class="line">            changed = <span class="literal">true</span></span><br><span class="line">            <span class="keyword">return</span> p2.repeat(p1 | <span class="number">0</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(decodeString(<span class="string">'3[a2[c]]'</span>))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/21/LeetCode-394-字符串解码/" data-id="cjhosl1p1000kl0kfdu59ijoy" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/21/LeetCode-336-回文对/" data-id="cjhqcmkxn000evskfdhfzubha" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -577,6 +578,10 @@
       <ul>
         
           <li>
+            <a href="/2018/05/28/LeetCode-722-删掉注释/">LeetCode 722 删掉注释</a>
+          </li>
+        
+          <li>
             <a href="/2018/05/27/LeetCode-843-猜猜这个单词/">LeetCode 843 猜猜这个单词</a>
           </li>
         
@@ -590,10 +595,6 @@
         
           <li>
             <a href="/2018/05/27/LeetCode-840-矩阵中的幻方/">LeetCode 840 矩阵中的幻方</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/26/LeetCode-803-打砖块/">LeetCode 803 打砖块</a>
           </li>
         
       </ul>
