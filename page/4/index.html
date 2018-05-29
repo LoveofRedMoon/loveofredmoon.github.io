@@ -70,6 +70,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LeetCode-668-乘法表中第k小的数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/16/LeetCode-668-乘法表中第k小的数/" class="article-date">
+  <time datetime="2018-05-16T08:53:46.000Z" itemprop="datePublished">2018-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/16/LeetCode-668-乘法表中第k小的数/">LeetCode 668 乘法表中第k小的数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="kth-smallest-number-in-multiplication-table"><a href="#kth-smallest-number-in-multiplication-table" class="headerlink" title="kth smallest number in multiplication table"></a>kth smallest number in multiplication table</h3><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>几乎每一个人都用 乘法表。但是你能在乘法表中快速找到第 k 小的数字吗？</p>
+<p>给定高度 m 、宽度 n 的一张 m * n 的乘法表，以及正整数 k，你需要返回表中第 k 小的数字。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先处理简单情况:<br>如果 <code>m</code> , <code>n</code> 其中一个为 <code>1</code> , 那么就是正整数排列, 直接返回 <code>k</code><br>如果 <code>k===m*n</code> 那么一定是最后一个, 返回 <code>k</code></p>
+<p>观察乘法表<br><code>1 2 3</code><br><code>2 4 6</code><br><code>3 6 9</code><br>第一想法:<br>发现第 <code>i</code> 行每一个数都能被 <code>i+1</code> 整除因此从 <code>1</code> 开始有 <code>1</code> 个以后每次自增 <code>1</code> 变为 <code>p</code> 如果 <code>p</code> 能整除 且在范围内, 那么即算一个</p>
+<p>跑了一下 发现了巨大问题, 一旦数据量较大, 很多事情都是无用功.<br>第二想法:<br>例如在上面 3*3 的乘法表中查找第 8 大的数字, 那完全可以使用二分法 先查找到中间数所在的 k 值, 然后进一步缩小范围<br>(其实这里可以进一步优化, 因为当值较小时, 包含的数量较多, 因此不应当直接选取中间值)</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">findKthNumber</span>(<span class="params">m, n, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (m === <span class="number">1</span> || n === <span class="number">1</span> || m * n &lt;= k) <span class="keyword">return</span> k</span><br><span class="line">    <span class="keyword">if</span> (k &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> (k &lt; <span class="number">4</span>) <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">    <span class="keyword">let</span> curNum = <span class="number">1</span>,</span><br><span class="line">        left = <span class="number">1</span>,</span><br><span class="line">        right = m * n,</span><br><span class="line">        last = [<span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> temp = ~~((left + right) / <span class="number">2</span>),</span><br><span class="line">            t = calcu(temp)</span><br><span class="line">        <span class="built_in">console</span>.log(temp, t, k, last)</span><br><span class="line">        <span class="keyword">if</span> (t &gt; k) &#123;</span><br><span class="line">            last = [temp, t]</span><br><span class="line">            right = temp</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (t === k) &#123;</span><br><span class="line">            <span class="keyword">return</span> check(temp, t)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (last[<span class="number">0</span>] - temp === <span class="number">1</span>) <span class="keyword">return</span> check(...last)</span><br><span class="line">            left = temp</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">l, t</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (calcu(l - <span class="number">1</span>) === t) l--</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> l</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">calcu</span>(<span class="params">l</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> sum = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (l &lt;= i) <span class="keyword">return</span> sum</span><br><span class="line">            sum += <span class="built_in">Math</span>.min(~~(l / (i + <span class="number">1</span>)), n)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/16/LeetCode-668-乘法表中第k小的数/" data-id="cjhrcvpjk00127wkfg78mz13j" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LeetCode-406-根据身高重建队列" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/16/LeetCode-406-根据身高重建队列/" class="article-date">
@@ -102,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/16/LeetCode-406-根据身高重建队列/" data-id="cjhqcmkxt000mvskfqr8e9e97" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/16/LeetCode-406-根据身高重建队列/" data-id="cjhrcvpjb000m7wkfro1wxl9c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -217,7 +261,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/15/CSS-径向渐变/" data-id="cjhqcmkx70000vskfxto6qac0" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/15/CSS-径向渐变/" data-id="cjhrcvpjd000o7wkf7sqlg8cl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li></ul>
@@ -267,7 +311,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/" data-id="cjhqcmky30012vskf1yd3u236" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/" data-id="cjhrcvpke001l7wkf6wk05h17" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -311,7 +355,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/15/LeetCode-20-有效的括号/" data-id="cjhqcmkxb0001vskfnwikh61l" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/15/LeetCode-20-有效的括号/" data-id="cjhrcvpiz00087wkfuyl3rxrl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -360,7 +404,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/" data-id="cjhqcmkxz000uvskfda08gdxj" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/" data-id="cjhrcvpjh000w7wkf94ozysw3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -422,6 +466,10 @@ $$k = \frac{1}{2}$$
       <ul>
         
           <li>
+            <a href="/2018/05/29/LeetCode-295-数据流的中位数/">LeetCode 295 数据流的中位数 </a>
+          </li>
+        
+          <li>
             <a href="/2018/05/28/LeetCode-722-删掉注释/">LeetCode 722 删掉注释</a>
           </li>
         
@@ -435,10 +483,6 @@ $$k = \frac{1}{2}$$
         
           <li>
             <a href="/2018/05/27/LeetCode-841-钥匙和房间/">LeetCode 841 钥匙和房间</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/27/LeetCode-840-矩阵中的幻方/">LeetCode 840 矩阵中的幻方</a>
           </li>
         
       </ul>

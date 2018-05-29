@@ -70,6 +70,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LeetCode-295-数据流的中位数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/29/LeetCode-295-数据流的中位数/" class="article-date">
+  <time datetime="2018-05-29T00:59:56.000Z" itemprop="datePublished">2018-05-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/29/LeetCode-295-数据流的中位数/">LeetCode 295 数据流的中位数 </a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。</p>
+<p>例如，</p>
+<p>[2,3,4] 的中位数是 3</p>
+<p>[2,3] 的中位数是 (2 + 3) / 2 = 2.5</p>
+<p>设计一个支持以下两种操作的数据结构：</p>
+<p>void addNum(int num) - 从数据流中添加一个整数到数据结构中。<br>double findMedian() - 返回目前所有元素的中位数。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>这个思想对于 JS 程序猿应该不是问题, 因为继承和原型是一个老生常谈的东西了重点在于保存的数据结构, 能够快速读取中间数</p>
+<p>第一种思路是直接保存住中间数的位置第二种思路是将数组分成两半进行保存显然第二种思路是不太优秀的, 因为数据插入时可能导致两个数组的元素进行频繁交换</p>
+<p>因此这里采用了第一种思路, 并且使用位置保存住中位数的位置</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * initialize your data structure here.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> MedianFinder = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.numbers = [-<span class="literal">Infinity</span>, <span class="literal">Infinity</span>]</span><br><span class="line">    <span class="keyword">this</span>.middlePos = <span class="number">0</span></span><br><span class="line">    <span class="keyword">this</span>.isOdd = <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; num</span></span><br><span class="line"><span class="comment"> * @return &#123;void&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">MedianFinder.prototype.addNum = <span class="function"><span class="keyword">function</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> n = <span class="keyword">this</span>.numbers</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = n.length; i--; ) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n[i] &lt; num) &#123;</span><br><span class="line">            <span class="comment">// 插入在i+1位置</span></span><br><span class="line">            n.splice(++i, <span class="number">0</span>, num)</span><br><span class="line">            <span class="keyword">if</span> (!<span class="keyword">this</span>.isOdd) <span class="keyword">this</span>.middlePos++</span><br><span class="line">            <span class="keyword">this</span>.isOdd = !<span class="keyword">this</span>.isOdd</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">MedianFinder.prototype.findMedian = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> n = <span class="keyword">this</span>.numbers,</span><br><span class="line">        pos = <span class="keyword">this</span>.middlePos</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.isOdd) <span class="keyword">return</span> n[pos]</span><br><span class="line">    <span class="keyword">return</span> (n[pos] + n[pos + <span class="number">1</span>]) / <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your MedianFinder object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * var obj = Object.create(MedianFinder).createNew()</span></span><br><span class="line"><span class="comment"> * obj.addNum(num)</span></span><br><span class="line"><span class="comment"> * var param_2 = obj.findMedian()</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> medianFinder = <span class="keyword">new</span> MedianFinder()</span><br><span class="line">medianFinder.addNum(<span class="number">-1</span>)</span><br><span class="line"><span class="built_in">console</span>.log(medianFinder.findMedian())</span><br><span class="line">medianFinder.addNum(<span class="number">-2</span>)</span><br><span class="line"><span class="built_in">console</span>.log(medianFinder.findMedian())</span><br><span class="line">medianFinder.addNum(<span class="number">-3</span>)</span><br><span class="line"><span class="built_in">console</span>.log(medianFinder.findMedian())</span><br><span class="line">medianFinder.addNum(<span class="number">-4</span>)</span><br><span class="line"><span class="built_in">console</span>.log(medianFinder.findMedian())</span><br><span class="line">medianFinder.addNum(<span class="number">-5</span>)</span><br><span class="line"><span class="built_in">console</span>.log(medianFinder.findMedian())</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/29/LeetCode-295-数据流的中位数/" data-id="cjhrcvpiw00047wkfhz4g5585" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LeetCode-722-删掉注释" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/28/LeetCode-722-删掉注释/" class="article-date">
@@ -106,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/28/LeetCode-722-删掉注释/" data-id="cjhqcmky40014vskfjmfv7gyo" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/28/LeetCode-722-删掉注释/" data-id="cjhrcvpjy00167wkfp6m5m49d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -155,7 +203,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-843-猜猜这个单词/" data-id="cjhqcmkz1001uvskf5oar0m5v" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-843-猜猜这个单词/" data-id="cjhrcvpkg001n7wkfnwybtk8h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -199,7 +247,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-842-将数组拆分成斐波那契序列/" data-id="cjhqcmkyx001ovskfpceagt9l" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-842-将数组拆分成斐波那契序列/" data-id="cjhrcvpkd001j7wkfkcappei2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -244,7 +292,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-841-钥匙和房间/" data-id="cjhqcmkys001ivskfcwwa51x6" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-841-钥匙和房间/" data-id="cjhrcvpkj001p7wkfef9hp017" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -286,7 +334,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-840-矩阵中的幻方/" data-id="cjhqcmkyu001kvskfybdgslk6" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-840-矩阵中的幻方/" data-id="cjhrcvpkb001h7wkffqopql55" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -329,7 +377,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-803-打砖块/" data-id="cjhqcmkyo001evskfgp96t7j2" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-803-打砖块/" data-id="cjhrcvpka001f7wkff3xk8z8k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -382,7 +430,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-316-去除重复字母/" data-id="cjhqcmkxj0008vskfx68g2g8v" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-316-去除重复字母/" data-id="cjhrcvpj1000a7wkfmepp9xs8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -424,7 +472,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-92-反转链表-II/" data-id="cjhqcmkyy001qvskff3e5pijh" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-92-反转链表-II/" data-id="cjhrcvpkm001v7wkf8ided58r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -469,51 +517,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-44-通配符匹配/" data-id="cjhqcmkxx000svskfv3lbm63r" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-392-判断子序列" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/26/LeetCode-392-判断子序列/" class="article-date">
-  <time datetime="2018-05-26T00:31:24.000Z" itemprop="datePublished">2018-05-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/26/LeetCode-392-判断子序列/">LeetCode 392 判断子序列</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定字符串 s 和 t ，判断 s 是否为 t 的子序列。</p>
-<p>你可以认为 s 和 t 中仅包含英文小写字母。字符串 t 可能会很长（长度 ~= 500,000），而 s 是个短字符串（长度 &lt;=100）。</p>
-<p>字符串的一个子序列是原始字符串删除一些（也可以不删除）字符而不改变剩余字符相对位置形成的新字符串。（例如，”ace”是”abcde”的一个子序列，而”aec”不是）。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>本质上是正则表达式的回溯算法</p>
-<p>从前往后寻找对应字母, 如果找不到那么回溯到上次寻找, 继续寻找</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; t</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> isSubsequence = <span class="function"><span class="keyword">function</span>(<span class="params">s, t</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> m = s.length,</span><br><span class="line">        n = t.length,</span><br><span class="line">        maxPos = n - m</span><br><span class="line">    <span class="keyword">if</span> (maxPos &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">if</span> (!maxPos) <span class="keyword">return</span> s === t</span><br><span class="line">    <span class="keyword">let</span> curPos = <span class="number">0</span>, <span class="comment">//保存当前查找s的第几个字符</span></span><br><span class="line">        poss = [<span class="number">-1</span>] <span class="comment">//保存当前所有查找位置</span></span><br><span class="line">    <span class="keyword">while</span> (curPos &lt; m) &#123;</span><br><span class="line">        <span class="keyword">const</span> pos = t.indexOf(s[curPos], poss[curPos] + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> (pos &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (curPos-- === <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            poss[curPos] = pos</span><br><span class="line">            poss[++curPos] = pos</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(isSubsequence(<span class="string">'agc'</span>, <span class="string">'ahbgdc'</span>))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-392-判断子序列/" data-id="cjhqcmkxu000ovskfegr2o7e5" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-44-通配符匹配/" data-id="cjhrcvpje000q7wkfz6yyfjjl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -575,6 +579,10 @@
       <ul>
         
           <li>
+            <a href="/2018/05/29/LeetCode-295-数据流的中位数/">LeetCode 295 数据流的中位数 </a>
+          </li>
+        
+          <li>
             <a href="/2018/05/28/LeetCode-722-删掉注释/">LeetCode 722 删掉注释</a>
           </li>
         
@@ -588,10 +596,6 @@
         
           <li>
             <a href="/2018/05/27/LeetCode-841-钥匙和房间/">LeetCode 841 钥匙和房间</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/27/LeetCode-840-矩阵中的幻方/">LeetCode 840 矩阵中的幻方</a>
           </li>
         
       </ul>
