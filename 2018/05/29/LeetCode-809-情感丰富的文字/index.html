@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>LeetCode 809 情感丰富的文字 | Love of Red Moon Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目有时候人们会用额外的字母来表示额外的情感，比如 “hello” -&amp;gt; “heeellooo”, “hi” -&amp;gt; “hiii”。我们将连续的相同的字母分组，并且相邻组的字母都不相同。我们将一个拥有三个或以上字母的组定义为扩张状态（extended），如第一个例子中的 “e” 和” o” 以及第二个例子中的 “i”。 此外，”abbcccaaaa” 将有分组 “a” , “bb” ,">
+<meta name="keywords" content="LeetCode JavaScript 算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 809 情感丰富的文字">
+<meta property="og:url" content="https://loveofredmoon.github.io/2018/05/29/LeetCode-809-情感丰富的文字/index.html">
+<meta property="og:site_name" content="Love of Red Moon Blog">
+<meta property="og:description" content="题目有时候人们会用额外的字母来表示额外的情感，比如 “hello” -&amp;gt; “heeellooo”, “hi” -&amp;gt; “hiii”。我们将连续的相同的字母分组，并且相邻组的字母都不相同。我们将一个拥有三个或以上字母的组定义为扩张状态（extended），如第一个例子中的 “e” 和” o” 以及第二个例子中的 “i”。 此外，”abbcccaaaa” 将有分组 “a” , “bb” ,">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-05-29T11:04:17.573Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode 809 情感丰富的文字">
+<meta name="twitter:description" content="题目有时候人们会用额外的字母来表示额外的情感，比如 “hello” -&amp;gt; “heeellooo”, “hi” -&amp;gt; “hiii”。我们将连续的相同的字母分组，并且相邻组的字母都不相同。我们将一个拥有三个或以上字母的组定义为扩张状态（extended），如第一个例子中的 “e” 和” o” 以及第二个例子中的 “i”。 此外，”abbcccaaaa” 将有分组 “a” , “bb” ,">
+  
+    <link rel="alternate" href="/atom.xml" title="Love of Red Moon Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Love of Red Moon Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">赤月之爱的博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">所有文章</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://loveofredmoon.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-LeetCode-809-情感丰富的文字" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/29/LeetCode-809-情感丰富的文字/" class="article-date">
+  <time datetime="2018-05-29T09:09:36.000Z" itemprop="datePublished">2018-05-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LeetCode 809 情感丰富的文字
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>有时候人们会用额外的字母来表示额外的情感，比如 “hello” -&gt; “heeellooo”, “hi” -&gt; “hiii”。我们将连续的相同的字母分组，并且相邻组的字母都不相同。我们将一个拥有三个或以上字母的组定义为扩张状态（extended），如第一个例子中的 “e” 和” o” 以及第二个例子中的 “i”。 此外，”abbcccaaaa” 将有分组 “a” , “bb” , “ccc” , “dddd”；其中 “ccc” 和 “aaaa” 处于扩张状态。</p>
+<p>对于一个给定的字符串 S ，如果另一个单词能够通过将一些字母组扩张从而使其和 S 相同，我们将这个单词定义为可扩张的（stretchy）。我们允许选择一个字母组（如包含字母 c ），然后往其中添加相同的字母 c 使其长度达到 3 或以上。注意，我们不能将一个只包含一个字母的字母组，如 “h”，扩张到一个包含两个字母的组，如 “hh”；所有的扩张必须使该字母组变成扩张状态（至少包含三个字母）。</p>
+<p>输入一组单词，输出其中可扩张的单词数量。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>将单词分割成各个字母部分, 并且标记允许的个数例如 h =&gt; 只能是 h<br>hh =&gt; 只能是 hh<br>hhh =&gt; 可以是 h 或者 hhh<br>hhhh =&gt; 可以是 h hh 或者 hhhh<br>因此 个数不等于自己个数减一即可, 并且大于 0</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; S</span></span><br><span class="line"><span class="comment"> * @param &#123;string[]&#125; words</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> expressiveWords = <span class="function"><span class="keyword">function</span>(<span class="params">S, words</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> all = g(S),</span><br><span class="line">        len = all.length</span><br><span class="line">    <span class="keyword">return</span> words.filter(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">        v = g(v)</span><br><span class="line">        <span class="keyword">if</span> (v.length !== len) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        <span class="keyword">return</span> v.every(</span><br><span class="line">            (vv, i) =&gt;</span><br><span class="line">                vv[<span class="number">0</span>] === all[i][<span class="number">0</span>] &amp;&amp;</span><br><span class="line">                vv[<span class="number">1</span>] &gt; <span class="number">0</span> &amp;&amp;</span><br><span class="line">                vv[<span class="number">1</span>] !== all[i][<span class="number">1</span>] - <span class="number">1</span> &amp;&amp;</span><br><span class="line">                vv[<span class="number">1</span>] &lt;= all[i][<span class="number">1</span>]</span><br><span class="line">        )</span><br><span class="line">    &#125;).length</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">g</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> s</span><br><span class="line">            .replace(<span class="regexp">/(.)(\1)*/g</span>, <span class="string">'$&amp;#'</span>)</span><br><span class="line">            .split(<span class="string">'#'</span>)</span><br><span class="line">            .slice(<span class="number">0</span>, <span class="number">-1</span>)</span><br><span class="line">            .map(<span class="function"><span class="params">v</span> =&gt;</span> [v[<span class="number">0</span>], v.length])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(expressiveWords(<span class="string">'aaa'</span>, [<span class="string">'aaaa'</span>]))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/29/LeetCode-809-情感丰富的文字/" data-id="cjhrkrdvm001axokfh5i43769" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/29/LeetCode-295-数据流的中位数/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LeetCode 295 数据流的中位数 </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/兼容/">兼容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-JS/">正则 JS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS-radial-gradient/" style="font-size: 10px;">CSS radial-gradient</a> <a href="/tags/LeetCode-JavaScript-算法/" style="font-size: 20px;">LeetCode JavaScript 算法</a> <a href="/tags/兼容/" style="font-size: 10px;">兼容</a> <a href="/tags/常用/" style="font-size: 10px;">常用</a> <a href="/tags/正则-JS/" style="font-size: 10px;">正则 JS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/29/LeetCode-809-情感丰富的文字/">LeetCode 809 情感丰富的文字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/29/LeetCode-295-数据流的中位数/">LeetCode 295 数据流的中位数 </a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/28/LeetCode-722-删掉注释/">LeetCode 722 删掉注释</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/27/LeetCode-843-猜猜这个单词/">LeetCode 843 猜猜这个单词</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/27/LeetCode-842-将数组拆分成斐波那契序列/">LeetCode 842 将数组拆分成斐波那契序列</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018  <a href="/cyj.min.html" target="_blank"> Yongj Chen </a><br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">所有文章</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
