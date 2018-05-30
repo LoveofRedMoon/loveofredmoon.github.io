@@ -5,20 +5,20 @@
   
 
   
-  <title>LeetCode 722 删掉注释 | Love of Red Moon Blog</title>
+  <title>关于一些常见类型的判断 | Love of Red Moon Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="题目在 C++ 中有两种注释风格，行内注释和块注释。 字符串// 表示行注释，表示//和其右侧的其余字符应该被忽略。 字符串/_ 表示一个块注释，它表示直到_/的下一个（非重叠）出现的所有字符都应该被忽略。（阅读顺序为从左到右）非重叠是指，字符串/*/并没有结束块注释，因为注释的结尾与开头相重叠。 第一个有效注释优先于其他注释：如果字符串//出现在块注释中会被忽略。 同样，如果字符串/*出现在行或">
-<meta name="keywords" content="LeetCode JavaScript 算法">
+  <meta name="description" content="JS 的数据类型JS 基本上只分为number string undefined boolean object symbol当然, 从object里面可以拓展出一些其他类型 基础数据类型判断 number判断数字很简单, typeof a === &amp;#39;number&amp;#39; 即可,在此基础上, 衍生出一些其他判断以下方法在全局下会进行隐式转换, 例如&amp;quot;123&amp;quot;也被认为是数">
+<meta name="keywords" content="JS 类型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode 722 删掉注释">
-<meta property="og:url" content="https://loveofredmoon.github.io/2018/05/28/LeetCode-722-删掉注释/index.html">
+<meta property="og:title" content="关于一些常见类型的判断">
+<meta property="og:url" content="https://loveofredmoon.github.io/2018/05/30/关于一些常见类型的判断/index.html">
 <meta property="og:site_name" content="Love of Red Moon Blog">
-<meta property="og:description" content="题目在 C++ 中有两种注释风格，行内注释和块注释。 字符串// 表示行注释，表示//和其右侧的其余字符应该被忽略。 字符串/_ 表示一个块注释，它表示直到_/的下一个（非重叠）出现的所有字符都应该被忽略。（阅读顺序为从左到右）非重叠是指，字符串/*/并没有结束块注释，因为注释的结尾与开头相重叠。 第一个有效注释优先于其他注释：如果字符串//出现在块注释中会被忽略。 同样，如果字符串/*出现在行或">
+<meta property="og:description" content="JS 的数据类型JS 基本上只分为number string undefined boolean object symbol当然, 从object里面可以拓展出一些其他类型 基础数据类型判断 number判断数字很简单, typeof a === &amp;#39;number&amp;#39; 即可,在此基础上, 衍生出一些其他判断以下方法在全局下会进行隐式转换, 例如&amp;quot;123&amp;quot;也被认为是数">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-05-28T08:40:12.456Z">
+<meta property="og:updated_time" content="2018-05-30T06:49:00.407Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode 722 删掉注释">
-<meta name="twitter:description" content="题目在 C++ 中有两种注释风格，行内注释和块注释。 字符串// 表示行注释，表示//和其右侧的其余字符应该被忽略。 字符串/_ 表示一个块注释，它表示直到_/的下一个（非重叠）出现的所有字符都应该被忽略。（阅读顺序为从左到右）非重叠是指，字符串/*/并没有结束块注释，因为注释的结尾与开头相重叠。 第一个有效注释优先于其他注释：如果字符串//出现在块注释中会被忽略。 同样，如果字符串/*出现在行或">
+<meta name="twitter:title" content="关于一些常见类型的判断">
+<meta name="twitter:description" content="JS 的数据类型JS 基本上只分为number string undefined boolean object symbol当然, 从object里面可以拓展出一些其他类型 基础数据类型判断 number判断数字很简单, typeof a === &amp;#39;number&amp;#39; 即可,在此基础上, 衍生出一些其他判断以下方法在全局下会进行隐式转换, 例如&amp;quot;123&amp;quot;也被认为是数">
   
     <link rel="alternate" href="/atom.xml" title="Love of Red Moon Blog" type="application/atom+xml">
   
@@ -69,10 +69,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-LeetCode-722-删掉注释" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-关于一些常见类型的判断" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/28/LeetCode-722-删掉注释/" class="article-date">
-  <time datetime="2018-05-28T08:32:32.000Z" itemprop="datePublished">2018-05-28</time>
+    <a href="/2018/05/30/关于一些常见类型的判断/" class="article-date">
+  <time datetime="2018-05-30T03:05:55.000Z" itemprop="datePublished">2018-05-30</time>
 </a>
     
   </div>
@@ -83,7 +83,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      LeetCode 722 删掉注释
+      关于一些常见类型的判断
     </h1>
   
 
@@ -91,24 +91,35 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>在 C++ 中有两种注释风格，行内注释和块注释。</p>
-<p>字符串// 表示行注释，表示//和其右侧的其余字符应该被忽略。</p>
-<p>字符串/_ 表示一个块注释，它表示直到_/的下一个（非重叠）出现的所有字符都应该被忽略。（阅读顺序为从左到右）非重叠是指，字符串/*/并没有结束块注释，因为注释的结尾与开头相重叠。</p>
-<p>第一个有效注释优先于其他注释：如果字符串//出现在块注释中会被忽略。 同样，如果字符串/*出现在行或块注释中也会被忽略。</p>
-<p>如果一行在删除注释之后变为空字符串，那么不要输出该行。即，答案列表中的每个字符串都是非空的。</p>
-<p>样例中没有控制字符，单引号或双引号字符。比如，source = “string s = “/_ Not a comment. _/“;” 不会出现在测试样例里。（此外，没有其他内容（如定义或宏）会干扰注释。）</p>
-<p>我们保证每一个块注释最终都会被闭合， 所以在行或块注释之外的/*总是开始新的注释。</p>
-<p>最后，隐式换行符可以通过块注释删除。 有关详细信息，请参阅下面的示例。</p>
-<p>从源代码中删除注释后，需要以相同的格式返回源代码。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>在未匹配状态时, 寻找// 或/*<br>如果是 // 选择忽略从//往后的所有字符如果是 /* 进入匹配状态, 并且从当前位置继续开始匹配同时记录 该行行号以及位置在匹配状态时, 寻找<em>/,<br>如果找到 则获取</em>/ 之后的字符, 并且匹配到/*所在行, 并且从当前行重新匹配如果未找到 则删除整行</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2>
+        <h2 id="JS-的数据类型"><a href="#JS-的数据类型" class="headerlink" title="JS 的数据类型"></a>JS 的数据类型</h2><p>JS 基本上只分为<br><code>number</code> <code>string</code> <code>undefined</code> <code>boolean</code> <code>object</code> <code>symbol</code><br>当然, 从<code>object</code>里面可以拓展出一些其他类型</p>
+<h3 id="基础数据类型判断"><a href="#基础数据类型判断" class="headerlink" title="基础数据类型判断"></a>基础数据类型判断</h3><ol>
+<li><p><code>number</code><br>判断数字很简单, <code>typeof a === &#39;number&#39;</code> 即可,<br>在此基础上, 衍生出一些其他判断以下方法在全局下会进行隐式转换, 例如<code>&quot;123&quot;</code>也被认为是数字<br><code>Number.isNaN(a)</code> 判断是否(不是)一个数字<br><code>Number.isFinite(a)</code> 判断是否是个有穷数(即不包括<code>Infinite</code>)<br><code>Number.isInterger(a)</code> 判断是否是整数, 没有全局方法额外要注意的是<code>typeof NaN === &#39;number&#39;</code>是<code>true</code></p>
+</li>
+<li><p><code>string</code><br>同样, 直接<code>typeof a === &#39;string&#39;</code> 即可</p>
+</li>
+<li><p><code>undefined</code><br><code>undefined</code>仅有<code>undefined</code>一个值, 直接判断<code>a === undefined</code>即可</p>
+</li>
+<li><p><code>Boolean</code><br><code>typeof a === &#39;boolean&#39;</code></p>
+</li>
+<li><p><code>symbol</code><br><code>typeof a === &#39;symbol&#39;</code></p>
+</li>
+<li><p><code>object</code><br>由于历史原因, 需要区分<code>null</code>和<code>object</code><br>由于<code>null</code>是<code>falsy</code>, 因此可以用<code>if(a)</code>来判断是否是<code>object</code><br>因此具体判断应该是<code>if(a &amp;&amp; typeof a === &#39;object&#39;)</code><br>具体需要具体的类</p>
+</li>
+<li><p><code>Element</code><br>直观理解的方法就是<code>a instanseof Element</code>即可判断,<br>问题出在<code>IE7</code>, 没有<code>Element</code>, 那么我们使用<code>if(a.nodeType)</code>来判断是否是节点, 或判断节点的具体类型</p>
+</li>
+<li><p><code>Array</code><br><code>Array.isArray(a)</code></p>
+</li>
+<li><p>其他暂未想到, 可以考虑使用 <code>instanceof</code> 暂时代替</p>
+</li>
+</ol>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/28/LeetCode-722-删掉注释/" data-id="cjhsr2tau0018vskfl8beg5jb" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/30/关于一些常见类型的判断/" data-id="cjhsr2tbx001wvskf2and9t8h" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS-类型/">JS 类型</a></li></ul>
 
     </footer>
   </div>
@@ -116,19 +127,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/05/29/LeetCode-295-数据流的中位数/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          LeetCode 295 数据流的中位数 
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/05/27/LeetCode-843-猜猜这个单词/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/05/30/LeetCode-397-整数替换/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">LeetCode 843 猜猜这个单词</div>
+      <div class="article-nav-title">LeetCode 397 整数替换</div>
     </a>
   
 </nav>
