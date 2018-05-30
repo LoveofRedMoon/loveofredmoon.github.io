@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>LeetCode 397 整数替换 | Love of Red Moon Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目给定一个正整数 n，你可以做如下操作：  如果 n 是偶数，则用 n / 2 替换 n。 如果 n 是奇数，则可以用 n + 1 或 n - 1 替换 n。n 变为 1 所需的最小替换次数是多少？  思路无 代码12345678910111213141516171819202122232425262728293031323334/** * @param &amp;#123;number&amp;#125; n">
+<meta name="keywords" content="LeetCode JavaScript 算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 397 整数替换">
+<meta property="og:url" content="https://loveofredmoon.github.io/2018/05/30/LeetCode-397-整数替换/index.html">
+<meta property="og:site_name" content="Love of Red Moon Blog">
+<meta property="og:description" content="题目给定一个正整数 n，你可以做如下操作：  如果 n 是偶数，则用 n / 2 替换 n。 如果 n 是奇数，则可以用 n + 1 或 n - 1 替换 n。n 变为 1 所需的最小替换次数是多少？  思路无 代码12345678910111213141516171819202122232425262728293031323334/** * @param &amp;#123;number&amp;#125; n">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-05-30T02:23:13.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode 397 整数替换">
+<meta name="twitter:description" content="题目给定一个正整数 n，你可以做如下操作：  如果 n 是偶数，则用 n / 2 替换 n。 如果 n 是奇数，则可以用 n + 1 或 n - 1 替换 n。n 变为 1 所需的最小替换次数是多少？  思路无 代码12345678910111213141516171819202122232425262728293031323334/** * @param &amp;#123;number&amp;#125; n">
+  
+    <link rel="alternate" href="/atom.xml" title="Love of Red Moon Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Love of Red Moon Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">赤月之爱的博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">所有文章</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://loveofredmoon.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-LeetCode-397-整数替换" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/30/LeetCode-397-整数替换/" class="article-date">
+  <time datetime="2018-05-30T00:46:37.000Z" itemprop="datePublished">2018-05-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LeetCode 397 整数替换
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个正整数 n，你可以做如下操作：</p>
+<ol>
+<li>如果 n 是偶数，则用 n / 2 替换 n。</li>
+<li>如果 n 是奇数，则可以用 n + 1 或 n - 1 替换 n。<br>n 变为 1 所需的最小替换次数是多少？</li>
+</ol>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>无</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> integerReplacement = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n === <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span> k = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> ((k *= <span class="number">2</span>) &lt; n);</span><br><span class="line">    <span class="keyword">return</span> gf(n)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">gf</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> res = []</span><br><span class="line">        res[n] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">let</span> remain = [n],</span><br><span class="line">            curIndex = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> (remain.length) &#123;</span><br><span class="line">            curIndex++</span><br><span class="line">            <span class="keyword">const</span> temp = []</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = remain.length; i--; ) &#123;</span><br><span class="line">                <span class="keyword">const</span> cur = remain[i]</span><br><span class="line">                <span class="keyword">if</span> (cur % <span class="number">2</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (check(cur - <span class="number">1</span>)) temp.push(cur - <span class="number">1</span>)</span><br><span class="line">                    <span class="keyword">if</span> (check(cur + <span class="number">1</span>)) temp.push(cur + <span class="number">1</span>)</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (check(cur / <span class="number">2</span>)) temp.push(cur / <span class="number">2</span>)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (temp.indexOf(<span class="number">1</span>) &gt; <span class="number">-1</span>) <span class="keyword">return</span> curIndex</span><br><span class="line">            remain = temp</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">i</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> i &lt;= k &amp;&amp; res[i] === <span class="literal">undefined</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(integerReplacement(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/30/LeetCode-397-整数替换/" data-id="cjhshl16b000qp0kfa3wdqyhe" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/30/LeetCode-75-分类颜色/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LeetCode 75 分类颜色</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/兼容/">兼容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-JS/">正则 JS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS-radial-gradient/" style="font-size: 10px;">CSS radial-gradient</a> <a href="/tags/LeetCode-JavaScript-算法/" style="font-size: 20px;">LeetCode JavaScript 算法</a> <a href="/tags/兼容/" style="font-size: 10px;">兼容</a> <a href="/tags/常用/" style="font-size: 10px;">常用</a> <a href="/tags/正则-JS/" style="font-size: 10px;">正则 JS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/30/LeetCode-397-整数替换/">LeetCode 397 整数替换</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/30/LeetCode-75-分类颜色/">LeetCode 75 分类颜色</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/29/LeetCode-809-情感丰富的文字/">LeetCode 809 情感丰富的文字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/29/LeetCode-295-数据流的中位数/">LeetCode 295 数据流的中位数 </a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/28/LeetCode-722-删掉注释/">LeetCode 722 删掉注释</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018  <a href="/cyj.min.html" target="_blank"> Yongj Chen </a><br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">所有文章</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

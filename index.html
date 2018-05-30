@@ -70,6 +70,98 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LeetCode-397-整数替换" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/30/LeetCode-397-整数替换/" class="article-date">
+  <time datetime="2018-05-30T00:46:37.000Z" itemprop="datePublished">2018-05-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/30/LeetCode-397-整数替换/">LeetCode 397 整数替换</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个正整数 n，你可以做如下操作：</p>
+<ol>
+<li>如果 n 是偶数，则用 n / 2 替换 n。</li>
+<li>如果 n 是奇数，则可以用 n + 1 或 n - 1 替换 n。<br>n 变为 1 所需的最小替换次数是多少？</li>
+</ol>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>无</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> integerReplacement = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n === <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span> k = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> ((k *= <span class="number">2</span>) &lt; n);</span><br><span class="line">    <span class="keyword">return</span> gf(n)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">gf</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> res = []</span><br><span class="line">        res[n] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">let</span> remain = [n],</span><br><span class="line">            curIndex = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> (remain.length) &#123;</span><br><span class="line">            curIndex++</span><br><span class="line">            <span class="keyword">const</span> temp = []</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = remain.length; i--; ) &#123;</span><br><span class="line">                <span class="keyword">const</span> cur = remain[i]</span><br><span class="line">                <span class="keyword">if</span> (cur % <span class="number">2</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (check(cur - <span class="number">1</span>)) temp.push(cur - <span class="number">1</span>)</span><br><span class="line">                    <span class="keyword">if</span> (check(cur + <span class="number">1</span>)) temp.push(cur + <span class="number">1</span>)</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (check(cur / <span class="number">2</span>)) temp.push(cur / <span class="number">2</span>)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (temp.indexOf(<span class="number">1</span>) &gt; <span class="number">-1</span>) <span class="keyword">return</span> curIndex</span><br><span class="line">            remain = temp</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">i</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> i &lt;= k &amp;&amp; res[i] === <span class="literal">undefined</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(integerReplacement(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/30/LeetCode-397-整数替换/" data-id="cjhshl16b000qp0kfa3wdqyhe" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-75-分类颜色" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/30/LeetCode-75-分类颜色/" class="article-date">
+  <time datetime="2018-05-30T00:24:00.000Z" itemprop="datePublished">2018-05-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/30/LeetCode-75-分类颜色/">LeetCode 75 分类颜色</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个包含红色、白色和蓝色，一共 n 个元素的数组，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。</p>
+<p>此题中，我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。</p>
+<p>注意:<br>不能使用代码库中的排序函数来解决这道题。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>使用递归的思想解决, 假设当前位置之前的均已经是排好序的列表</p>
+<p>使用标记标记出当前 0 1 的最后位置,</p>
+<p>当前位置可以分为以下几种情况例如 0 0 1 1 2 2 1<br>如果是 0, 就和 0 后一个位置交换, 0 的位置加一 (并且继续判断, 因为可能换回来的是 1 或者 2)<br>如果是 1 就和 1 后面一个位置交换, 1 的位置加一 (此时换回来的一定是 2 (除非位置没变,即没有 2))<br>如果是 2 不动</p>
+<p>防止出现没有 0 1 2 而造成的序号混乱的情况, 先往数组中加入 0 1 2 三个数, 最后删除这样</p>
+<p>在处理 0 之后一定要处理 1, 不用进行判断了</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;void&#125; Do not return anything, modify nums in-place instead.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> sortColors = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> i = <span class="number">0</span>,</span><br><span class="line">        j = <span class="number">1</span></span><br><span class="line">    nums.unshift(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">const</span> len = nums.length</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> k = <span class="number">3</span>; k &lt; len; k++) &#123;</span><br><span class="line">        <span class="keyword">switch</span> (nums[k]) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                swap(++i, k)</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                swap(++j, k)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    nums.splice(j, <span class="number">1</span>)</span><br><span class="line">    nums.shift()</span><br><span class="line">    nums.pop()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">swap</span>(<span class="params">i, j</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (i != j) [nums[i], nums[j]] = [nums[j], nums[i]]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(sortColors([<span class="number">2</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/30/LeetCode-75-分类颜色/" data-id="cjhshl16t001cp0kfz2vyi2x5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LeetCode-809-情感丰富的文字" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/29/LeetCode-809-情感丰富的文字/" class="article-date">
@@ -101,7 +193,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/29/LeetCode-809-情感丰富的文字/" data-id="cjhrkrdvm001axokfh5i43769" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/29/LeetCode-809-情感丰富的文字/" data-id="cjhshl170001mp0kfk0uzk79z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -149,7 +241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/29/LeetCode-295-数据流的中位数/" data-id="cjhrkrduc0005xokf33n2kb53" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/29/LeetCode-295-数据流的中位数/" data-id="cjhshl14r0004p0kfwi32vsms" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -197,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/28/LeetCode-722-删掉注释/" data-id="cjhrkrdvk0016xokfcipyiyyp" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/28/LeetCode-722-删掉注释/" data-id="cjhshl16x001ip0kf724fchoe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -246,7 +338,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-843-猜猜这个单词/" data-id="cjhrkrdvx001sxokfclje8tsv" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-843-猜猜这个单词/" data-id="cjhshl183002ap0kfz4hhmrbc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -290,7 +382,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-842-将数组拆分成斐波那契序列/" data-id="cjhrkrdvv001oxokf2aqbz6r1" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-842-将数组拆分成斐波那契序列/" data-id="cjhshl17g001pp0kfendlfqgz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -335,7 +427,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-841-钥匙和房间/" data-id="cjhrkrdvw001qxokfywrnax1q" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-841-钥匙和房间/" data-id="cjhshl17n001up0kf3xkksks1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -377,7 +469,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-840-矩阵中的幻方/" data-id="cjhrkrdvu001mxokfb07af9zi" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-840-矩阵中的幻方/" data-id="cjhshl17i001qp0kfbbh9bk95" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -420,102 +512,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-803-打砖块/" data-id="cjhrkrdvo001cxokfnr8ei6bl" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-316-去除重复字母" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/26/LeetCode-316-去除重复字母/" class="article-date">
-  <time datetime="2018-05-26T03:10:24.000Z" itemprop="datePublished">2018-05-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/26/LeetCode-316-去除重复字母/">LeetCode 316 去除重复字母</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个仅包含小写字母的字符串，去除重复的字母使得所有字母出现且仅出现一次。你必须保证返回结果是所有可能结果中的以字典排序的最短结果。</p>
-<p>例如:</p>
-<p>给定 “bcabc”<br>返回 “abc”</p>
-<p>给定 “cbacdcbc”<br>返回 “acdb”</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>分别统计各个字母出现的位置</p>
-<p>如果按照字典序, 因此我们寻找位置应当从 a-&gt;z 进行寻找</p>
-<p>从前一个字符的位置向后寻找对应字符例如<code>cbacdcbc</code></p>
-<ol>
-<li>cb<strong>a</strong>cdcbc</li>
-<li>再 cb<strong>a</strong>cdc<strong>b</strong>c</li>
-<li>再 cb<strong>a</strong>cdc<strong>bc</strong></li>
-<li>发现 d 找不到了, 但是 d 必须存在, 因此直接找到最后一个<code>d</code>所在位置</li>
-</ol>
-<p>这时生成了一个相对小的字典排序 <code>adbc</code> 但是不是最小的这时哪些字母的相对位置一定确定了呢?<br><code>a</code> ,详细思路见代码</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> removeDuplicateLetters = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> res = &#123;&#125;,</span><br><span class="line">        result = [],</span><br><span class="line">        keys = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = s.length; i--; ) &#123;</span><br><span class="line">        <span class="keyword">if</span> (res[s[i]]) res[s[i]].unshift(i)</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            res[s[i]] = [i]</span><br><span class="line">            keys.push(s[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    keys.sort()</span><br><span class="line">    <span class="comment">// 依次从a-z 如果能满足: 最小序号小于其他所有的最大序号, 那么这个位置即确定, 同时更新所有数组, 去除小于这个序号的</span></span><br><span class="line">    <span class="comment">// 如果不满足这个条件, 则下一个元素, 开始找到最小的, 是否满足条件, 直到确定所有</span></span><br><span class="line">    <span class="keyword">while</span> (keys.length) &#123;</span><br><span class="line">        <span class="keyword">let</span> i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">const</span> len = keys.length</span><br><span class="line">        <span class="keyword">while</span> (!check(keys[i], res[keys[i++]][<span class="number">0</span>]));</span><br><span class="line">        <span class="keyword">const</span> k = keys[--i],</span><br><span class="line">            v = res[k][<span class="number">0</span>]</span><br><span class="line">        result.push(k)</span><br><span class="line">        <span class="keyword">delete</span> res[k]</span><br><span class="line">        keys.splice(i, <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = keys.length; i--; ) &#123;</span><br><span class="line">            res[keys[i]] = res[keys[i]].filter(<span class="function"><span class="params">vv</span> =&gt;</span> vv &gt; v)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// console.log(keys, res)</span></span><br><span class="line">        <span class="comment">// console.log('-----------------')</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// console.log(result)</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">key, value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = keys.length; i--; ) &#123;</span><br><span class="line">            <span class="keyword">const</span> k = keys[i]</span><br><span class="line">            <span class="keyword">if</span> (k !== key &amp;&amp; res[k][res[k].length - <span class="number">1</span>] &lt; value) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result.join(<span class="string">''</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(removeDuplicateLetters(<span class="string">'baa'</span>))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-316-去除重复字母/" data-id="cjhrkrdv1000jxokfg6y09hbl" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-92-反转链表-II" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/26/LeetCode-92-反转链表-II/" class="article-date">
-  <time datetime="2018-05-26T02:35:14.000Z" itemprop="datePublished">2018-05-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/26/LeetCode-92-反转链表-II/">LeetCode 92 反转链表 II</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。</p>
-<p>说明:<br>1 ≤ m ≤ n ≤ 链表长度。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>从 m-1 开始依次记录, 直到 n</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; createList, ListNode, showList &#125; = <span class="built_in">require</span>(<span class="string">'./ListNode'</span>)</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * function ListNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.next = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;ListNode&#125; head</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; m</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n</span></span><br><span class="line"><span class="comment"> * @return &#123;ListNode&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> reverseBetween = <span class="function"><span class="keyword">function</span>(<span class="params">head, m, n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (m &gt;= n) <span class="keyword">return</span> head</span><br><span class="line">    <span class="keyword">const</span> root = &#123;</span><br><span class="line">        next: head</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> curNode = root,</span><br><span class="line">        curPos = <span class="number">0</span>,</span><br><span class="line">        changeHead = <span class="literal">null</span>,</span><br><span class="line">        changeHeadNext = <span class="literal">null</span>,</span><br><span class="line">        lastNode = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">while</span> (curPos &lt;= n) &#123;</span><br><span class="line">        <span class="keyword">const</span> temp = curNode.next</span><br><span class="line">        <span class="keyword">if</span> (curPos === m - <span class="number">1</span>) changeHead = curNode</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (curPos === m) lastNode = changeHeadNext = curNode</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (curPos &gt; m) &#123;</span><br><span class="line">            curNode.next = lastNode</span><br><span class="line">            lastNode = curNode</span><br><span class="line">        &#125;</span><br><span class="line">        curNode = temp</span><br><span class="line">        curPos++</span><br><span class="line">    &#125;</span><br><span class="line">    changeHead.next = lastNode</span><br><span class="line">    changeHeadNext.next = curNode</span><br><span class="line">    <span class="keyword">return</span> root.next</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(showList(reverseBetween(createList([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]), <span class="number">2</span>, <span class="number">4</span>)))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-92-反转链表-II/" data-id="cjhrkrdw0001wxokfgsv8y7of" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-803-打砖块/" data-id="cjhshl16z001kp0kfvqjv9sod" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -577,6 +574,14 @@
       <ul>
         
           <li>
+            <a href="/2018/05/30/LeetCode-397-整数替换/">LeetCode 397 整数替换</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/30/LeetCode-75-分类颜色/">LeetCode 75 分类颜色</a>
+          </li>
+        
+          <li>
             <a href="/2018/05/29/LeetCode-809-情感丰富的文字/">LeetCode 809 情感丰富的文字</a>
           </li>
         
@@ -586,14 +591,6 @@
         
           <li>
             <a href="/2018/05/28/LeetCode-722-删掉注释/">LeetCode 722 删掉注释</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/27/LeetCode-843-猜猜这个单词/">LeetCode 843 猜猜这个单词</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/27/LeetCode-842-将数组拆分成斐波那契序列/">LeetCode 842 将数组拆分成斐波那契序列</a>
           </li>
         
       </ul>
