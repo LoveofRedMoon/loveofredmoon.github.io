@@ -70,6 +70,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LeetCode-150-逆波兰表达式求值" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/01/LeetCode-150-逆波兰表达式求值/" class="article-date">
+  <time datetime="2018-06-01T08:19:06.000Z" itemprop="datePublished">2018-06-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/01/LeetCode-150-逆波兰表达式求值/">LeetCode 150 逆波兰表达式求值</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>根据逆波兰表示法，求表达式的值。</p>
+<p>有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。</p>
+<p>说明：</p>
+<p>整数除法只保留整数部分。给定逆波兰表达式总是有效的。换句话说，表达式总会得出有效数值且不存在除数为 0 的情况。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>每个运算都是双目运算所以只需要重复找到一个运算符, 然后前面的两个数即是双目运算操作数</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string[]&#125; tokens</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> evalRPN = <span class="function"><span class="keyword">function</span>(<span class="params">tokens</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> operator = <span class="regexp">/^[\+|\-|\*|\/]$/</span></span><br><span class="line">    <span class="keyword">let</span> i</span><br><span class="line">    <span class="keyword">while</span> ((i = tokens.findIndex(<span class="function"><span class="params">v</span> =&gt;</span> operator.exec(v))) &gt; <span class="number">-1</span>) &#123;</span><br><span class="line">        tokens.splice(i - <span class="number">2</span>, <span class="number">3</span>, calc(tokens[i - <span class="number">2</span>], tokens[i - <span class="number">1</span>], tokens[i]))</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ~~tokens[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">calc</span>(<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (c) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'+'</span>:</span><br><span class="line">                <span class="keyword">return</span> ~~a + ~~b</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'-'</span>:</span><br><span class="line">                <span class="keyword">return</span> a - b</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'*'</span>:</span><br><span class="line">                <span class="keyword">return</span> a * b</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'/'</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">parseInt</span>(a / b)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(</span><br><span class="line">    evalRPN([</span><br><span class="line">        <span class="string">'10'</span>,</span><br><span class="line">        <span class="string">'6'</span>,</span><br><span class="line">        <span class="string">'9'</span>,</span><br><span class="line">        <span class="string">'3'</span>,</span><br><span class="line">        <span class="string">'+'</span>,</span><br><span class="line">        <span class="string">'-11'</span>,</span><br><span class="line">        <span class="string">'*'</span>,</span><br><span class="line">        <span class="string">'/'</span>,</span><br><span class="line">        <span class="string">'*'</span>,</span><br><span class="line">        <span class="string">'17'</span>,</span><br><span class="line">        <span class="string">'+'</span>,</span><br><span class="line">        <span class="string">'5'</span>,</span><br><span class="line">        <span class="string">'+'</span></span><br><span class="line">    ])</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/06/01/LeetCode-150-逆波兰表达式求值/" data-id="cjhvz6aj0000dn8kfhb4bwket" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-懒加载实现原理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/06/01/懒加载实现原理/" class="article-date">
@@ -110,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/06/01/懒加载实现原理/" data-id="cjhvov2m3001xrgkfi04gxthd" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/06/01/懒加载实现原理/" data-id="cjhvz6aoy002hn8kfufbasmqf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS-懒加载/">JS 懒加载</a></li></ul>
@@ -169,7 +213,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/30/关于一些常见类型的判断/" data-id="cjhvov2mi0028rgkffo51xkr7" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/30/关于一些常见类型的判断/" data-id="cjhvz6anz0022n8kfcqrgcczo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS-类型/">JS 类型</a></li></ul>
@@ -214,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/30/LeetCode-397-整数替换/" data-id="cjhvov2lk0013rgkfyn0ox56v" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/30/LeetCode-397-整数替换/" data-id="cjhvz6amz0010n8kfg9349mgb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -261,7 +305,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/30/LeetCode-75-分类颜色/" data-id="cjhvov2lv001jrgkf3roufvld" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/30/LeetCode-75-分类颜色/" data-id="cjhvz6ann001in8kfuts28b41" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -304,7 +348,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/29/LeetCode-809-情感丰富的文字/" data-id="cjhvov2m1001trgkfl5u5ndj0" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/29/LeetCode-809-情感丰富的文字/" data-id="cjhvz6anx001yn8kf3q8ctyzy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -352,7 +396,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/29/LeetCode-295-数据流的中位数/" data-id="cjhvov2kz000argkfdfr076ut" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/29/LeetCode-295-数据流的中位数/" data-id="cjhvz6aj7000jn8kfxhgmjgns" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -400,7 +444,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/28/LeetCode-722-删掉注释/" data-id="cjhvov2lr001drgkfnpfe08wl" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/28/LeetCode-722-删掉注释/" data-id="cjhvz6ani001cn8kf4f6d34dg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -449,7 +493,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-843-猜猜这个单词/" data-id="cjhvov2m2001vrgkf2fqrh8az" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-843-猜猜这个单词/" data-id="cjhvz6anv001wn8kf5gfwbhok" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -493,52 +537,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-842-将数组拆分成斐波那契序列/" data-id="cjhvov2ly001nrgkfz78ofe0s" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-841-钥匙和房间" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/27/LeetCode-841-钥匙和房间/" class="article-date">
-  <time datetime="2018-05-27T09:17:48.000Z" itemprop="datePublished">2018-05-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/27/LeetCode-841-钥匙和房间/">LeetCode 841 钥匙和房间</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>有 N 个房间，开始时你位于 0 号房间。每个房间有不同的号码：0，1，2，…，N-1，并且房间里可能有一些钥匙能使你进入下一个房间。</p>
-<p>在形式上，对于每个房间 i 都有一个钥匙列表 rooms[i]，每个钥匙 rooms[i][j] 由 [0,1，…，N-1] 中的一个整数表示，其中 N = rooms.length。 钥匙 rooms[i][j] = v 可以打开编号为 v 的房间。</p>
-<p>最初，除 0 号房间外的其余所有房间都被锁住。</p>
-<p>你可以自由地在房间之间来回走动。</p>
-<p>如果能进入每个房间返回 true，否则返回 false。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>就是深度遍历的思路, 使用一个数组保存已经去过的房间, 直到不能找到所有房间, 然后检查这个数组</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[][]&#125; rooms</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> canVisitAllRooms = <span class="function"><span class="keyword">function</span>(<span class="params">rooms</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> room = <span class="built_in">Array</span>(rooms.length).fill(<span class="literal">false</span>),</span><br><span class="line">        checkRoom = [<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">while</span> (checkRoom.length) &#123;</span><br><span class="line">        <span class="keyword">const</span> i = checkRoom.shift()</span><br><span class="line">        <span class="keyword">if</span> (room[i]) <span class="keyword">continue</span></span><br><span class="line">        room[i] = <span class="literal">true</span></span><br><span class="line">        checkRoom.push(...rooms[i])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> room.every(<span class="function"><span class="params">v</span> =&gt;</span> v)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(canVisitAllRooms([[<span class="number">1</span>, <span class="number">3</span>], [<span class="number">3</span>, <span class="number">0</span>, <span class="number">1</span>], [<span class="number">2</span>], [<span class="number">0</span>]]))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-841-钥匙和房间/" data-id="cjhvov2lw001lrgkf0pryyre2" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-842-将数组拆分成斐波那契序列/" data-id="cjhvz6anu001un8kfqlujcp7m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -600,6 +599,10 @@
       <ul>
         
           <li>
+            <a href="/2018/06/01/LeetCode-150-逆波兰表达式求值/">LeetCode 150 逆波兰表达式求值</a>
+          </li>
+        
+          <li>
             <a href="/2018/06/01/懒加载实现原理/">懒加载实现原理</a>
           </li>
         
@@ -613,10 +616,6 @@
         
           <li>
             <a href="/2018/05/30/LeetCode-75-分类颜色/">LeetCode 75 分类颜色</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/29/LeetCode-809-情感丰富的文字/">LeetCode 809 情感丰富的文字</a>
           </li>
         
       </ul>

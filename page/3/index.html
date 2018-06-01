@@ -70,6 +70,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LeetCode-3-无重复字符的最长子串" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/23/LeetCode-3-无重复字符的最长子串/" class="article-date">
+  <time datetime="2018-05-23T06:02:14.000Z" itemprop="datePublished">2018-05-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/23/LeetCode-3-无重复字符的最长子串/">LeetCode 3 无重复字符的最长子串</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个字符串，找出不含有重复字符的最长子串的长度。</p>
+<p>示例：</p>
+<p>给定 “abcabcbb” ，没有重复字符的最长子串是 “abc” ，那么长度就是 3。</p>
+<p>给定 “bbbbb” ，最长的子串就是 “b” ，长度是 1。</p>
+<p>给定 “pwwkew” ，最长子串是 “wke” ，长度是 3。请注意答案必须是一个子串，”pwke” 是 子序列 而不是子串。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>对于一个字符串, 依次判断每个字符出现的次数, 如果出现超过 1 次, 那么就进行分割, 并且分别再次求子字符串的最长子串</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> lengthOfLongestSubstring = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> maxLength = <span class="number">0</span></span><br><span class="line">    <span class="keyword">const</span> zy = [</span><br><span class="line">        <span class="string">'*'</span>,</span><br><span class="line">        <span class="string">'.'</span>,</span><br><span class="line">        <span class="string">'?'</span>,</span><br><span class="line">        <span class="string">'+'</span>,</span><br><span class="line">        <span class="string">'$'</span>,</span><br><span class="line">        <span class="string">'^'</span>,</span><br><span class="line">        <span class="string">'['</span>,</span><br><span class="line">        <span class="string">']'</span>,</span><br><span class="line">        <span class="string">'('</span>,</span><br><span class="line">        <span class="string">')'</span>,</span><br><span class="line">        <span class="string">'&#123;'</span>,</span><br><span class="line">        <span class="string">'&#125;'</span>,</span><br><span class="line">        <span class="string">'|'</span>,</span><br><span class="line">        <span class="string">'\\'</span>,</span><br><span class="line">        <span class="string">'/'</span></span><br><span class="line">    ]</span><br><span class="line">    check(s)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.lengt &lt;= maxLength) <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">const</span> ma = s.match(<span class="regexp">/(.).*?\1/</span>)</span><br><span class="line">        <span class="keyword">if</span> (ma) &#123;</span><br><span class="line">            <span class="keyword">const</span> letter = ma[<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">const</span> r =</span><br><span class="line">                zy.indexOf(letter) &gt; <span class="number">-1</span></span><br><span class="line">                    ? <span class="built_in">RegExp</span>(</span><br><span class="line">                          <span class="string">'(.*?)\\'</span> + letter + <span class="string">'.*?(?=(\\'</span> + letter + <span class="string">'|$))'</span>,</span><br><span class="line">                          <span class="string">'g'</span></span><br><span class="line">                      )</span><br><span class="line">                    : <span class="built_in">RegExp</span>(</span><br><span class="line">                          <span class="string">'(.*?)'</span> + letter + <span class="string">'.*?(?=('</span> + letter + <span class="string">'|$))'</span>,</span><br><span class="line">                          <span class="string">'g'</span></span><br><span class="line">                      )</span><br><span class="line">            <span class="keyword">let</span> res</span><br><span class="line">            <span class="keyword">while</span> ((res = r.exec(s))) &#123;</span><br><span class="line">                r.lastIndex = res.index + res[<span class="number">1</span>].length + <span class="number">1</span></span><br><span class="line">                check(res[<span class="number">0</span>])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (s.length &gt; maxLength) maxLength = s.length</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxLength</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-3-无重复字符的最长子串/" data-id="cjhvz6ait0005n8kf44icrydl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LeetCode-798-Smallest-Rotation-with-Highest-Score" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/" class="article-date">
@@ -120,7 +165,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/" data-id="cjhvov2lq001brgkfdr6tto6g" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/" data-id="cjhvz6ano001kn8kfob26lk1e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -161,7 +206,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-238-除自身以外数组的乘积/" data-id="cjhvov2ku0005rgkfl15tsbwp" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-238-除自身以外数组的乘积/" data-id="cjhvz6aiw0008n8kft97w0zaf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -202,7 +247,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-200-岛屿的个数/" data-id="cjhvov2l9000lrgkfe2o25kqe" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-200-岛屿的个数/" data-id="cjhvz6aio0001n8kfrd7cmzys" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -254,7 +299,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-393-UTF-8-编码验证/" data-id="cjhvov2l6000hrgkfb0p8ky8n" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-393-UTF-8-编码验证/" data-id="cjhvz6amt000qn8kfraa7qqy5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -294,7 +339,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/22/LeetCode-524-通过删除字母匹配到字典里最长单词/" data-id="cjhvov2lf000vrgkfl3tkjy67" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/22/LeetCode-524-通过删除字母匹配到字典里最长单词/" data-id="cjhvz6an10014n8kf7gxd20kt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -337,7 +382,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/21/LeetCode-336-回文对/" data-id="cjhvov2le000trgkfjri36uzn" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/21/LeetCode-336-回文对/" data-id="cjhvz6aj4000hn8kf6cwugaiv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -381,7 +426,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/21/LeetCode-394-字符串解码/" data-id="cjhvov2lb000nrgkfkh6d8smu" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/21/LeetCode-394-字符串解码/" data-id="cjhvz6amw000wn8kf9dc53apg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -425,7 +470,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/20/LeetCode-738-单调递增的数字/" data-id="cjhvov2lm0015rgkfm6jwkb3f" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/20/LeetCode-738-单调递增的数字/" data-id="cjhvz6anf001an8kfyffm4imp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -555,55 +600,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/19/正则表达式-JS/" data-id="cjhvov2ns002drgkfssz3crgh" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/19/正则表达式-JS/" data-id="cjhvz6aok002an8kffhji6855" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则-JS/">正则 JS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-常用代码处理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/19/常用代码处理/" class="article-date">
-  <time datetime="2018-05-19T07:05:35.000Z" itemprop="datePublished">2018-05-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/19/常用代码处理/">常用代码处理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 驼峰转短横线</span></span><br><span class="line"><span class="keyword">var</span> toKeCase = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.replace(<span class="regexp">/[A-Z]/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'-'</span> + v.toLowerCase()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 短横线转驼峰</span></span><br><span class="line"><span class="keyword">var</span> toCamelCase = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.replace(<span class="regexp">/-([a-z])/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">v, a</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a.toUpperCase()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 封装选择器获取元素, (其中还有一些其他方法另写)</span></span><br><span class="line"><span class="keyword">var</span> querySelector = <span class="function"><span class="keyword">function</span>(<span class="params">sel</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.querySelectorAll) &#123;</span><br><span class="line">        sel = <span class="built_in">document</span>.querySelectorAll(sel)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 针对IE7 不支持querySelectAll</span></span><br><span class="line">        <span class="comment">// 处理一下选择器 后代( ) id(#) class(.) tagName() 子代(&gt;) 属性选择器(不能单独作为最后一个选择器)</span></span><br><span class="line">        <span class="comment">// 暂时不支持逗号选择器</span></span><br><span class="line">        <span class="comment">// 不考虑性能, 将从第一个id选择器或者第一个开始查询</span></span><br><span class="line">        sel = sel.split(<span class="regexp">/\b(?=[ &gt;])/</span>)</span><br><span class="line">        <span class="keyword">var</span> cur = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">var</span> ppp = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = sel.length; i--; ) &#123;</span><br><span class="line">            <span class="keyword">var</span> flag = <span class="literal">false</span></span><br><span class="line">            <span class="keyword">if</span> (sel[i].charAt(<span class="number">0</span>) === <span class="string">'&gt;'</span>) flag = <span class="literal">true</span></span><br><span class="line">            sel[i] = sel[i].replace(<span class="regexp">/(^[ &gt;]|"|')/g</span>, <span class="string">''</span>)</span><br><span class="line">            <span class="keyword">var</span> v = sel[i].split(<span class="regexp">/(\b(?=[ #\.\[])|\])/</span>)</span><br><span class="line">            <span class="keyword">var</span> j = <span class="number">0</span></span><br><span class="line">            <span class="comment">// 这里cur保存当前满足条件的所有元素</span></span><br><span class="line">            <span class="comment">// 这里ppp保存当前满足条件的底层元素</span></span><br><span class="line">            <span class="keyword">if</span> (ppp === <span class="literal">null</span>) &#123;</span><br><span class="line">                ppp = $$.getElem(v[j++])</span><br><span class="line">                <span class="keyword">if</span> (!ppp.length) <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">                cur = $$.map(ppp, <span class="function"><span class="keyword">function</span>(<span class="params">vv, ii</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> [vv, ii]</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//筛选所有不满足条件的元素</span></span><br><span class="line">            <span class="keyword">for</span> (; j &lt; v.length; j++)</span><br><span class="line">                cur = $$.reduce(</span><br><span class="line">                    cur,</span><br><span class="line">                    <span class="function"><span class="keyword">function</span>(<span class="params">p, curr</span>) </span>&#123;</span><br><span class="line">                        <span class="keyword">if</span> ($$.check(curr[<span class="number">0</span>], v[j])) p.push(curr)</span><br><span class="line">                        <span class="keyword">return</span> p</span><br><span class="line">                    &#125;,</span><br><span class="line">                    []</span><br><span class="line">                )</span><br><span class="line">            <span class="keyword">if</span> (i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (flag)</span><br><span class="line">                    cur = $$.reduce(</span><br><span class="line">                        cur,</span><br><span class="line">                        <span class="function"><span class="keyword">function</span>(<span class="params">p, curr</span>) </span>&#123;</span><br><span class="line">                            <span class="keyword">var</span> z = curr[<span class="number">0</span>].parentNode</span><br><span class="line">                            <span class="keyword">if</span> (z !== <span class="literal">null</span>) p.push([z, curr[<span class="number">1</span>]])</span><br><span class="line">                            <span class="keyword">return</span> p</span><br><span class="line">                        &#125;,</span><br><span class="line">                        []</span><br><span class="line">                    )</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    cur = $$.reduce(</span><br><span class="line">                        cur,</span><br><span class="line">                        <span class="function"><span class="keyword">function</span>(<span class="params">p, curr</span>) </span>&#123;</span><br><span class="line">                            <span class="keyword">var</span> z = curr[<span class="number">0</span>]</span><br><span class="line">                            <span class="keyword">while</span> ((z = z.parentNode)) p.push([z, curr[<span class="number">1</span>]])</span><br><span class="line">                            <span class="keyword">return</span> p</span><br><span class="line">                        &#125;,</span><br><span class="line">                        []</span><br><span class="line">                    )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cur = $$.map(</span><br><span class="line">            $$.removeRepeat(</span><br><span class="line">                $$.map(cur, <span class="function"><span class="keyword">function</span>(<span class="params">vv</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> vv[<span class="number">1</span>]</span><br><span class="line">                &#125;)</span><br><span class="line">            ),</span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params">vv</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> ppp[vv]</span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line">        sel = cur</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">``</span><span class="string">`</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">``</span><span class="string">`</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br></pre></td></tr></table></figure>
-<pre><code class="js">
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/19/常用代码处理/" data-id="cjhvov2mg0027rgkfgciomb3u" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常用/">常用</a></li></ul>
 
     </footer>
   </div>
@@ -662,6 +662,10 @@
       <ul>
         
           <li>
+            <a href="/2018/06/01/LeetCode-150-逆波兰表达式求值/">LeetCode 150 逆波兰表达式求值</a>
+          </li>
+        
+          <li>
             <a href="/2018/06/01/懒加载实现原理/">懒加载实现原理</a>
           </li>
         
@@ -675,10 +679,6 @@
         
           <li>
             <a href="/2018/05/30/LeetCode-75-分类颜色/">LeetCode 75 分类颜色</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/29/LeetCode-809-情感丰富的文字/">LeetCode 809 情感丰富的文字</a>
           </li>
         
       </ul>

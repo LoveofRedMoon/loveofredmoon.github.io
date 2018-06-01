@@ -70,6 +70,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LeetCode-841-钥匙和房间" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/27/LeetCode-841-钥匙和房间/" class="article-date">
+  <time datetime="2018-05-27T09:17:48.000Z" itemprop="datePublished">2018-05-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/27/LeetCode-841-钥匙和房间/">LeetCode 841 钥匙和房间</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>有 N 个房间，开始时你位于 0 号房间。每个房间有不同的号码：0，1，2，…，N-1，并且房间里可能有一些钥匙能使你进入下一个房间。</p>
+<p>在形式上，对于每个房间 i 都有一个钥匙列表 rooms[i]，每个钥匙 rooms[i][j] 由 [0,1，…，N-1] 中的一个整数表示，其中 N = rooms.length。 钥匙 rooms[i][j] = v 可以打开编号为 v 的房间。</p>
+<p>最初，除 0 号房间外的其余所有房间都被锁住。</p>
+<p>你可以自由地在房间之间来回走动。</p>
+<p>如果能进入每个房间返回 true，否则返回 false。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>就是深度遍历的思路, 使用一个数组保存已经去过的房间, 直到不能找到所有房间, 然后检查这个数组</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[][]&#125; rooms</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> canVisitAllRooms = <span class="function"><span class="keyword">function</span>(<span class="params">rooms</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> room = <span class="built_in">Array</span>(rooms.length).fill(<span class="literal">false</span>),</span><br><span class="line">        checkRoom = [<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">while</span> (checkRoom.length) &#123;</span><br><span class="line">        <span class="keyword">const</span> i = checkRoom.shift()</span><br><span class="line">        <span class="keyword">if</span> (room[i]) <span class="keyword">continue</span></span><br><span class="line">        room[i] = <span class="literal">true</span></span><br><span class="line">        checkRoom.push(...rooms[i])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> room.every(<span class="function"><span class="params">v</span> =&gt;</span> v)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(canVisitAllRooms([[<span class="number">1</span>, <span class="number">3</span>], [<span class="number">3</span>, <span class="number">0</span>, <span class="number">1</span>], [<span class="number">2</span>], [<span class="number">0</span>]]))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-841-钥匙和房间/" data-id="cjhvz6ans001qn8kfzzo3oay8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LeetCode-840-矩阵中的幻方" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/27/LeetCode-840-矩阵中的幻方/" class="article-date">
@@ -100,7 +145,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-840-矩阵中的幻方/" data-id="cjhvov2lz001prgkfmvxhmhan" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-840-矩阵中的幻方/" data-id="cjhvz6ant001sn8kfpld1qhxj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -143,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-803-打砖块/" data-id="cjhvov2lp0019rgkfaw4o24p2" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-803-打砖块/" data-id="cjhvz6anl001gn8kf3bu9qvnb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -196,7 +241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-316-去除重复字母/" data-id="cjhvov2l8000jrgkf5wxjwp9j" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-316-去除重复字母/" data-id="cjhvz6amv000un8kfrfrfhtim" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -238,7 +283,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-92-反转链表-II/" data-id="cjhvov2m0001rrgkfx3nwum7v" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-92-反转链表-II/" data-id="cjhvz6any0020n8kfxy7sof8c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -283,7 +328,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-44-通配符匹配/" data-id="cjhvov2lc000prgkfu1lcco21" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-44-通配符匹配/" data-id="cjhvz6amu000sn8kfeev8o5zo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -327,7 +372,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-392-判断子序列/" data-id="cjhvov2l2000drgkf5apz5sgj" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-392-判断子序列/" data-id="cjhvz6ams000pn8kfofgvceyv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -372,7 +417,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/" data-id="cjhvov2lu001hrgkfod7xihtz" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/" data-id="cjhvz6anq001on8kf4fumqvzl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -417,7 +462,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-808-分汤/" data-id="cjhvov2ls001frgkfo7211q4m" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-808-分汤/" data-id="cjhvz6anp001mn8kf2jmq25ln" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -461,52 +506,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-565-数组嵌套/" data-id="cjhvov2li0011rgkfg5hcv2w4" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-3-无重复字符的最长子串" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/23/LeetCode-3-无重复字符的最长子串/" class="article-date">
-  <time datetime="2018-05-23T06:02:14.000Z" itemprop="datePublished">2018-05-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/23/LeetCode-3-无重复字符的最长子串/">LeetCode 3 无重复字符的最长子串</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个字符串，找出不含有重复字符的最长子串的长度。</p>
-<p>示例：</p>
-<p>给定 “abcabcbb” ，没有重复字符的最长子串是 “abc” ，那么长度就是 3。</p>
-<p>给定 “bbbbb” ，最长的子串就是 “b” ，长度是 1。</p>
-<p>给定 “pwwkew” ，最长子串是 “wke” ，长度是 3。请注意答案必须是一个子串，”pwke” 是 子序列 而不是子串。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>对于一个字符串, 依次判断每个字符出现的次数, 如果出现超过 1 次, 那么就进行分割, 并且分别再次求子字符串的最长子串</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> lengthOfLongestSubstring = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> maxLength = <span class="number">0</span></span><br><span class="line">    <span class="keyword">const</span> zy = [</span><br><span class="line">        <span class="string">'*'</span>,</span><br><span class="line">        <span class="string">'.'</span>,</span><br><span class="line">        <span class="string">'?'</span>,</span><br><span class="line">        <span class="string">'+'</span>,</span><br><span class="line">        <span class="string">'$'</span>,</span><br><span class="line">        <span class="string">'^'</span>,</span><br><span class="line">        <span class="string">'['</span>,</span><br><span class="line">        <span class="string">']'</span>,</span><br><span class="line">        <span class="string">'('</span>,</span><br><span class="line">        <span class="string">')'</span>,</span><br><span class="line">        <span class="string">'&#123;'</span>,</span><br><span class="line">        <span class="string">'&#125;'</span>,</span><br><span class="line">        <span class="string">'|'</span>,</span><br><span class="line">        <span class="string">'\\'</span>,</span><br><span class="line">        <span class="string">'/'</span></span><br><span class="line">    ]</span><br><span class="line">    check(s)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.lengt &lt;= maxLength) <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">const</span> ma = s.match(<span class="regexp">/(.).*?\1/</span>)</span><br><span class="line">        <span class="keyword">if</span> (ma) &#123;</span><br><span class="line">            <span class="keyword">const</span> letter = ma[<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">const</span> r =</span><br><span class="line">                zy.indexOf(letter) &gt; <span class="number">-1</span></span><br><span class="line">                    ? <span class="built_in">RegExp</span>(</span><br><span class="line">                          <span class="string">'(.*?)\\'</span> + letter + <span class="string">'.*?(?=(\\'</span> + letter + <span class="string">'|$))'</span>,</span><br><span class="line">                          <span class="string">'g'</span></span><br><span class="line">                      )</span><br><span class="line">                    : <span class="built_in">RegExp</span>(</span><br><span class="line">                          <span class="string">'(.*?)'</span> + letter + <span class="string">'.*?(?=('</span> + letter + <span class="string">'|$))'</span>,</span><br><span class="line">                          <span class="string">'g'</span></span><br><span class="line">                      )</span><br><span class="line">            <span class="keyword">let</span> res</span><br><span class="line">            <span class="keyword">while</span> ((res = r.exec(s))) &#123;</span><br><span class="line">                r.lastIndex = res.index + res[<span class="number">1</span>].length + <span class="number">1</span></span><br><span class="line">                check(res[<span class="number">0</span>])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (s.length &gt; maxLength) maxLength = s.length</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxLength</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-3-无重复字符的最长子串/" data-id="cjhvov2kt0004rgkfrm0gaebn" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-565-数组嵌套/" data-id="cjhvz6anb0017n8kf9h02unw3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -568,6 +568,10 @@
       <ul>
         
           <li>
+            <a href="/2018/06/01/LeetCode-150-逆波兰表达式求值/">LeetCode 150 逆波兰表达式求值</a>
+          </li>
+        
+          <li>
             <a href="/2018/06/01/懒加载实现原理/">懒加载实现原理</a>
           </li>
         
@@ -581,10 +585,6 @@
         
           <li>
             <a href="/2018/05/30/LeetCode-75-分类颜色/">LeetCode 75 分类颜色</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/29/LeetCode-809-情感丰富的文字/">LeetCode 809 情感丰富的文字</a>
           </li>
         
       </ul>
