@@ -70,6 +70,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-懒加载实现原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/01/懒加载实现原理/" class="article-date">
+  <time datetime="2018-06-01T00:55:50.000Z" itemprop="datePublished">2018-06-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/01/懒加载实现原理/">懒加载实现原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="懒加载"><a href="#懒加载" class="headerlink" title="懒加载"></a>懒加载</h2><p>懒加载是优化用户体验的一步, 并且已经是个很古老的问题了.<br>这里就懒加载的一些情况进行说明</p>
+<h3 id="图片懒加载"><a href="#图片懒加载" class="headerlink" title="图片懒加载"></a>图片懒加载</h3><p>一开始肯定是想使用默认图片, 并且加载完成之后替换原本的 SRC 即可但是事与愿违, 图片修改 SRC 之后会出现空白</p>
+<p>因此使用情况应当是使用一个新的 IMG 标签加载图片, 如果加载完成, 说明浏览器有缓存了, 这个时候替换原来的图片即可瞬间加载完毕. 当然, 为了保持文件大小的一致性, 一定要给 Img 标签设置具体的宽高值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用了jQuery</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">imgLazyLoad</span>(<span class="params">img</span>) </span>&#123;</span><br><span class="line">    img = $(img)</span><br><span class="line">    <span class="keyword">var</span> newImg = $(<span class="string">'&lt;img /&gt;'</span>),</span><br><span class="line">        path = img.data(<span class="string">'src'</span>)</span><br><span class="line">    newImg.on(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        img.prop(<span class="string">'src'</span>, path)</span><br><span class="line">    &#125;)</span><br><span class="line">    newImg.prop(<span class="string">'src'</span>, path)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="加载时机"><a href="#加载时机" class="headerlink" title="加载时机"></a>加载时机</h3><p>上面的加载时机是自己决定的所以一般是使用<code>window.onload</code>即整个网页架构都加载完毕后进行图片加载具体的图片即</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="string">'img'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params">index, elem</span>) </span>&#123;</span><br><span class="line">        imgLazyLoad(elem)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是在实际开发中, 会遇到很多问题, 例如淘宝, 在用户对界面很熟悉的情况下, 一般会忽略打开页面的顶部信息栏, 而是直接滚动到下部选择需要的物品又或者用户会快速浏览商品名, 对某些商品进行过滤</p>
+<p>因此需要快速进行定位一般来说, 需要两步同时进行,<br>即<strong>预加载图片</strong>和<strong>界面加载图片</strong>同时进行</p>
+<p>我的思路里, 认定<strong>当前界面的图片加载</strong> &gt; <strong>下一屏加载</strong> &gt; <strong>其他图片加载</strong></p>
+<ol>
+<li>图片位置判定是利用<code>元素距离顶部的距离</code> <code>视口距离顶部的距离</code> <code>视口的高度</code>三者的关系来判定图片的位置即若在视口内, 则是<code>$(&#39;img&#39;).offset().top - $(window).scrollTop()</code>必须在<code>0</code>和<code>$(window).height</code>之间, 若是下一屏则是在<code>$(window).height</code>和<code>$(window).height*2</code>之间</li>
+<li>时机的判定应当在加载完 DOM 结构之后就进行网页图片的申请, 并且需要进行图片的管理</li>
+</ol>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 处理所有待处理的图片, 获取距离顶部的高度</span></span><br><span class="line">    <span class="keyword">const</span> allLazyImg = [].map</span><br><span class="line">            .call($(<span class="string">'img[data-src]'</span>), v =&gt; &#123;</span><br><span class="line">                v = $(v)</span><br><span class="line">                <span class="keyword">return</span> [v, v.offset().top]</span><br><span class="line">            &#125;)</span><br><span class="line">            .sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a[<span class="number">1</span>] - b[<span class="number">1</span>]),</span><br><span class="line">        windowHeight = $(<span class="built_in">window</span>).height()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 假设浏览器的默认并发数为 6</span></span><br><span class="line">    <span class="comment">// 考虑到浏览器并发限制, 因此人为的限制非本屏的图片获取并发数为 3</span></span><br><span class="line">    <span class="comment">// 当本屏有未加载图片时, 优先加载本屏图片</span></span><br><span class="line">    <span class="keyword">const</span> MAXLINE = <span class="number">6</span>,</span><br><span class="line">        curSCREENLINE = <span class="number">3</span></span><br><span class="line">    <span class="keyword">let</span> curNum = <span class="number">1</span>, <span class="comment">// 当前正在处理图片的数量</span></span><br><span class="line">        scrollTop = <span class="number">0</span>, <span class="comment">// 当前滚动条位置, 用于判断图片是否在本屏幕</span></span><br><span class="line">        timeId = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">    check()</span><br><span class="line">    $(<span class="built_in">window</span>).on(<span class="string">'scroll'</span>, scrollEvent)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">scrollEvent</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        clearTimeout(timeId)</span><br><span class="line">        timeId = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            scrollTop = $(<span class="built_in">window</span>).scrollTop()</span><br><span class="line">            <span class="keyword">const</span> pos = allLazyImg.findIndex(<span class="function"><span class="params">v</span> =&gt;</span> v[<span class="number">1</span>] &gt; scrollTop)</span><br><span class="line">            <span class="keyword">if</span> (pos &gt;= <span class="number">0</span>) allLazyImg.push(...allLazyImg.splice(<span class="number">0</span>, pos))</span><br><span class="line">        &#125;, <span class="number">500</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 回调函数, 用于处理图片加载之后的行为</span></span><br><span class="line">        curNum--</span><br><span class="line">        <span class="comment">// allLazyImg默认按照需要的顺序排序 即当前页面第一</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!allLazyImg.length) &#123;</span><br><span class="line">                <span class="comment">// 处理完毕, 清除所有事件</span></span><br><span class="line">                $(<span class="built_in">window</span>).off(<span class="string">'scroll'</span>, scrollEvent)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 并发过多(一般不可能) 返回</span></span><br><span class="line">            <span class="keyword">if</span> (curNum &gt;= <span class="number">6</span>) <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">const</span> curImg = allLazyImg[<span class="number">0</span>][<span class="number">0</span>],</span><br><span class="line">                pos = allLazyImg[<span class="number">0</span>][<span class="number">1</span>] - scrollTop</span><br><span class="line">            <span class="comment">// 超过三条并发并且还不在页面内</span></span><br><span class="line">            <span class="keyword">if</span> (curNum &gt; <span class="number">2</span> &amp;&amp; (pos &lt; <span class="number">0</span> || pos &gt; windowHeight)) <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 添加</span></span><br><span class="line">            curNum++</span><br><span class="line">            <span class="built_in">console</span>.log(curNum)</span><br><span class="line">            <span class="built_in">console</span>.log(curImg)</span><br><span class="line">            $(<span class="string">'&lt;img /&gt;'</span>)</span><br><span class="line">                .on(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                    curImg.prop(<span class="string">'src'</span>, curImg.data(<span class="string">'src'</span>))</span><br><span class="line">                    check()</span><br><span class="line">                &#125;)</span><br><span class="line">                .prop(<span class="string">'src'</span>, curImg.data(<span class="string">'src'</span>))</span><br><span class="line">            allLazyImg.shift()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/06/01/懒加载实现原理/" data-id="cjhvov2m3001xrgkfi04gxthd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS-懒加载/">JS 懒加载</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-关于一些常见类型的判断" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/30/关于一些常见类型的判断/" class="article-date">
@@ -117,7 +169,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/30/关于一些常见类型的判断/" data-id="cjhsr2tbx001wvskf2and9t8h" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/30/关于一些常见类型的判断/" data-id="cjhvov2mi0028rgkffo51xkr7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS-类型/">JS 类型</a></li></ul>
@@ -162,7 +214,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/30/LeetCode-397-整数替换/" data-id="cjhsr2tak0012vskfjcqhygnz" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/30/LeetCode-397-整数替换/" data-id="cjhvov2lk0013rgkfyn0ox56v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -209,7 +261,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/30/LeetCode-75-分类颜色/" data-id="cjhsr2taz001evskf3hx17wvk" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/30/LeetCode-75-分类颜色/" data-id="cjhvov2lv001jrgkf3roufvld" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -252,7 +304,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/29/LeetCode-809-情感丰富的文字/" data-id="cjhsr2tbg001ovskfp4cd1jxy" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/29/LeetCode-809-情感丰富的文字/" data-id="cjhvov2m1001trgkfl5u5ndj0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -300,7 +352,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/29/LeetCode-295-数据流的中位数/" data-id="cjhsr2t880004vskfnl66zmx8" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/29/LeetCode-295-数据流的中位数/" data-id="cjhvov2kz000argkfdfr076ut" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -348,7 +400,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/28/LeetCode-722-删掉注释/" data-id="cjhsr2tau0018vskfl8beg5jb" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/28/LeetCode-722-删掉注释/" data-id="cjhvov2lr001drgkfnpfe08wl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -397,7 +449,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-843-猜猜这个单词/" data-id="cjhsr2tbs001svskfulsi65wh" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-843-猜猜这个单词/" data-id="cjhvov2m2001vrgkf2fqrh8az" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -441,7 +493,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-842-将数组拆分成斐波那契序列/" data-id="cjhsr2tbv001uvskfznhqoljh" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-842-将数组拆分成斐波那契序列/" data-id="cjhvov2ly001nrgkfz78ofe0s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -486,49 +538,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-841-钥匙和房间/" data-id="cjhsr2tbk001qvskfzjofegi0" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-840-矩阵中的幻方" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/27/LeetCode-840-矩阵中的幻方/" class="article-date">
-  <time datetime="2018-05-27T09:01:42.000Z" itemprop="datePublished">2018-05-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/27/LeetCode-840-矩阵中的幻方/">LeetCode 840 矩阵中的幻方</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>3 x 3 的幻方是一个填充有从 1 到 9 的不同数字的 3 x 3 矩阵，其中每行，每列以及两条对角线上的各数之和都相等。</p>
-<p>给定一个由整数组成的 N × N 矩阵，其中有多少个 3 × 3 的 “幻方” 子矩阵？（每个子矩阵都是连续的）。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>三阶幻方的中心数一定是 5, 因此直接寻找 5, 并且周围四个均为奇数 其次均为偶数</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[][]&#125; grid</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> numMagicSquaresInside = <span class="function"><span class="keyword">function</span>(<span class="params">grid</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> m = grid.length,</span><br><span class="line">        n = grid[<span class="number">0</span>].length</span><br><span class="line">    <span class="keyword">let</span> res = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; m - <span class="number">1</span>; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">1</span>; j &lt; n - <span class="number">1</span>; j++) <span class="keyword">if</span> (grid[i][j] === <span class="number">5</span>) res += check(i, j)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">i, j</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> odd = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">            all = [</span><br><span class="line">                grid[i - <span class="number">1</span>][j],</span><br><span class="line">                grid[i + <span class="number">1</span>][j],</span><br><span class="line">                grid[i][j - <span class="number">1</span>],</span><br><span class="line">                grid[i][j + <span class="number">1</span>]</span><br><span class="line">            ]</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> k = <span class="number">0</span>; k &lt; <span class="number">4</span>; k++) &#123;</span><br><span class="line">            <span class="keyword">const</span> c = all[k]</span><br><span class="line">            <span class="keyword">if</span> (!c % <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> (odd[~~c / <span class="number">2</span>]) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">            odd[~~c / <span class="number">2</span>] = <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ((all[<span class="number">0</span>] + all[<span class="number">2</span>]) / <span class="number">2</span> !== grid[i + <span class="number">1</span>][j + <span class="number">1</span>]) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> ((all[<span class="number">0</span>] + all[<span class="number">3</span>]) / <span class="number">2</span> !== grid[i + <span class="number">1</span>][j - <span class="number">1</span>]) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> ((all[<span class="number">1</span>] + all[<span class="number">2</span>]) / <span class="number">2</span> !== grid[i - <span class="number">1</span>][j + <span class="number">1</span>]) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> ((all[<span class="number">1</span>] + all[<span class="number">3</span>]) / <span class="number">2</span> !== grid[i - <span class="number">1</span>][j - <span class="number">1</span>]) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(numMagicSquaresInside([[<span class="number">4</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">4</span>], [<span class="number">9</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">9</span>], [<span class="number">2</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">2</span>]]))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-840-矩阵中的幻方/" data-id="cjhsr2tbe001mvskfmpm7gt0w" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-841-钥匙和房间/" data-id="cjhvov2lw001lrgkf0pryyre2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -544,7 +554,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -558,7 +568,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS-类型/">JS 类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/兼容/">兼容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-JS/">正则 JS</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS-懒加载/">JS 懒加载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS-类型/">JS 类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/兼容/">兼容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-JS/">正则 JS</a></li></ul>
     </div>
   </div>
 
@@ -568,7 +578,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CSS-radial-gradient/" style="font-size: 10px;">CSS radial-gradient</a> <a href="/tags/JS-类型/" style="font-size: 10px;">JS 类型</a> <a href="/tags/LeetCode-JavaScript-算法/" style="font-size: 20px;">LeetCode JavaScript 算法</a> <a href="/tags/兼容/" style="font-size: 10px;">兼容</a> <a href="/tags/常用/" style="font-size: 10px;">常用</a> <a href="/tags/正则-JS/" style="font-size: 10px;">正则 JS</a>
+      <a href="/tags/CSS-radial-gradient/" style="font-size: 10px;">CSS radial-gradient</a> <a href="/tags/JS-懒加载/" style="font-size: 10px;">JS 懒加载</a> <a href="/tags/JS-类型/" style="font-size: 10px;">JS 类型</a> <a href="/tags/LeetCode-JavaScript-算法/" style="font-size: 20px;">LeetCode JavaScript 算法</a> <a href="/tags/兼容/" style="font-size: 10px;">兼容</a> <a href="/tags/常用/" style="font-size: 10px;">常用</a> <a href="/tags/正则-JS/" style="font-size: 10px;">正则 JS</a>
     </div>
   </div>
 
@@ -577,7 +587,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
     </div>
   </div>
 
@@ -588,6 +598,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/06/01/懒加载实现原理/">懒加载实现原理</a>
+          </li>
         
           <li>
             <a href="/2018/05/30/关于一些常见类型的判断/">关于一些常见类型的判断</a>
@@ -603,10 +617,6 @@
         
           <li>
             <a href="/2018/05/29/LeetCode-809-情感丰富的文字/">LeetCode 809 情感丰富的文字</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/29/LeetCode-295-数据流的中位数/">LeetCode 295 数据流的中位数 </a>
           </li>
         
       </ul>

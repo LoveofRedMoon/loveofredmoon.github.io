@@ -70,6 +70,88 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-兼容性处理-慢慢更新" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/19/兼容性处理-慢慢更新/" class="article-date">
+  <time datetime="2018-05-19T05:03:52.000Z" itemprop="datePublished">2018-05-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/19/兼容性处理-慢慢更新/">兼容性处理(慢慢更新)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>绑定事件</p>
+<ul>
+<li><p>&lt;= IE8 <code>elem.attachEvent(&#39;on...&#39;, callback)</code><br>其他 <code>elem.addEventListener(&#39;...&#39;, callback, isCapture)</code></p>
+</li>
+<li><p>同样的, 删除事件也要改成 <code>elem.detachEvent</code>  <code>elem.removeEventListener</code></p>
+</li>
+</ul>
+</li>
+<li><p>获取元素</p>
+<ul>
+<li>通过类名获取 <code>getElementsByClassName</code> 在 &lt;= IE8 时不兼容, 解决方法: IE8 可以通过<code>querySelectorAll</code> 获取, IE7及以下得用hack进行编写</li>
+<li>通过选择器获取 <code>querySelectorAll</code> 在 &lt;= IE7 时不兼容, 解决方法: hack编写</li>
+</ul>
+</li>
+<li><p>scrollTop获取</p>
+<ul>
+<li>使用 <code>document.documentElement || document.body</code> <code>.scrollTop</code>来获取</li>
+</ul>
+</li>
+<li><p>获取CSS样式</p>
+<ul>
+<li>通用做法是 <code>window.getComputedStyle(elem, 伪类)</code> 来获取</li>
+<li>&lt;= IE8 时不支持, 可以使用 <code>elem.currentStyle</code> 来获取</li>
+<li>&lt;= IE10 是不支持伪类</li>
+<li>在未设置宽高时, <code>currentStyle</code> 获得的是 <code>auto</code> 而不是具体宽高值, 因此需要做兼容性处理 <code>offsetHeight offsetWidth</code></li>
+</ul>
+</li>
+<li><p>before, after伪元素</p>
+<ul>
+<li>&lt;= IE7 时不支持伪元素 建议不用, 改直接写元素, 使用before after类名假装伪元素</li>
+</ul>
+</li>
+<li><p>正则表达式</p>
+<ul>
+<li>并没与兼容问题, 只是着重提一句, 一般字符串的处理, 都可以使用正则+replace match来处理</li>
+</ul>
+</li>
+<li><p>关于CSS3属性, 显然CSS3属性低版本IE不支持</p>
+<ul>
+<li>opacity: &lt;= IE8 使用 <code>filter: &quot;alpha(opacity=50)&quot;</code> 因此需要作额外处理</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/19/兼容性处理-慢慢更新/" data-id="cjhvov2m4001zrgkfamrywbil" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/兼容/">兼容</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LeetCode-集锦" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/17/LeetCode-集锦/" class="article-date">
@@ -148,7 +230,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-集锦/" data-id="cjhsr2td8002bvskffwead5v7" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-集锦/" data-id="cjhvov2nt002ergkfi7xbawx6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -194,7 +276,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-321-拼接最大数/" data-id="cjhsr2t8v000dvskfzpsawqkq" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-321-拼接最大数/" data-id="cjhvov2kw0008rgkfgndblpx5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -239,7 +321,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-102-二叉树的层次遍历/" data-id="cjhsr2t870003vskfi659o5ly" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-102-二叉树的层次遍历/" data-id="cjhvov2ki0000rgkfkk1z87bn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -282,7 +364,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-354-Russian-Doll-Envelopes/" data-id="cjhsr2t8x000fvskfzpc75l38" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/17/LeetCode-354-Russian-Doll-Envelopes/" data-id="cjhvov2l3000frgkfm9bes8fp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -326,7 +408,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/16/LeetCode-668-乘法表中第k小的数/" data-id="cjhsr2tar0016vskfkocxmcie" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/16/LeetCode-668-乘法表中第k小的数/" data-id="cjhvov2ln0017rgkf0zk79tpt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -370,7 +452,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/16/LeetCode-406-根据身高重建队列/" data-id="cjhsr2ta4000uvskf0zul14ai" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/16/LeetCode-406-根据身高重建队列/" data-id="cjhvov2lh000zrgkf5d3c76if" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -485,7 +567,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/15/CSS-径向渐变/" data-id="cjhsr2t820001vskfaqr80c6d" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/15/CSS-径向渐变/" data-id="cjhvov2kn0001rgkfje45zsrn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li></ul>
@@ -535,7 +617,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/" data-id="cjhsr2tap0014vskfrc8kpj7l" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/15/LeetCode-592-Fraction-Addition-and-Subtraction/" data-id="cjhvov2lg000xrgkfyi9hx695" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -579,56 +661,7 @@ $$k = \frac{1}{2}$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/15/LeetCode-20-有效的括号/" data-id="cjhsr2t7v0000vskfpmn55bo4" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-462-最少移动次数使数组元素相等-II" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/" class="article-date">
-  <time datetime="2018-05-15T07:40:26.000Z" itemprop="datePublished">2018-05-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/">LeetCode 462 最少移动次数使数组元素相等 II</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="minimum-moves-to-equal-array-elements-ii"><a href="#minimum-moves-to-equal-array-elements-ii" class="headerlink" title="minimum moves to equal array elements ii"></a>minimum moves to equal array elements ii</h3><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个非空整数数组，找到使所有数组元素相等所需的最小移动数，其中每次移动可将选定的一个元素加 1 或减 1。 您可以假设数组的长度最多为 10000。</p>
-<p>例如:</p>
-<p>输入:<br>[1,2,3]</p>
-<p>输出:<br>2</p>
-<p>说明：只有两个动作是必要的（记得每一步仅可使其中一个元素加 1 或减 1）：</p>
-<p>[1,2,3] =&gt; [2,2,3] =&gt; [2,2,2]</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>举个栗子 , 对于数组 <code>[0, 0, 1, 7, 8]</code> 来说, 第一想法肯定是取中间的数例如取 <code>4</code> ,那么此时各个位置的差值为 <code>4 4 3 3 4</code><br>如果取 <code>3</code> ,那么此时各个位置的差值为 <code>3 3 2 4 5</code></p>
-<p>也就是当取值减 <code>1</code> 时, 比它小的数的差值会减一, 比它大的数的差值就会加一所以如果<strong>比它小的数</strong>的个数比<strong>比它大的数</strong>的个数多, 那我们就是赚的那什么时候可以停止呢? 肯定是比它小的数比比它大的数的个数不多的时候</p>
-<p>因此我们取的值应当是居中的一个<strong>中位数</strong>值可以测试得知, 如果数组长度为偶数, 取中间两个数任意一个都可以</p>
-<p>因此对于长度为 <code>len</code> 的数组而言, 取 <code>Math.floor(len/2)</code> 即可</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 462</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> minMoves2 = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> len = nums.length,</span><br><span class="line">        per = nums.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)[<span class="built_in">Math</span>.floor(len / <span class="number">2</span>)]</span><br><span class="line">    <span class="keyword">return</span> nums.reduce(<span class="function">(<span class="params">p, v</span>) =&gt;</span> p + <span class="built_in">Math</span>.abs(v - per), <span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(minMoves2([<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">6</span>]))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/15/LeetCode-462-最少移动次数使数组元素相等-II/" data-id="cjhsr2tai0010vskfj9rwaqxz" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/15/LeetCode-20-有效的括号/" data-id="cjhvov2kr0003rgkf4yspctag" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -644,7 +677,7 @@ $$k = \frac{1}{2}$$
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -658,7 +691,7 @@ $$k = \frac{1}{2}$$
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS-类型/">JS 类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/兼容/">兼容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-JS/">正则 JS</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS-懒加载/">JS 懒加载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS-类型/">JS 类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/兼容/">兼容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-JS/">正则 JS</a></li></ul>
     </div>
   </div>
 
@@ -668,7 +701,7 @@ $$k = \frac{1}{2}$$
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CSS-radial-gradient/" style="font-size: 10px;">CSS radial-gradient</a> <a href="/tags/JS-类型/" style="font-size: 10px;">JS 类型</a> <a href="/tags/LeetCode-JavaScript-算法/" style="font-size: 20px;">LeetCode JavaScript 算法</a> <a href="/tags/兼容/" style="font-size: 10px;">兼容</a> <a href="/tags/常用/" style="font-size: 10px;">常用</a> <a href="/tags/正则-JS/" style="font-size: 10px;">正则 JS</a>
+      <a href="/tags/CSS-radial-gradient/" style="font-size: 10px;">CSS radial-gradient</a> <a href="/tags/JS-懒加载/" style="font-size: 10px;">JS 懒加载</a> <a href="/tags/JS-类型/" style="font-size: 10px;">JS 类型</a> <a href="/tags/LeetCode-JavaScript-算法/" style="font-size: 20px;">LeetCode JavaScript 算法</a> <a href="/tags/兼容/" style="font-size: 10px;">兼容</a> <a href="/tags/常用/" style="font-size: 10px;">常用</a> <a href="/tags/正则-JS/" style="font-size: 10px;">正则 JS</a>
     </div>
   </div>
 
@@ -677,7 +710,7 @@ $$k = \frac{1}{2}$$
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
     </div>
   </div>
 
@@ -688,6 +721,10 @@ $$k = \frac{1}{2}$$
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/06/01/懒加载实现原理/">懒加载实现原理</a>
+          </li>
         
           <li>
             <a href="/2018/05/30/关于一些常见类型的判断/">关于一些常见类型的判断</a>
@@ -703,10 +740,6 @@ $$k = \frac{1}{2}$$
         
           <li>
             <a href="/2018/05/29/LeetCode-809-情感丰富的文字/">LeetCode 809 情感丰富的文字</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/29/LeetCode-295-数据流的中位数/">LeetCode 295 数据流的中位数 </a>
           </li>
         
       </ul>

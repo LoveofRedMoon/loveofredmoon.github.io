@@ -70,6 +70,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LeetCode-840-矩阵中的幻方" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/27/LeetCode-840-矩阵中的幻方/" class="article-date">
+  <time datetime="2018-05-27T09:01:42.000Z" itemprop="datePublished">2018-05-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/27/LeetCode-840-矩阵中的幻方/">LeetCode 840 矩阵中的幻方</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>3 x 3 的幻方是一个填充有从 1 到 9 的不同数字的 3 x 3 矩阵，其中每行，每列以及两条对角线上的各数之和都相等。</p>
+<p>给定一个由整数组成的 N × N 矩阵，其中有多少个 3 × 3 的 “幻方” 子矩阵？（每个子矩阵都是连续的）。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>三阶幻方的中心数一定是 5, 因此直接寻找 5, 并且周围四个均为奇数 其次均为偶数</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[][]&#125; grid</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> numMagicSquaresInside = <span class="function"><span class="keyword">function</span>(<span class="params">grid</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> m = grid.length,</span><br><span class="line">        n = grid[<span class="number">0</span>].length</span><br><span class="line">    <span class="keyword">let</span> res = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; m - <span class="number">1</span>; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">1</span>; j &lt; n - <span class="number">1</span>; j++) <span class="keyword">if</span> (grid[i][j] === <span class="number">5</span>) res += check(i, j)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">i, j</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> odd = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">            all = [</span><br><span class="line">                grid[i - <span class="number">1</span>][j],</span><br><span class="line">                grid[i + <span class="number">1</span>][j],</span><br><span class="line">                grid[i][j - <span class="number">1</span>],</span><br><span class="line">                grid[i][j + <span class="number">1</span>]</span><br><span class="line">            ]</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> k = <span class="number">0</span>; k &lt; <span class="number">4</span>; k++) &#123;</span><br><span class="line">            <span class="keyword">const</span> c = all[k]</span><br><span class="line">            <span class="keyword">if</span> (!c % <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> (odd[~~c / <span class="number">2</span>]) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">            odd[~~c / <span class="number">2</span>] = <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ((all[<span class="number">0</span>] + all[<span class="number">2</span>]) / <span class="number">2</span> !== grid[i + <span class="number">1</span>][j + <span class="number">1</span>]) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> ((all[<span class="number">0</span>] + all[<span class="number">3</span>]) / <span class="number">2</span> !== grid[i + <span class="number">1</span>][j - <span class="number">1</span>]) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> ((all[<span class="number">1</span>] + all[<span class="number">2</span>]) / <span class="number">2</span> !== grid[i - <span class="number">1</span>][j + <span class="number">1</span>]) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> ((all[<span class="number">1</span>] + all[<span class="number">3</span>]) / <span class="number">2</span> !== grid[i - <span class="number">1</span>][j - <span class="number">1</span>]) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(numMagicSquaresInside([[<span class="number">4</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">4</span>], [<span class="number">9</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">9</span>], [<span class="number">2</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">2</span>]]))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/05/27/LeetCode-840-矩阵中的幻方/" data-id="cjhvov2lz001prgkfmvxhmhan" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LeetCode-803-打砖块" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/26/LeetCode-803-打砖块/" class="article-date">
@@ -101,7 +143,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-803-打砖块/" data-id="cjhsr2tb4001ivskfnosam3i7" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-803-打砖块/" data-id="cjhvov2lp0019rgkfaw4o24p2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -154,7 +196,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-316-去除重复字母/" data-id="cjhsr2t8j0008vskfpk2nrzt8" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-316-去除重复字母/" data-id="cjhvov2l8000jrgkf5wxjwp9j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -196,7 +238,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-92-反转链表-II/" data-id="cjhsr2tct0028vskfn56qfyte" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-92-反转链表-II/" data-id="cjhvov2m0001rrgkfx3nwum7v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -241,7 +283,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-44-通配符匹配/" data-id="cjhsr2ta1000svskfuommh524" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-44-通配符匹配/" data-id="cjhvov2lc000prgkfu1lcco21" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -285,7 +327,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-392-判断子序列/" data-id="cjhsr2t92000jvskfw96lykbl" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/26/LeetCode-392-判断子序列/" data-id="cjhvov2l2000drgkf5apz5sgj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -330,7 +372,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/" data-id="cjhsr2tc0001yvskfmjkmdhey" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-826-Most-Profit-Assigning-Work/" data-id="cjhvov2lu001hrgkfod7xihtz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -375,7 +417,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-808-分汤/" data-id="cjhsr2tb1001gvskfmak3hlw0" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-808-分汤/" data-id="cjhvov2ls001frgkfo7211q4m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -419,7 +461,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-565-数组嵌套/" data-id="cjhsr2taw001avskf07f1gkt5" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/24/LeetCode-565-数组嵌套/" data-id="cjhvov2li0011rgkfg5hcv2w4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -464,69 +506,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-3-无重复字符的最长子串/" data-id="cjhsr2t9z000qvskf8afs4rxj" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LeetCode-798-Smallest-Rotation-with-Highest-Score" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/" class="article-date">
-  <time datetime="2018-05-23T02:04:39.000Z" itemprop="datePublished">2018-05-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/">LeetCode 798 Smallest Rotation with Highest Score</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>Given an array A, we may rotate it by a non-negative integer K so that the array becomes A[K], A[K+1], A{K+2], … A[A.length - 1], A[0], A[1], …, A[K-1]. Afterward, any entries that are less than or equal to their index are worth 1 point.</p>
-<p>For example, if we have [2, 4, 1, 3, 0], and we rotate by K = 2, it becomes [1, 3, 0, 2, 4]. This is worth 3 points because 1 &gt; 0 [no points], 3 &gt; 1 [no points], 0 &lt;= 2 [one point], 2 &lt;= 3 [one point], 4 &lt;= 4 [one point].</p>
-<p>Over all possible rotations, return the rotation index K that corresponds to the highest score we could receive. If there are multiple answers, return the smallest such index K.</p>
-<p>Example 1:<br>Input: [2, 3, 1, 4, 0]<br>Output: 3<br>Explanation:<br>Scores for each K are listed below:<br>K = 0, A = [2,3,1,4,0], score 2<br>K = 1, A = [3,1,4,0,2], score 3<br>K = 2, A = [1,4,0,2,3], score 3<br>K = 3, A = [4,0,2,3,1], score 4<br>K = 4, A = [0,2,3,1,4], score 3<br>So we should choose K = 3, which has the highest score.</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>在每一次左移的过程中, 除了首位, 各个索引均降低 1 首位索引提高 A.length</p>
-<p>因此</p>
-<ol>
-<li>先过滤所有的 0, 避免出现首位为 0 的情况, 避免对位置的影响, 应当把 0 改为很大的数, 例如 A.length<ul>
-<li>因为 0&lt;=POS 恒成立, 因此一定是不会改变 point 的</li>
-</ul>
-</li>
-<li>先处理所有值与索引的差<ul>
-<li>例子中是 [2, 2, -1, 1, -4]</li>
-</ul>
-</li>
-<li>在左移一次后, 所有值加一, 除了(移动的次数位置-1)减少 A.length<ul>
-<li>例子中是 K=1 [-2, 3, 0, 2, -3]</li>
-<li>K=2 [-2, -2, 1, 3, -2]</li>
-</ul>
-</li>
-</ol>
-<p>总结: K=0 单独处理</p>
-<p>当 K&gt;0 时, 第 i 个位置的差值应当为 <code>(i&lt;K?-A.length:0) + K + cur</code></p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; A</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> bestRotation = <span class="function"><span class="keyword">function</span>(<span class="params">A</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> n = A.length</span><br><span class="line">    A = A.map(<span class="function"><span class="params">v</span> =&gt;</span> (v === <span class="number">0</span> ? n : v))</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">const</span> first = A.map(<span class="function">(<span class="params">v, i</span>) =&gt;</span> v - i)</span><br><span class="line">    <span class="keyword">const</span> res = &#123;&#125;</span><br><span class="line">    first.forEach(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (res[v]) res[v]++</span><br><span class="line">        <span class="keyword">else</span> res[v] = <span class="number">1</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">let</span> max = <span class="number">0</span>,</span><br><span class="line">        maxPoints = first.filter(<span class="function"><span class="params">v</span> =&gt;</span> v &lt; <span class="number">1</span>).length,</span><br><span class="line">        curPoints = maxPoints</span><br><span class="line">    <span class="built_in">console</span>.log(first)</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> k = <span class="number">1</span>; k &lt; n; k++) &#123;</span><br><span class="line">        <span class="comment">// 首先points要减去 first中为-k+1的项</span></span><br><span class="line">        <span class="comment">// 其次 将first[k-1] 减一 first[k-1]-n的项加一</span></span><br><span class="line">        curPoints -= ~~res[-k + <span class="number">1</span>]</span><br><span class="line">        res[first[k - <span class="number">1</span>]]--</span><br><span class="line">        res[first[k - <span class="number">1</span>] - n] = ~~res[first[k - <span class="number">1</span>] - n] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> (first[k - <span class="number">1</span>] &gt; -k &amp;&amp; first[k - <span class="number">1</span>] &lt;= -k + n) curPoints++</span><br><span class="line">        <span class="built_in">console</span>.log(k, curPoints)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'--------------'</span>)</span><br><span class="line">        <span class="keyword">if</span> (curPoints &gt; maxPoints) &#123;</span><br><span class="line">            maxPoints = curPoints</span><br><span class="line">            max = k</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-798-Smallest-Rotation-with-Highest-Score/" data-id="cjhsr2tba001kvskf7wam1a78" class="article-share-link">Share</a>
+      <a data-url="https://loveofredmoon.github.io/2018/05/23/LeetCode-3-无重复字符的最长子串/" data-id="cjhvov2kt0004rgkfrm0gaebn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li></ul>
@@ -542,7 +522,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -556,7 +536,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS-类型/">JS 类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/兼容/">兼容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-JS/">正则 JS</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS-懒加载/">JS 懒加载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS-类型/">JS 类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/兼容/">兼容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-JS/">正则 JS</a></li></ul>
     </div>
   </div>
 
@@ -566,7 +546,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CSS-radial-gradient/" style="font-size: 10px;">CSS radial-gradient</a> <a href="/tags/JS-类型/" style="font-size: 10px;">JS 类型</a> <a href="/tags/LeetCode-JavaScript-算法/" style="font-size: 20px;">LeetCode JavaScript 算法</a> <a href="/tags/兼容/" style="font-size: 10px;">兼容</a> <a href="/tags/常用/" style="font-size: 10px;">常用</a> <a href="/tags/正则-JS/" style="font-size: 10px;">正则 JS</a>
+      <a href="/tags/CSS-radial-gradient/" style="font-size: 10px;">CSS radial-gradient</a> <a href="/tags/JS-懒加载/" style="font-size: 10px;">JS 懒加载</a> <a href="/tags/JS-类型/" style="font-size: 10px;">JS 类型</a> <a href="/tags/LeetCode-JavaScript-算法/" style="font-size: 20px;">LeetCode JavaScript 算法</a> <a href="/tags/兼容/" style="font-size: 10px;">兼容</a> <a href="/tags/常用/" style="font-size: 10px;">常用</a> <a href="/tags/正则-JS/" style="font-size: 10px;">正则 JS</a>
     </div>
   </div>
 
@@ -575,7 +555,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
     </div>
   </div>
 
@@ -586,6 +566,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/06/01/懒加载实现原理/">懒加载实现原理</a>
+          </li>
         
           <li>
             <a href="/2018/05/30/关于一些常见类型的判断/">关于一些常见类型的判断</a>
@@ -601,10 +585,6 @@
         
           <li>
             <a href="/2018/05/29/LeetCode-809-情感丰富的文字/">LeetCode 809 情感丰富的文字</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/29/LeetCode-295-数据流的中位数/">LeetCode 295 数据流的中位数 </a>
           </li>
         
       </ul>

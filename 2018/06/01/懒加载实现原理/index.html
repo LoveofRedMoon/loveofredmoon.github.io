@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>懒加载实现原理 | Love of Red Moon Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="懒加载懒加载是优化用户体验的一步, 并且已经是个很古老的问题了.这里就懒加载的一些情况进行说明 图片懒加载一开始肯定是想使用默认图片, 并且加载完成之后替换原本的 SRC 即可但是事与愿违, 图片修改 SRC 之后会出现空白 因此使用情况应当是使用一个新的 IMG 标签加载图片, 如果加载完成, 说明浏览器有缓存了, 这个时候替换原来的图片即可瞬间加载完毕. 当然, 为了保持文件大小的一致性, 一">
+<meta name="keywords" content="JS 懒加载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="懒加载实现原理">
+<meta property="og:url" content="https://loveofredmoon.github.io/2018/06/01/懒加载实现原理/index.html">
+<meta property="og:site_name" content="Love of Red Moon Blog">
+<meta property="og:description" content="懒加载懒加载是优化用户体验的一步, 并且已经是个很古老的问题了.这里就懒加载的一些情况进行说明 图片懒加载一开始肯定是想使用默认图片, 并且加载完成之后替换原本的 SRC 即可但是事与愿违, 图片修改 SRC 之后会出现空白 因此使用情况应当是使用一个新的 IMG 标签加载图片, 如果加载完成, 说明浏览器有缓存了, 这个时候替换原来的图片即可瞬间加载完毕. 当然, 为了保持文件大小的一致性, 一">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-06-01T08:10:07.131Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="懒加载实现原理">
+<meta name="twitter:description" content="懒加载懒加载是优化用户体验的一步, 并且已经是个很古老的问题了.这里就懒加载的一些情况进行说明 图片懒加载一开始肯定是想使用默认图片, 并且加载完成之后替换原本的 SRC 即可但是事与愿违, 图片修改 SRC 之后会出现空白 因此使用情况应当是使用一个新的 IMG 标签加载图片, 如果加载完成, 说明浏览器有缓存了, 这个时候替换原来的图片即可瞬间加载完毕. 当然, 为了保持文件大小的一致性, 一">
+  
+    <link rel="alternate" href="/atom.xml" title="Love of Red Moon Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Love of Red Moon Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">赤月之爱的博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">所有文章</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://loveofredmoon.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-懒加载实现原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/01/懒加载实现原理/" class="article-date">
+  <time datetime="2018-06-01T00:55:50.000Z" itemprop="datePublished">2018-06-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      懒加载实现原理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="懒加载"><a href="#懒加载" class="headerlink" title="懒加载"></a>懒加载</h2><p>懒加载是优化用户体验的一步, 并且已经是个很古老的问题了.<br>这里就懒加载的一些情况进行说明</p>
+<h3 id="图片懒加载"><a href="#图片懒加载" class="headerlink" title="图片懒加载"></a>图片懒加载</h3><p>一开始肯定是想使用默认图片, 并且加载完成之后替换原本的 SRC 即可但是事与愿违, 图片修改 SRC 之后会出现空白</p>
+<p>因此使用情况应当是使用一个新的 IMG 标签加载图片, 如果加载完成, 说明浏览器有缓存了, 这个时候替换原来的图片即可瞬间加载完毕. 当然, 为了保持文件大小的一致性, 一定要给 Img 标签设置具体的宽高值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用了jQuery</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">imgLazyLoad</span>(<span class="params">img</span>) </span>&#123;</span><br><span class="line">    img = $(img)</span><br><span class="line">    <span class="keyword">var</span> newImg = $(<span class="string">'&lt;img /&gt;'</span>),</span><br><span class="line">        path = img.data(<span class="string">'src'</span>)</span><br><span class="line">    newImg.on(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        img.prop(<span class="string">'src'</span>, path)</span><br><span class="line">    &#125;)</span><br><span class="line">    newImg.prop(<span class="string">'src'</span>, path)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="加载时机"><a href="#加载时机" class="headerlink" title="加载时机"></a>加载时机</h3><p>上面的加载时机是自己决定的所以一般是使用<code>window.onload</code>即整个网页架构都加载完毕后进行图片加载具体的图片即</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="string">'img'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params">index, elem</span>) </span>&#123;</span><br><span class="line">        imgLazyLoad(elem)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是在实际开发中, 会遇到很多问题, 例如淘宝, 在用户对界面很熟悉的情况下, 一般会忽略打开页面的顶部信息栏, 而是直接滚动到下部选择需要的物品又或者用户会快速浏览商品名, 对某些商品进行过滤</p>
+<p>因此需要快速进行定位一般来说, 需要两步同时进行,<br>即<strong>预加载图片</strong>和<strong>界面加载图片</strong>同时进行</p>
+<p>我的思路里, 认定<strong>当前界面的图片加载</strong> &gt; <strong>下一屏加载</strong> &gt; <strong>其他图片加载</strong></p>
+<ol>
+<li>图片位置判定是利用<code>元素距离顶部的距离</code> <code>视口距离顶部的距离</code> <code>视口的高度</code>三者的关系来判定图片的位置即若在视口内, 则是<code>$(&#39;img&#39;).offset().top - $(window).scrollTop()</code>必须在<code>0</code>和<code>$(window).height</code>之间, 若是下一屏则是在<code>$(window).height</code>和<code>$(window).height*2</code>之间</li>
+<li>时机的判定应当在加载完 DOM 结构之后就进行网页图片的申请, 并且需要进行图片的管理</li>
+</ol>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 处理所有待处理的图片, 获取距离顶部的高度</span></span><br><span class="line">    <span class="keyword">const</span> allLazyImg = [].map</span><br><span class="line">            .call($(<span class="string">'img[data-src]'</span>), v =&gt; &#123;</span><br><span class="line">                v = $(v)</span><br><span class="line">                <span class="keyword">return</span> [v, v.offset().top]</span><br><span class="line">            &#125;)</span><br><span class="line">            .sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a[<span class="number">1</span>] - b[<span class="number">1</span>]),</span><br><span class="line">        windowHeight = $(<span class="built_in">window</span>).height()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 假设浏览器的默认并发数为 6</span></span><br><span class="line">    <span class="comment">// 考虑到浏览器并发限制, 因此人为的限制非本屏的图片获取并发数为 3</span></span><br><span class="line">    <span class="comment">// 当本屏有未加载图片时, 优先加载本屏图片</span></span><br><span class="line">    <span class="keyword">const</span> MAXLINE = <span class="number">6</span>,</span><br><span class="line">        curSCREENLINE = <span class="number">3</span></span><br><span class="line">    <span class="keyword">let</span> curNum = <span class="number">1</span>, <span class="comment">// 当前正在处理图片的数量</span></span><br><span class="line">        scrollTop = <span class="number">0</span>, <span class="comment">// 当前滚动条位置, 用于判断图片是否在本屏幕</span></span><br><span class="line">        timeId = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">    check()</span><br><span class="line">    $(<span class="built_in">window</span>).on(<span class="string">'scroll'</span>, scrollEvent)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">scrollEvent</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        clearTimeout(timeId)</span><br><span class="line">        timeId = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            scrollTop = $(<span class="built_in">window</span>).scrollTop()</span><br><span class="line">            <span class="keyword">const</span> pos = allLazyImg.findIndex(<span class="function"><span class="params">v</span> =&gt;</span> v[<span class="number">1</span>] &gt; scrollTop)</span><br><span class="line">            <span class="keyword">if</span> (pos &gt;= <span class="number">0</span>) allLazyImg.push(...allLazyImg.splice(<span class="number">0</span>, pos))</span><br><span class="line">        &#125;, <span class="number">500</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 回调函数, 用于处理图片加载之后的行为</span></span><br><span class="line">        curNum--</span><br><span class="line">        <span class="comment">// allLazyImg默认按照需要的顺序排序 即当前页面第一</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!allLazyImg.length) &#123;</span><br><span class="line">                <span class="comment">// 处理完毕, 清除所有事件</span></span><br><span class="line">                $(<span class="built_in">window</span>).off(<span class="string">'scroll'</span>, scrollEvent)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 并发过多(一般不可能) 返回</span></span><br><span class="line">            <span class="keyword">if</span> (curNum &gt;= <span class="number">6</span>) <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">const</span> curImg = allLazyImg[<span class="number">0</span>][<span class="number">0</span>],</span><br><span class="line">                pos = allLazyImg[<span class="number">0</span>][<span class="number">1</span>] - scrollTop</span><br><span class="line">            <span class="comment">// 超过三条并发并且还不在页面内</span></span><br><span class="line">            <span class="keyword">if</span> (curNum &gt; <span class="number">2</span> &amp;&amp; (pos &lt; <span class="number">0</span> || pos &gt; windowHeight)) <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 添加</span></span><br><span class="line">            curNum++</span><br><span class="line">            <span class="built_in">console</span>.log(curNum)</span><br><span class="line">            <span class="built_in">console</span>.log(curImg)</span><br><span class="line">            $(<span class="string">'&lt;img /&gt;'</span>)</span><br><span class="line">                .on(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                    curImg.prop(<span class="string">'src'</span>, curImg.data(<span class="string">'src'</span>))</span><br><span class="line">                    check()</span><br><span class="line">                &#125;)</span><br><span class="line">                .prop(<span class="string">'src'</span>, curImg.data(<span class="string">'src'</span>))</span><br><span class="line">            allLazyImg.shift()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/06/01/懒加载实现原理/" data-id="cjhvov2m3001xrgkfi04gxthd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS-懒加载/">JS 懒加载</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/30/关于一些常见类型的判断/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">关于一些常见类型的判断</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS-懒加载/">JS 懒加载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS-类型/">JS 类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/兼容/">兼容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-JS/">正则 JS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS-radial-gradient/" style="font-size: 10px;">CSS radial-gradient</a> <a href="/tags/JS-懒加载/" style="font-size: 10px;">JS 懒加载</a> <a href="/tags/JS-类型/" style="font-size: 10px;">JS 类型</a> <a href="/tags/LeetCode-JavaScript-算法/" style="font-size: 20px;">LeetCode JavaScript 算法</a> <a href="/tags/兼容/" style="font-size: 10px;">兼容</a> <a href="/tags/常用/" style="font-size: 10px;">常用</a> <a href="/tags/正则-JS/" style="font-size: 10px;">正则 JS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/06/01/懒加载实现原理/">懒加载实现原理</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/30/关于一些常见类型的判断/">关于一些常见类型的判断</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/30/LeetCode-397-整数替换/">LeetCode 397 整数替换</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/30/LeetCode-75-分类颜色/">LeetCode 75 分类颜色</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/29/LeetCode-809-情感丰富的文字/">LeetCode 809 情感丰富的文字</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018  <a href="/cyj.min.html" target="_blank"> Yongj Chen </a><br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">所有文章</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
