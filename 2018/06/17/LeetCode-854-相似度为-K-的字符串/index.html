@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>LeetCode 854 相似度为 K 的字符串 | Love of Red Moon Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目如果可以通过将 A 中的两个小写字母精确地交换位置 K 次得到与 B 相等的字符串，我们称字符串 A 和 B 的相似度为 K（K 为非负整数）。 给定两个字母异位词 A 和 B ，返回 A 和 B 的相似度 K 的最小值。 思路首先去重, 去除相同位子上重复的字符 其次将位置进行分组, 例如abcd badc可以分成 01 两个位置一组, 23 两个位置一组那么每组只需要交换长度减一次, 问题">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 854 相似度为 K 的字符串">
+<meta property="og:url" content="https://loveofredmoon.github.io/2018/06/17/LeetCode-854-相似度为-K-的字符串/index.html">
+<meta property="og:site_name" content="Love of Red Moon Blog">
+<meta property="og:description" content="题目如果可以通过将 A 中的两个小写字母精确地交换位置 K 次得到与 B 相等的字符串，我们称字符串 A 和 B 的相似度为 K（K 为非负整数）。 给定两个字母异位词 A 和 B ，返回 A 和 B 的相似度 K 的最小值。 思路首先去重, 去除相同位子上重复的字符 其次将位置进行分组, 例如abcd badc可以分成 01 两个位置一组, 23 两个位置一组那么每组只需要交换长度减一次, 问题">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-06-17T08:18:43.798Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode 854 相似度为 K 的字符串">
+<meta name="twitter:description" content="题目如果可以通过将 A 中的两个小写字母精确地交换位置 K 次得到与 B 相等的字符串，我们称字符串 A 和 B 的相似度为 K（K 为非负整数）。 给定两个字母异位词 A 和 B ，返回 A 和 B 的相似度 K 的最小值。 思路首先去重, 去除相同位子上重复的字符 其次将位置进行分组, 例如abcd badc可以分成 01 两个位置一组, 23 两个位置一组那么每组只需要交换长度减一次, 问题">
+  
+    <link rel="alternate" href="/atom.xml" title="Love of Red Moon Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Love of Red Moon Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">赤月之爱的博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">所有文章</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://loveofredmoon.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-LeetCode-854-相似度为-K-的字符串" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/17/LeetCode-854-相似度为-K-的字符串/" class="article-date">
+  <time datetime="2018-06-17T04:00:20.000Z" itemprop="datePublished">2018-06-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LeetCode 854 相似度为 K 的字符串
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>如果可以通过将 A 中的两个小写字母精确地交换位置 K 次得到与 B 相等的字符串，我们称字符串 A 和 B 的相似度为 K（K 为非负整数）。</p>
+<p>给定两个字母异位词 A 和 B ，返回 A 和 B 的相似度 K 的最小值。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先去重, 去除相同位子上重复的字符</p>
+<p>其次将位置进行分组, 例如<code>abcd badc</code>可以分成 01 两个位置一组, 23 两个位置一组<br>那么每组只需要交换长度减一次, 问题在于分组要彻底</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; A</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; B</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> kSimilarity = <span class="function"><span class="keyword">function</span>(<span class="params">A, B</span>) </span>&#123;</span><br><span class="line">    ;(A = A.split(<span class="string">''</span>)), (B = B.split(<span class="string">''</span>))</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; A.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (A[i] === B[i]) &#123;</span><br><span class="line">            A.splice(i, <span class="number">1</span>)</span><br><span class="line">            B.splice(i--, <span class="number">1</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> remain = <span class="built_in">Array</span>(A.length).fill(<span class="literal">true</span>)</span><br><span class="line">    <span class="keyword">const</span> Aset = &#123;&#125;,</span><br><span class="line">        Bset = &#123;&#125;</span><br><span class="line">    A.forEach(<span class="function">(<span class="params">v, i</span>) =&gt;</span> (Aset[v] ? Aset[v].push(i) : (Aset[v] = [i])))</span><br><span class="line">    B.forEach(<span class="function">(<span class="params">v, i</span>) =&gt;</span> (Bset[v] ? Bset[v].push(i) : (Bset[v] = [i])))</span><br><span class="line">    <span class="built_in">console</span>.log(A, B)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">findMin</span>(<span class="params">aPos, remainArr, curLen</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> allChar = A[aPos]</span><br><span class="line">        <span class="keyword">let</span> r = [[aPos]]</span><br><span class="line">        <span class="keyword">while</span> (r[<span class="number">0</span>].length &lt;= curLen) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, len = r.length; i &lt; len; i++) &#123;</span><br><span class="line">                <span class="keyword">const</span> v = r[i]</span><br><span class="line">                <span class="keyword">if</span> (B[v[v.length - <span class="number">1</span>]] === allChar) <span class="keyword">return</span> v</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">const</span> tempArr = []</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, len = r.length; i &lt; len; i++) &#123;</span><br><span class="line">                <span class="keyword">const</span> v = r[i],</span><br><span class="line">                    char = B[v[v.length - <span class="number">1</span>]]</span><br><span class="line">                Aset[char]</span><br><span class="line">                    .filter(<span class="function"><span class="params">vv</span> =&gt;</span> remainArr[vv] &amp;&amp; v.indexOf(vv) &lt; <span class="number">0</span>)</span><br><span class="line">                    .forEach(<span class="function"><span class="params">vv</span> =&gt;</span> tempArr.push([...v, vv]))</span><br><span class="line">            &#125;</span><br><span class="line">            r = tempArr</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> minRes = <span class="literal">Infinity</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">chose</span>(<span class="params">res, curLen, remain, curi</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (remain.some(<span class="function"><span class="params">v</span> =&gt;</span> v)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (curLen &gt; remain.filter(<span class="function"><span class="params">v</span> =&gt;</span> v).length) <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = curi + <span class="number">1</span>, len = remain.length; i &lt; len; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (remain[i]) &#123;</span><br><span class="line">                    <span class="keyword">const</span> r = findMin(i, remain, curLen)</span><br><span class="line">                    <span class="keyword">if</span> (!r.length) <span class="keyword">continue</span></span><br><span class="line">                    chose(res, curLen, [...remain], i)</span><br><span class="line">                    res += r.length - <span class="number">1</span></span><br><span class="line">                    r.forEach(<span class="function"><span class="params">v</span> =&gt;</span> (remain[v] = <span class="literal">false</span>))</span><br><span class="line">                    <span class="keyword">if</span> (res + remain.filter(<span class="function"><span class="params">v</span> =&gt;</span> v).length / <span class="number">2</span> &gt; minRes) <span class="keyword">return</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            curLen++</span><br><span class="line">            curi = <span class="number">-1</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (res &lt; minRes) minRes = res</span><br><span class="line">    &#125;</span><br><span class="line">    chose(<span class="number">0</span>, <span class="number">2</span>, remain, <span class="number">-1</span>)</span><br><span class="line">    <span class="keyword">return</span> minRes</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(kSimilarity(<span class="string">'aabbccddee'</span>, <span class="string">'bdcebacdae'</span>))</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">deabceabd</span></span><br><span class="line"><span class="comment">cadeadbeb</span></span><br><span class="line"><span class="comment">0 7 10</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://loveofredmoon.github.io/2018/06/17/LeetCode-854-相似度为-K-的字符串/" data-id="cjiik7mxt0026o4kft6vhwjpv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/06/17/LeetCode-855-考场就座/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LeetCode 855 考场就座</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-radial-gradient/">CSS radial-gradient</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6-iterator/">ES6 iterator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS-懒加载/">JS 懒加载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS-类型/">JS 类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode-JavaScript-算法/">LeetCode JavaScript 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/兼容/">兼容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-JS/">正则 JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS-radial-gradient/" style="font-size: 10px;">CSS radial-gradient</a> <a href="/tags/ES6-iterator/" style="font-size: 10px;">ES6 iterator</a> <a href="/tags/JS-懒加载/" style="font-size: 10px;">JS 懒加载</a> <a href="/tags/JS-类型/" style="font-size: 10px;">JS 类型</a> <a href="/tags/LeetCode-JavaScript-算法/" style="font-size: 20px;">LeetCode JavaScript 算法</a> <a href="/tags/兼容/" style="font-size: 10px;">兼容</a> <a href="/tags/常用/" style="font-size: 10px;">常用</a> <a href="/tags/正则-JS/" style="font-size: 10px;">正则 JS</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/06/17/LeetCode-854-相似度为-K-的字符串/">LeetCode 854 相似度为 K 的字符串</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/17/LeetCode-855-考场就座/">LeetCode 855 考场就座</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/17/LeetCode-853-车队/">LeetCode 853 车队</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/17/LeetCode-852-山脉数组的峰顶索引/">LeetCode 852 山脉数组的峰顶索引</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/10/LeetCode-850-矩形面积-II/">LeetCode 850 矩形面积 II</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018  <a href="/cyj.min.html" target="_blank"> Yongj Chen </a><br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">所有文章</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
