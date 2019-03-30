@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+    <title>弹窗</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/iconfont.css">
+    <script src="./js/index.js"></script>
+</head>
+
+<body>
+    <button id="show">点我打开弹窗</button>
+    <script>
+        $('#show').on('click', function () {
+            const nextButton = $('<button>点击我5秒后自动关闭新弹窗</button>')
+            nextButton.on('click', function () {
+                const mask2 = new Mask({
+                    title: '陈勇君',
+                    context: '展示正文',
+                    callback: function (e, next) {
+                        console.log('关闭了')
+                        next()
+                    }
+                })
+
+                setTimeout(function () {
+                    if (mask2) mask2.close()
+                }, 5000)
+            })
+            const mask1 = new Mask({
+                title: '陈勇君',
+                context: nextButton,
+                callback: function (e, next) {
+                    console.log('关闭了')
+                    next()
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
